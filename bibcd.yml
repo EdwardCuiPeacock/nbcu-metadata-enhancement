@@ -1,0 +1,42 @@
+---
+version: 1
+context: mlops
+triggering: master-and-prs
+
+modules:
+
+  linter:
+    pipelineShape: buildOnly
+    additionalSourceDirectories:
+      - linter
+    nodes:
+      prBuild: dind-slave
+
+  training:
+    pipelineShape: buildOnly
+    directory: training
+    nodes:
+      prBuild: dind-slave
+      cdBuild: dind-slave
+    slackNotifications:
+      main:
+        onEvents: ['failure', 'back-to-normal']
+      prod:
+        onEvents: ['success', 'failure']
+
+  serving:
+    pipelineShape: buildOnly
+    directory: serving
+    nodes:
+      prBuild: dind-slave
+      cdBuild: dind-slave
+    slackNotifications:
+      main:
+        onEvents: ['failure', 'back-to-normal']
+      prod:
+        onEvents: ['success', 'failure']
+
+slack:
+  domain: sky
+  token: 6Y1LWxol3KTSuZnfHGquGXhd
+  defaultChannel: mlops-monitoring-testing

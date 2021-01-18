@@ -1,0 +1,14 @@
+# Python specific
+__pycache__/
+*.pyc
+.DS_Store
+.pytest_cache
+*.py[cod]
+*$py.class
+.coverage
+htmlcov/
+
+# Text editor/IDE
+.vscode/
+
+# Application specific

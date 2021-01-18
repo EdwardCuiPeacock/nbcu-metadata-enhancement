@@ -1,8 +1,8 @@
 """
 https://github.com/tensorflow/tfx/blob/master/tfx/examples/bigquery_ml/taxi_utils_bqml_test.py
 
-Here we will do some training tests to make sure that our model definition is correct and that it 
-is able to learn on a small amount of data 
+Here we will do some training tests to make sure that our model definition is correct and that it
+is able to learn on a small amount of data
 """
 import tensorflow as tf
 from tensorflow.keras import callbacks
@@ -19,10 +19,10 @@ from test.functional.common_test_setup import CommonTestSetup
 class TaggingModelTest(CommonTestSetup):
     def setUp(self):
         """
-        Run the exact same setup as DataForTestingGenerator so we are looking in the same 
+        Run the exact same setup as DataForTestingGenerator so we are looking in the same
         place for pipeline artifacts
 
-        Therefore, this MUST be run after generate_test_data 
+        Therefore, this MUST be run after generate_test_data
         """
         super().setUp()
         super().setTransformOutputs()
@@ -92,7 +92,7 @@ class TaggingModelTest(CommonTestSetup):
             callbacks=[early_stopping_callback],
         )
 
-        # Make sure we have the expected metrics 
+        # Make sure we have the expected metrics
         all_metrics = tagging_model.metrics
         self.assertIsInstance(all_metrics[1], tf.keras.metrics.Precision)
         self.assertIsInstance(all_metrics[2], tf.keras.metrics.Recall)
@@ -101,20 +101,20 @@ class TaggingModelTest(CommonTestSetup):
         self.assertFalse(tf.math.is_nan(history.history["val_loss"][-1]))
         self.assertFalse(tf.math.is_nan(history.history["loss"][-1]))
 
-        # Is loss going down? We should be able to overfit on a small number of 
+        # Is loss going down? We should be able to overfit on a small number of
         # examples.
         self.assertLess(history.history["loss"][-1], history.history["loss"][0])
-        
+
         # Get the final weights after fitting
         all_final_weights = [weights.numpy() for weights in tagging_model.weights]
 
         for initial, final in zip(all_initial_weights, all_final_weights):
             # Weights should be updated
             self.assertFalse(np.all(initial == final))
-            # Weights are not more than half zero (arbitrary threshold). Point is 
-            # to make sure that we are not getting a lot of dead neurons 
+            # Weights are not more than half zero (arbitrary threshold). Point is
+            # to make sure that we are not getting a lot of dead neurons
             self.assertGreater(tf.math.count_nonzero(final) / final.size, 0.5)
-            # Don't want any weights to be not a number. Would mostly likely indicate 
+            # Don't want any weights to be not a number. Would mostly likely indicate
             # that gradients are exploding
             num_nans = tf.reduce_sum(tf.cast(tf.math.is_nan(final), tf.int32))
             self.assertEqual(num_nans / final.size, 0)
@@ -122,7 +122,7 @@ class TaggingModelTest(CommonTestSetup):
         # Make sure we can evaluate
         _ = tagging_model.evaluate(self.transformed_eval_dataset, steps=1)
 
-        # Make sure we can predict and that predictions are in range 
+        # Make sure we can predict and that predictions are in range
         # We are using sigmoid activation, so they should be in range (0, 1)
         predictions = tagging_model.predict(self.transformed_eval_dataset, steps=1)
 

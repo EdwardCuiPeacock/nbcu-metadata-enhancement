@@ -1,12 +1,10 @@
-# ML Template repo
-
-This repo is a template repo for new ML projects within Sky. Feel free to click the "Use this template" button to create your own version and start implementing your own training pipeline and serving code. 
+# NBCU Metadata Enhancement
 
 This codebase is split into two main folders:
 - [training](training/README.md)
 - [serving](./serving/README.md)
 
-Each of these folders should have their own `readme`, which explain how to run the pipeline/service locally or in the cloud, and any setup instructions. 
+Each of these folders should have their own `readme`, which explain how to run the pipeline/service locally or in the cloud, and any setup instructions.
 
 The purpose of this `readme` is for any information which is required for both training and serving folders. Add any information here that you feel is relevant to both training and serving.
 
@@ -25,7 +23,7 @@ We currently use [Poetry](https://python-poetry.org/) for python package managem
 
 ### Poetry
 
-This is used to create a virtual environment and install all python packages inside. There are separate `pyproject.yaml` and `poetry.lock` files for both `training` and `serving` folders. 
+This is used to create a virtual environment and install all python packages inside. There are separate `pyproject.yaml` and `poetry.lock` files for both `training` and `serving` folders.
 
 To install poetry just run:
 ```

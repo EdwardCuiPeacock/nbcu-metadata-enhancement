@@ -122,5 +122,6 @@ class AutoTaggingModelTest(tf.test.TestCase):
 
         self.assertIsInstance(model.loss, tf.keras.losses.BinaryCrossentropy)
 
+
 if __name__ == "__main__":
     tf.test.main()

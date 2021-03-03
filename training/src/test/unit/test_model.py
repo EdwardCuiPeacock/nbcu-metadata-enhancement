@@ -10,9 +10,9 @@ import main.components.bert_model as bert_model
 
 class ModelTest(tf.test.TestCase):
     @classmethod 
-    @patch("main.components.bert_model.N_TAGS", 5)
     def setUpClass(cls):
-        cls.model = bert_model.get_compiled_model()
+        num_labels = 5
+        cls.model = bert_model.get_compiled_model(num_labels)
 
     @patch("main.components.bert_model.tf.data.TFRecordDataset", autospec=True)
     def test_gzip_reader_fn(self, mockDataset):
@@ -31,14 +31,14 @@ class ModelTest(tf.test.TestCase):
     def test_input_fn_uses_defaults(self, mockBatchedDataset):
         file_pattern = "path/to/file/*"
         tf_transform_output_mock = Mock()
-        feature_spec = {"program_longsynopsis_xf": tf.io.FixedLenFeature([], tf.string),
-                        "tags": tf.io.FixedLenFeature([53], tf.int64)
+        feature_spec = {"synopsis": tf.io.FixedLenFeature([], tf.string),
+                        "labels_xf": tf.io.FixedLenFeature([53], tf.int64)
                         }
         tf_transform_output_mock.transformed_feature_spec.return_value.copy.return_value = (
             feature_spec
         )
 
-        test_dataset = tf.data.Dataset.from_tensor_slices((["features"], ["tags"]))
+        test_dataset = tf.data.Dataset.from_tensor_slices((["features"], ["labels"]))
         mockBatchedDataset.return_value = test_dataset
         dataset = bert_model._input_fn(
             file_pattern, tf_transform_output_mock
@@ -50,12 +50,12 @@ class ModelTest(tf.test.TestCase):
             features=feature_spec,
             reader=bert_model._gzip_reader_fn,
             shuffle=True,
-            label_key="tags",
+            label_key="labels_xf",
             num_epochs=None,
         )
         for elem in dataset.take(1):
             self.assertEqual(elem[0], ["features"])
-            self.assertEqual(elem[1], ["tags"])
+            self.assertEqual(elem[1], ["labels"])
 
     @patch(
         "main.components.bert_model.tf.data.experimental.make_batched_features_dataset",
@@ -64,8 +64,8 @@ class ModelTest(tf.test.TestCase):
     def test_input_fn_overrides_defaults(self, mockBatchedDataset):
         file_pattern = "path/to/file/*"
         tf_transform_output_mock = Mock()
-        feature_spec = {"program_longsynopsis_xf": tf.io.FixedLenFeature([], tf.string),
-                        "tags": tf.io.FixedLenFeature([53], tf.int64)
+        feature_spec = {"synopsis": tf.io.FixedLenFeature([], tf.string),
+                        "labels_xf": tf.io.FixedLenFeature([53], tf.int64)
                         }
         tf_transform_output_mock.transformed_feature_spec.return_value.copy.return_value = (
             feature_spec
@@ -74,7 +74,7 @@ class ModelTest(tf.test.TestCase):
         shuffle = False
         epochs = 10
 
-        test_dataset = tf.data.Dataset.from_tensor_slices((["features"], ["tags"]))
+        test_dataset = tf.data.Dataset.from_tensor_slices((["features"], ["labels"]))
         mockBatchedDataset.return_value = test_dataset
 
         dataset = bert_model._input_fn(
@@ -90,13 +90,13 @@ class ModelTest(tf.test.TestCase):
             features=feature_spec,
             reader=bert_model._gzip_reader_fn,
             shuffle=False,
-            label_key="tags",
+            label_key="labels_xf",
             num_epochs=10,
         )
 
         for elem in dataset.take(1):
             self.assertEqual(elem[0], ["features"])
-            self.assertEqual(elem[1], ["tags"])
+            self.assertEqual(elem[1], ["labels"])
 
     def test_build_bert_tagger(self):
         preprocessing_layer = self.model.layers[1]
@@ -110,6 +110,7 @@ class ModelTest(tf.test.TestCase):
 
         dense_layer = self.model.layers[3]
         self.assertEqual(dense_layer.output_shape[1], 5)
+        self.assertEqual(dense_layer.get_config()['activation'], 'sigmoid')
 
     def test_get_compiled_model(self):
         self.assertTrue(self.model._is_compiled)
@@ -120,6 +121,11 @@ class ModelTest(tf.test.TestCase):
         expected_optimizer_config.update({"epsilon": 1e-8})
         self.assertEqual(self.model.optimizer.get_config(), expected_optimizer_config)
 
+        # Test metrics and loss fn 
+        metric_types = [type(metric) for metric in self.model.compiled_metrics._metrics]
+        self.assertAllEqual(metric_types, 
+                            [tf.keras.metrics.Precision, tf.keras.metrics.Recall])
+        
         self.assertIsInstance(self.model.loss, tf.keras.losses.BinaryCrossentropy)
 
 if __name__ == "__main__":

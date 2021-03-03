@@ -39,7 +39,7 @@ def preprocessing_fn(inputs, custom_config):
     
     # Create and apply a full vocabulary for the labels (subgenres)
     labels = tft.compute_and_apply_vocabulary(
-        labels, vocab_filename="labels", num_oov_buckets=1
+        labels, vocab_filename=LABEL, num_oov_buckets=1
     )
     # Create a full vocabulary for the tags to be accessed later
     _ = tft.vocabulary(tags, vocab_filename='tags')

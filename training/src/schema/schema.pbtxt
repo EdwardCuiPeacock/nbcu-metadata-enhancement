@@ -1,0 +1,144 @@
+feature {
+  name: "TitleType"
+  type: BYTES
+  domain: "TitleType"
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  shape {
+    dim {
+      size: 1
+    }
+  }
+}
+feature {
+  name: "content_id"
+  type: BYTES
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  shape {
+    dim {
+      size: 1
+    }
+  }
+}
+feature {
+  name: "labels"
+  value_count {
+    min: 1
+  }
+  type: BYTES
+  domain: "labels"
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+}
+feature {
+  name: "synopsis"
+  type: BYTES
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  shape {
+    dim {
+      size: 1
+    }
+  }
+}
+feature {
+  name: "tags"
+  value_count {
+    min: 1
+  }
+  type: BYTES
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+}
+string_domain {
+  name: "TitleType"
+  value: "Movie"
+  value: "Programme"
+}
+string_domain {
+  name: "labels"
+  value: "Action & Adventure"
+  value: "Animals"
+  value: "Baseball"
+  value: "Basketball"
+  value: "Biography"
+  value: "Boxing"
+  value: "Business & Finance"
+  value: "Cartoon & Animation"
+  value: "Children"
+  value: "Comedy"
+  value: "Comedy-Drama"
+  value: "Crime"
+  value: "Crime drama"
+  value: "Documentary"
+  value: "Drama"
+  value: "Education"
+  value: "Educational"
+  value: "Entertainment"
+  value: "Fantasy"
+  value: "Food"
+  value: "Football"
+  value: "Game Show & Contest"
+  value: "Golf"
+  value: "Health & Fitness"
+  value: "History & Biography"
+  value: "Holiday"
+  value: "Home & How-To"
+  value: "Horror"
+  value: "Horse Racing"
+  value: "Ice Hockey"
+  value: "Ice Skating"
+  value: "Kids"
+  value: "Lifestyle"
+  value: "Martial Arts"
+  value: "Military & War"
+  value: "Motor Sports"
+  value: "Movies"
+  value: "Music"
+  value: "Musical"
+  value: "Mystery"
+  value: "Mystery & Suspense"
+  value: "Nature"
+  value: "News"
+  value: "News & Documentary"
+  value: "Olympics"
+  value: "Outdoors"
+  value: "Pro Wrestling"
+  value: "Reality"
+  value: "Religion"
+  value: "Romance"
+  value: "Rugby"
+  value: "Sci-Fi & Fantasy"
+  value: "Science & Technology"
+  value: "Soccer"
+  value: "Sports"
+  value: "Talk"
+  value: "Teen"
+  value: "Teens"
+  value: "Tennis"
+  value: "Thriller"
+  value: "Track & Field"
+  value: "Travel"
+  value: "Volleyball"
+  value: "Water Sports"
+  value: "Western"
+  value: "Winter Sports"
+  value: "big kids (ages 8-9)"
+  value: "little kids (ages 5-7)"
+  value: "not for kids"
+  value: "older teens (ages 15+)"
+  value: "preschoolers (ages 2-4)"
+  value: "teens (ages 13-14)"
+  value: "tweens (ages 10-12)"
+}

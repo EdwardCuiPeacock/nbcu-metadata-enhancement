@@ -49,7 +49,7 @@ def _input_fn(file_pattern, tf_transform_output, batch_size=64, shuffle=True, ep
 
 def build_bert_tagger(num_labels):
     # TODO: think about alternative architecture
-    text_input = tf.keras.layers.Input(shape=(), dtype=tf.string, name='program_longsynopsis_xf')
+    text_input = tf.keras.layers.Input(shape=(), dtype=tf.string, name='synopsis_xf')
     preprocessing_layer = hub.KerasLayer(TFHUB_HANDLE_PREPROCESSOR, name='preprocessing')
     encoder_inputs = preprocessing_layer(text_input)
     encoder = hub.KerasLayer(TFHUB_HANDLE_ENCODER, trainable=True, name='BERT_encoder')
@@ -67,7 +67,7 @@ def get_compiled_model(num_labels):
         # TODO: clipnorm only seems to work in TF 2.4? 
         model.compile(
             optimizer=tf.keras.optimizers.Adam(learning_rate=0.00003,
-                                               # clipnorm=1,
+                                               clipnorm=1,
                                                epsilon=1e-8),
             loss=BinaryCrossentropy(),
             metrics=metrics,
@@ -99,7 +99,7 @@ def run_fn(fn_args):
     tf_transform_output = tft.TFTransformOutput(fn_args.transform_output)
     # Not sure why its like this
     # TODO: fix this, might be a version issue?
-    num_labels = fn_args.num_labels
+    num_labels = fn_args.custom_config['num_labels']
     
     train_dataset = _input_fn(
         file_pattern=fn_args.train_files,
@@ -108,10 +108,11 @@ def run_fn(fn_args):
     
     model = get_compiled_model(num_labels)
     
+    # TODO pass in epochs
     history = model.fit(
         train_dataset, 
-        epochs=10,
-        steps_per_epoch=fn_args.train_steps / 10
+        epochs=3,
+        steps_per_epoch=fn_args.train_steps // 3
     )
     
     signatures = {

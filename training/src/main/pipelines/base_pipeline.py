@@ -23,8 +23,6 @@ from tfx.components import Transform
 from tfx.components import ImporterNode
 from tfx.components.trainer import executor as trainer_executor
 from tfx.dsl.experimental import latest_blessed_model_resolver
-from tfx.dsl.component.experimental import container_component
-from tfx.dsl.component.experimental import placeholders
 from tfx.extensions.google_cloud_ai_platform.pusher import (
     executor as ai_platform_pusher_executor,
 )
@@ -140,10 +138,12 @@ def create_pipeline(
             {
                 "custom_executor_spec": executor_spec.ExecutorClassSpec(
                     ai_platform_trainer_executor.GenericExecutor
-                ),
-                "custom_config": {
-                    ai_platform_trainer_executor.TRAINING_ARGS_KEY: ai_platform_training_args,
-                },
+                )
+            }
+        )
+        trainer_args['custom_config'].update(
+            {
+                ai_platform_trainer_executor.TRAINING_ARGS_KEY: ai_platform_training_args
             }
         )
     trainer = Trainer(**trainer_args)

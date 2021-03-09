@@ -48,3 +48,4 @@ def preprocessing_fn(inputs, custom_config):
     outputs[_transformed_name(LABEL)] = binarize_tags(labels, num_labels)
 
     return outputs
+

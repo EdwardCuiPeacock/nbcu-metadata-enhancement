@@ -1,16 +1,13 @@
 """
 TFX pipeline definition
 
-This is the full pipeline using the BQ example gen component
+This is a test pipeline using filebasedexamplegen 
 """
 import os
 from typing import Optional, Text, List, Dict, Any
 import tensorflow as tf
 
 from ml_metadata.proto import metadata_store_pb2
-from tfx.extensions.google_cloud_big_query.example_gen.component import (
-    BigQueryExampleGen,
-)  # pylint: disable=unused-import
 from tfx.components import (
     ExampleValidator,
     Pusher,
@@ -28,7 +25,10 @@ from tfx.types import Channel
 from tfx.types import standard_artifacts
 from tfx.types.standard_artifacts import Model, ModelBlessing, Schema
 from tfx.utils.dsl_utils import external_input
-from tfx.dsl.components.base import executor_spec
+from tfx.components.base import executor_spec
+from tfx.components.example_gen.component import FileBasedExampleGen
+from tfx.components.example_gen.custom_executors import parquet_executor
+
 
 from main.pipelines import configs
 
@@ -36,7 +36,7 @@ from main.pipelines import configs
 def create_pipeline(
     pipeline_name: Text,
     pipeline_root: Text,
-    query: Text,
+    data_path: Text,
     preprocessing_fn: Text,
     run_fn: Text,
     train_args: trainer_pb2.TrainArgs,
@@ -58,9 +58,11 @@ def create_pipeline(
                  example_gen_pb2.SplitConfig.Split(name='train', hash_buckets=10)
              ],
     ))
-    # Input data is in BQ
-    example_gen = BigQueryExampleGen(query=query, 
-                                    output_config=output)
+    example_gen = FileBasedExampleGen(
+        input_base=data_path,
+        custom_executor_spec=executor_spec.ExecutorClassSpec(parquet_executor.Executor),
+        output_config=output,
+    )
     components.append(example_gen)
 
     ### Import Curated Schema ###

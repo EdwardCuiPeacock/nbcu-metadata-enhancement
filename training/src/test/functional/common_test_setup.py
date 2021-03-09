@@ -5,7 +5,7 @@ import tensorflow_transform as tft
 
 import pandas as pd
 
-import main.components.component_utils as component_utils
+import main.components.bert_model as bert_model
 
 
 class CommonTestSetup(tf.test.TestCase):
@@ -13,7 +13,6 @@ class CommonTestSetup(tf.test.TestCase):
     Class for sharing a setup function between functional tests so we are always
     looking for artifacts in the same place
     """
-
     def setUp(self):
         super().setUp()
 
@@ -38,10 +37,11 @@ class CommonTestSetup(tf.test.TestCase):
         )
         self.tf_transform_output = tft.TFTransformOutput(self.transform_output)
 
-        self.num_tags = self.tf_transform_output.vocabulary_size_by_name("tags")
+        self.label_file = self.tf_transform_output.vocabulary_file_by_name("labels")
         self.tag_file = self.tf_transform_output.vocabulary_file_by_name("tags")
-        self.vocab_size = self.tf_transform_output.vocabulary_size_by_name("vocab")
-        self.vocab_file = self.tf_transform_output.vocabulary_file_by_name("vocab")
+
+        self.label_df = pd.read_csv(self.label_file, header=None)
+        self.tag_df = pd.read_csv(self.tag_file, header=None)
 
         transformed_examples_output = os.path.join(
             self._pipeline_root, "Transform/transformed_examples"
@@ -51,33 +51,9 @@ class CommonTestSetup(tf.test.TestCase):
             os.listdir(transformed_examples_output)[0],
             "train/*",
         )
-        self.transformed_eval_files = os.path.join(
-            transformed_examples_output,
-            os.listdir(transformed_examples_output)[0],
-            "eval/*",
-        )
-
-        self.tag_df = pd.read_csv(self.tag_file, header=None)
-        self.tag_lookup_table = component_utils.create_tag_lookup_table(self.tag_file)
-        self.vocab_df = pd.read_csv(self.vocab_file, header=None)
-        self.vocab_lookup_table = component_utils.create_tag_lookup_table(
-            self.vocab_file
-        )
-
-        self.transformed_train_dataset = component_utils._input_fn(
+        self.transformed_train_dataset = bert_model._input_fn(
             file_pattern=self.transformed_train_files,
             tf_transform_output=self.tf_transform_output,
-            num_tags=self.num_tags,
             shuffle=False,
-            table=self.tag_lookup_table,
-            batch_size=10,
-        )
-
-        self.transformed_eval_dataset = component_utils._input_fn(
-            file_pattern=self.transformed_eval_files,
-            tf_transform_output=self.tf_transform_output,
-            num_tags=self.num_tags,
-            shuffle=False,
-            table=self.tag_lookup_table,
-            batch_size=10,
+            batch_size=20,
         )

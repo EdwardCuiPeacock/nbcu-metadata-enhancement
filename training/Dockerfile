@@ -1,8 +1,8 @@
 # TFX build 
-FROM tensorflow/tfx:0.26.0 as tfx_base
+FROM tensorflow/tfx:0.27.0 as tfx_base
 
 # Main 
-FROM tensorflow/tensorflow:2.3.1-gpu 
+FROM tensorflow/tensorflow:2.4.0-gpu 
 COPY --from=tfx_base tfx/src/ tfx-src 
 
 RUN python -m pip install --upgrade poetry 

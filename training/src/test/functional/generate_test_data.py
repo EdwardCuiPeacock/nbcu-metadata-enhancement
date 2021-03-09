@@ -7,8 +7,8 @@ from tfx.orchestration.beam.beam_dag_runner import (
 from tfx.proto import trainer_pb2
 import tensorflow as tf
 
-from main.pipelines import base_pipeline
-from main.pipelines import config
+from main.pipelines import local_pipeline
+from main.pipelines import configs
 
 from test.functional.common_test_setup import CommonTestSetup
 
@@ -34,23 +34,24 @@ class DataForTestingGenerator(CommonTestSetup):
 
         Need access to GCS anyway to initialize the embeddings
         """
-        pipeline_high_threshold = base_pipeline.create_pipeline(
-            pipeline_name=config.PIPELINE_NAME,
+        pipeline = local_pipeline.create_pipeline(
+            pipeline_name=configs.PIPELINE_NAME,
             pipeline_root=self._pipeline_root,
-            data_path=config.TEST_DATA_PATH,
-            preprocessing_fn=config.PREPROCESSING_FN,
-            run_fn=config.RUN_FN,
-            train_args=trainer_pb2.TrainArgs(num_steps=config.TRAIN_NUM_STEPS_TEST),
-            eval_args=trainer_pb2.EvalArgs(num_steps=config.EVAL_NUM_STEPS_TEST),
-            eval_precision_threshold=config.EVAL_PRECISION_THRESHOLD,
-            eval_recall_threshold=config.EVAL_RECALL_THRESHOLD,
+            data_path=configs.DATA_PATH_TEST, 
+            preprocessing_fn=configs.PREPROCESSING_FN,
+            run_fn=configs.RUN_FN,
+            train_args=trainer_pb2.TrainArgs(num_steps=configs.TRAIN_NUM_STEPS_TEST, splits=['train']),
+            eval_args=trainer_pb2.EvalArgs(num_steps=configs.EVAL_NUM_STEPS_TEST, splits=['train']),
+            eval_accuracy_threshold=None,
             serving_model_dir=self._serving_model_dir,
+            custom_config=configs.custom_config,
+            beam_pipeline_args=configs.BIG_QUERY_WITH_DIRECT_RUNNER_BEAM_PIPELINE_ARGS,
             metadata_connection_config=metadata.sqlite_metadata_connection_config(
                 self._metadata_path
             ),
         )
 
-        BeamDagRunner().run(pipeline_high_threshold)
+        BeamDagRunner().run(pipeline)
 
 
 if __name__ == "__main__":

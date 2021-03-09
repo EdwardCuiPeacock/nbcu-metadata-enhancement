@@ -117,8 +117,9 @@ class ModelTest(tf.test.TestCase):
         self.assertIsInstance(self.model.distribute_strategy, tf.distribute.MirroredStrategy)
 
         expected_optimizer_config = tf.keras.optimizers.Adam().get_config().copy()
-        expected_optimizer_config.update({"learning_rate": 0.00003})
-        expected_optimizer_config.update({"epsilon": 1e-8})
+        expected_optimizer_config.update({"learning_rate": 0.00003, 
+                                          "epsilon": 1e-8, 
+                                          "clipnorm": 1})
         self.assertEqual(self.model.optimizer.get_config(), expected_optimizer_config)
 
         # Test metrics and loss fn 

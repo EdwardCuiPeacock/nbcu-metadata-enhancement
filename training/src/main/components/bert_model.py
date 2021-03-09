@@ -49,7 +49,7 @@ def _input_fn(file_pattern, tf_transform_output, batch_size=64, shuffle=True, ep
 
 def build_bert_tagger(num_labels):
     # TODO: think about alternative architecture
-    text_input = tf.keras.layers.Input(shape=(), dtype=tf.string, name='synopsis_xf')
+    text_input = tf.keras.layers.Input(shape=(), dtype=tf.string, name='synopsis')
     preprocessing_layer = hub.KerasLayer(TFHUB_HANDLE_PREPROCESSOR, name='preprocessing')
     encoder_inputs = preprocessing_layer(text_input)
     encoder = hub.KerasLayer(TFHUB_HANDLE_ENCODER, trainable=True, name='BERT_encoder')
@@ -64,7 +64,7 @@ def get_compiled_model(num_labels):
     with strategy.scope():
         model = build_bert_tagger(num_labels)
         metrics = [tf.keras.metrics.Precision(), tf.keras.metrics.Recall()]
-        # TODO: clipnorm only seems to work in TF 2.4? 
+        # clipnorm only seems to work in TF 2.4 with distribution strategy 
         model.compile(
             optimizer=tf.keras.optimizers.Adam(learning_rate=0.00003,
                                                clipnorm=1,

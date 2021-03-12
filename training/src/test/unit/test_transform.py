@@ -41,7 +41,6 @@ class TransformTest(tf.test.TestCase):
     def test_preprocessing_fn(self, mockComputeAndApply, mockVocabulary):
         inputs = {
             'synopsis': [["some input"], ["more input"]],
-            'labels': [['label_1'], ['label_2']],
             'tags': [['tag_1'], ['tag_2']]
         }
         custom_config = {
@@ -54,7 +53,7 @@ class TransformTest(tf.test.TestCase):
         )
         expected_output = {
             'synopsis': tf.constant(["some input", "more input"]),
-            'labels_xf': tf.constant([[0, 1, 0, 0, 0],
+            'tags_xf': tf.constant([[0, 1, 0, 0, 0],
                                       [0, 0, 1, 0, 0]], dtype=tf.int64)
         }
 
@@ -62,15 +61,12 @@ class TransformTest(tf.test.TestCase):
         outputs = transform.preprocessing_fn(inputs, custom_config)
 
         call = mockComputeAndApply.call_args_list
-        self.assertEqual(call[0][1], {"vocab_filename": "labels", "num_oov_buckets": 1})
-        mockVocabulary.assert_called_with(
-            inputs['tags'], vocab_filename="tags"
-        )
+        self.assertEqual(call[0][1], {"vocab_filename": "tags", "num_oov_buckets": 1})
         self.assertAllEqual(outputs.keys(), expected_output.keys())
         self.assertAllEqual(outputs['synopsis'], 
                             expected_output['synopsis'])
-        self.assertAllEqual(outputs['labels_xf'], 
-                            expected_output['labels_xf'])
+        self.assertAllEqual(outputs['tags_xf'], 
+                            expected_output['tags_xf'])
 
 if __name__ == "__main__":
     tf.test.main()

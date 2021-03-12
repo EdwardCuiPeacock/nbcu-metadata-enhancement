@@ -42,7 +42,7 @@ def _input_fn(file_pattern, tf_transform_output, batch_size=64, shuffle=True, ep
         features=transformed_feature_spec,
         reader=_gzip_reader_fn,
         shuffle=shuffle,
-        label_key='labels_xf',
+        label_key='tags_xf',
         num_epochs=epochs
     )
     return dataset

@@ -9,7 +9,7 @@ import tensorflow_transform as tft
 import tensorflow as tf
 
 FEATURE = 'synopsis'
-LABEL = 'labels'
+LABEL = 'tags'
 
 def _transformed_name(key):
     return key + '_xf'
@@ -33,7 +33,6 @@ def preprocessing_fn(inputs, custom_config):
     outputs = {}
     text = tf.squeeze(inputs[FEATURE], axis=1)
     labels = inputs[LABEL]
-    tags = inputs['tags']
     
     num_labels = custom_config.get('num_labels')
     
@@ -41,8 +40,6 @@ def preprocessing_fn(inputs, custom_config):
     labels = tft.compute_and_apply_vocabulary(
         labels, vocab_filename=LABEL, num_oov_buckets=1
     )
-    # Create a full vocabulary for the tags to be accessed later
-    _ = tft.vocabulary(tags, vocab_filename='tags')
 
     outputs[FEATURE] = text
     outputs[_transformed_name(LABEL)] = binarize_tags(labels, num_labels)

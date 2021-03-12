@@ -32,7 +32,7 @@ class ModelTest(tf.test.TestCase):
         file_pattern = "path/to/file/*"
         tf_transform_output_mock = Mock()
         feature_spec = {"synopsis": tf.io.FixedLenFeature([], tf.string),
-                        "labels_xf": tf.io.FixedLenFeature([53], tf.int64)
+                        "tags_xf": tf.io.FixedLenFeature([53], tf.int64)
                         }
         tf_transform_output_mock.transformed_feature_spec.return_value.copy.return_value = (
             feature_spec
@@ -50,7 +50,7 @@ class ModelTest(tf.test.TestCase):
             features=feature_spec,
             reader=bert_model._gzip_reader_fn,
             shuffle=True,
-            label_key="labels_xf",
+            label_key="tags_xf",
             num_epochs=None,
         )
         for elem in dataset.take(1):
@@ -65,7 +65,7 @@ class ModelTest(tf.test.TestCase):
         file_pattern = "path/to/file/*"
         tf_transform_output_mock = Mock()
         feature_spec = {"synopsis": tf.io.FixedLenFeature([], tf.string),
-                        "labels_xf": tf.io.FixedLenFeature([53], tf.int64)
+                        "tags_xf": tf.io.FixedLenFeature([53], tf.int64)
                         }
         tf_transform_output_mock.transformed_feature_spec.return_value.copy.return_value = (
             feature_spec
@@ -90,7 +90,7 @@ class ModelTest(tf.test.TestCase):
             features=feature_spec,
             reader=bert_model._gzip_reader_fn,
             shuffle=False,
-            label_key="labels_xf",
+            label_key="tags_xf",
             num_epochs=10,
         )
 

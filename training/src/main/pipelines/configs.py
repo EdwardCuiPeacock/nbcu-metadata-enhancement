@@ -34,7 +34,7 @@ def get_domain_size(schema_path, feature):
 
     return len(domain.value)
 
-num_labels = get_domain_size('schema/schema.pbtxt', 'labels')
+num_labels = get_domain_size('schema/schema.pbtxt', 'tags')
 custom_config = {
     'num_labels': num_labels
 }

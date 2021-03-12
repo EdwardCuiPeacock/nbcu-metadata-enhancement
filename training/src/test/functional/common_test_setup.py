@@ -37,10 +37,8 @@ class CommonTestSetup(tf.test.TestCase):
         )
         self.tf_transform_output = tft.TFTransformOutput(self.transform_output)
 
-        self.label_file = self.tf_transform_output.vocabulary_file_by_name("labels")
         self.tag_file = self.tf_transform_output.vocabulary_file_by_name("tags")
 
-        self.label_df = pd.read_csv(self.label_file, header=None)
         self.tag_df = pd.read_csv(self.tag_file, header=None)
 
         transformed_examples_output = os.path.join(

@@ -28,7 +28,7 @@ class TaggingModelTest(CommonTestSetup):
 
     def test_model(self):
         # TODO: Do this in configs or something?
-        num_labels = 409
+        num_labels = 408
         model = bert_model.get_compiled_model(num_labels)
 
         # Don't use encoder and dense layer now, maybe something we can do with them? 

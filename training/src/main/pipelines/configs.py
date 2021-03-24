@@ -15,7 +15,7 @@ with open('main/queries/ingest_query_test.sql', 'r') as input_query:
 with open('main/queries/ingest_query.sql', 'r') as input_query:
     query = input_query.read()
 
-IMAGE = "eu.gcr.io/ml-sandbox-101/custom_gpu_tfx_image_nbcu_2:local"
+IMAGE = "eu.gcr.io/ml-sandbox-101/custom_gpu_tfx_image_nbcu_3:local"
 
 GCS_BUCKET_NAME = "metadata-bucket-sky"
 
@@ -41,7 +41,7 @@ custom_config = {
 
 
 # TODO: update this (too many steps?)
-TRAIN_NUM_STEPS = 2000
+TRAIN_NUM_STEPS = 100000
 EVAL_NUM_STEPS = 0
 
 TRAIN_NUM_STEPS_TEST = 3 
@@ -66,7 +66,7 @@ GCP_AI_PLATFORM_TRAINING_ARGS = {
      "masterType": "n1-standard-16",
      "masterConfig": {
          "imageUri": IMAGE,
-         "acceleratorConfig": {"count": 1, "type": "NVIDIA_TESLA_T4"},
+         "acceleratorConfig": {"count": 4, "type": "NVIDIA_TESLA_T4"},
      },
      "scaleTier": "CUSTOM",
  }

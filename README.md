@@ -49,6 +49,7 @@ poetry add <package>
 ```
 See more advanced usage at https://python-poetry.org/docs/cli/#add.
 Make sure to commit the new poetry.lock file to git if you add any new packages.
+
 ## Precommit
 
 This project has an automatic linter setup which runs both [Black](https://github.com/psf/black) and [Flake8](https://flake8.pycqa.org/en/latest/). A good writeup of this solution is [here](https://ljvmiranda921.github.io/notebook/2018/06/21/precommits-using-black-and-flake8/).
@@ -68,3 +69,10 @@ make pre-commit
 ```
 
 In addition to being ran on every commit, this is ensured with the linter stage in `bibcd`. This builds a dockerfile and runs the pre-commit on all files.
+
+## Building and Running the Pipeline 
+
+You can use the [MLCLI](https://github.com/sky-uk/disco-mlops-mlcli/blob/master/README.md) tool in order to build and run your pipelines. 
+
+Please look at the README for instructions on how to get started. 
+

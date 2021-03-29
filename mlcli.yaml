@@ -1,0 +1,12 @@
+meta:
+  issue: "mlo-421"
+  organisation: "nbcu"
+  tenant: "us"
+  model_name: "metadata-enhancement"
+  gcr_root: "eu.gcr.io/ml-sandbox-deploy-test-101/mlops"
+
+pipeline_builder:
+  namespace: kubeflow-pipelines
+  source:
+    file: training/src/kubeflow_dag_runner.py
+  schedule: "0 0 1 * *"

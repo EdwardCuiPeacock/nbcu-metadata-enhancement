@@ -3,24 +3,41 @@ TFX Pipeline for Peacock Deep Learning Recs Enginge model
 """
 import os
 import tensorflow_data_validation as tfdv
+from jinja2 import Environment, FileSystemLoader
+from functools import partial
 
 # Pipeline name will be used to identify this pipeline.
 PIPELINE_NAME = "metadata-dev"
 
-# Local testing data
-DATA_PATH_TEST = "test_data/"
-# Real BQ Data
-with open('main/queries/ingest_query_test.sql', 'r') as input_query:
-    query_test = input_query.read()
-with open('main/queries/ingest_query.sql', 'r') as input_query:
-    query = input_query.read()
-
-IMAGE = "eu.gcr.io/ml-sandbox-101/custom_gpu_tfx_image_nbcu_3:local"
+IMAGE = "eu.gcr.io/ml-sandbox-101/custom_gpu_tfx_image_nbcu_4:local"
 
 GCS_BUCKET_NAME = "metadata-bucket-sky"
 
 GOOGLE_CLOUD_REGION = "europe-west2"
 GOOGLE_CLOUD_PROJECT = "ml-sandbox-101"
+BQ_DATASET = 'metadata_sky'
+BQ_TABLE = 'merlin_movie_series_data_small'
+TEST_LIMIT = 20 
+
+# BQ data 
+# TODO: This needs to go somewhere else
+# TODO: Right now we are templating at pipeline COMPILE time 
+#       eventually we'll want to do this at RUN time, since this 
+#       will allow us to template out any temporal aspects of the query
+file_loader = FileSystemLoader('main/queries')
+env = Environment(loader=file_loader)
+template = env.get_template('ingest_query.sql')
+
+partially_rendered_query = partial(template.render, 
+                                   project=GOOGLE_CLOUD_PROJECT, 
+                                   dataset=BQ_DATASET, 
+                                   table=BQ_TABLE)
+
+query = partially_rendered_query()
+query_test = partially_rendered_query(limit=TEST_LIMIT)
+
+# Local testing data
+DATA_PATH_TEST = "test_data/"
 
 
 PREPROCESSING_FN = "main.components.transform.preprocessing_fn"
@@ -41,7 +58,7 @@ custom_config = {
 
 
 # TODO: update this (too many steps?)
-TRAIN_NUM_STEPS = 100000
+TRAIN_NUM_STEPS = 25000
 EVAL_NUM_STEPS = 0
 
 TRAIN_NUM_STEPS_TEST = 3 
@@ -59,7 +76,7 @@ BIG_QUERY_WITH_DIRECT_RUNNER_BEAM_PIPELINE_ARGS = [
  ]
 
 
-# # Use AI Platform training.
+# Use AI Platform training.
 GCP_AI_PLATFORM_TRAINING_ARGS = {
      "project": GOOGLE_CLOUD_PROJECT,
      "region": GOOGLE_CLOUD_REGION,

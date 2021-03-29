@@ -1,4 +1,7 @@
 SELECT 
-  synopsis,
+  CONCAT(program_title, '. ', synopsis) as synopsis,
   tags
-FROM `ml-sandbox-101.metadata_sky.merlin_movie_series_data_small`
+FROM `{{ project }}.{{ dataset }}.{{ table }}`
+{% if limit -%}
+   LIMIT {{ limit }}
+{% endif %}

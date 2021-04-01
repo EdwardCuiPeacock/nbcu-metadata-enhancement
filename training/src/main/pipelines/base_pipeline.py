@@ -60,7 +60,7 @@ def create_pipeline(
     ))
     # Input data is in BQ
     example_gen = BigQueryExampleGen(query=query, 
-                                    output_config=output)
+                                     output_config=output)
     components.append(example_gen)
 
     ### Import Curated Schema ###

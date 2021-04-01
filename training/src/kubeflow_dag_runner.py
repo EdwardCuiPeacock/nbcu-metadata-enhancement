@@ -16,7 +16,8 @@ from tfx.utils import telemetry_utils
 # stored under this OUTPUT_DIR.
 OUTPUT_DIR = os.path.join("gs://", configs.GCS_BUCKET_NAME)
 PIPELINE_NAME = configs.PIPELINE_NAME
-OUTPUT_FILENAME = f"{PIPELINE_NAME}.yaml"
+OUTPUT_FILENAME = f"{PIPELINE_NAME}.tar.gz"
+#OUTPUT_FILENAME = f"{PIPELINE_NAME}.yaml"
 IMAGE = configs.IMAGE
 
 def run(output_dir=OUTPUT_DIR, output_filename=OUTPUT_FILENAME, pipeline_name=PIPELINE_NAME, image=IMAGE):

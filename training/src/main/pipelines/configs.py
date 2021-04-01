@@ -7,24 +7,37 @@ from jinja2 import Environment, FileSystemLoader
 from functools import partial
 
 # Pipeline name will be used to identify this pipeline.
-PIPELINE_NAME = "metadata-dev"
+PIPELINE_NAME = "metadata-dev-base"
 
-IMAGE = "eu.gcr.io/ml-sandbox-101/custom_gpu_tfx_image_nbcu_4:local"
 
-GCS_BUCKET_NAME = "metadata-bucket-sky"
+GCS_BUCKET_NAME = "metadata-bucket-base"
 
-GOOGLE_CLOUD_REGION = "europe-west2"
-GOOGLE_CLOUD_PROJECT = "ml-sandbox-101"
-BQ_DATASET = 'metadata_sky'
-BQ_TABLE = 'merlin_movie_series_data_small'
+GOOGLE_CLOUD_REGION = "us-east1"
+try:
+    import google.auth  # pylint: disable=g-import-not-at-top
+    try:
+        _, GOOGLE_CLOUD_PROJECT = google.auth.default()
+    except google.auth.exceptions.DefaultCredentialsError:
+        GOOGLE_CLOUD_PROJECT = ''
+except ImportError:
+    GOOGLE_CLOUD_PROJECT = ''
+
+#GOOGLE_CLOUD_PROJECT = "res-nbcupea-dev-ds-sandbox-001"
+BQ_DATASET = 'metadata_enhancement'
+BQ_TABLE = 'merlin_data'
 TEST_LIMIT = 20 
+
+#IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/metadata-dev-pipeline-base'
+IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/peacock-tfx-metadata-dev-base'
+#IMAGE = "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
 
 # BQ data 
 # TODO: This needs to go somewhere else
 # TODO: Right now we are templating at pipeline COMPILE time 
 #       eventually we'll want to do this at RUN time, since this 
 #       will allow us to template out any temporal aspects of the query
-file_loader = FileSystemLoader('main/queries')
+
+file_loader = FileSystemLoader('src/main/queries')
 env = Environment(loader=file_loader)
 template = env.get_template('ingest_query.sql')
 
@@ -33,7 +46,7 @@ partially_rendered_query = partial(template.render,
                                    dataset=BQ_DATASET, 
                                    table=BQ_TABLE)
 
-query = partially_rendered_query()
+query = partially_rendered_query(limit=1000)
 query_test = partially_rendered_query(limit=TEST_LIMIT)
 
 # Local testing data
@@ -51,7 +64,7 @@ def get_domain_size(schema_path, feature):
 
     return len(domain.value)
 
-num_labels = get_domain_size('schema/schema.pbtxt', 'tags')
+num_labels = get_domain_size('src/schema/schema.pbtxt', 'tags')
 custom_config = {
     'num_labels': num_labels
 }
@@ -79,8 +92,8 @@ BIG_QUERY_WITH_DIRECT_RUNNER_BEAM_PIPELINE_ARGS = [
 # Use AI Platform training.
 GCP_AI_PLATFORM_TRAINING_ARGS = {
      "project": GOOGLE_CLOUD_PROJECT,
-     "region": GOOGLE_CLOUD_REGION,
-     "masterType": "n1-standard-16",
+     "region": "us-central1",
+     "masterType": "n1-highmem-16",
      "masterConfig": {
          "imageUri": IMAGE,
          "acceleratorConfig": {"count": 4, "type": "NVIDIA_TESLA_T4"},

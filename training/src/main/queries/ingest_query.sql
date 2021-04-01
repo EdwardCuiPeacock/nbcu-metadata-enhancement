@@ -1,5 +1,5 @@
 SELECT 
-  CONCAT(program_title, '. ', synopsis) as synopsis,
+  CONCAT(program_title, '. ', program_longsynopsis) as synopsis,
   tags
 FROM `{{ project }}.{{ dataset }}.{{ table }}`
 {% if limit -%}

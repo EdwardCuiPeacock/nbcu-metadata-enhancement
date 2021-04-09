@@ -1,7 +1,7 @@
 # NBCU Metadata Enhancement
 
 
-SET UP NEW MODEL:
+SETUP NEW MODEL:
 
 STEP 0 - CHANGE DIRECTORY:
 

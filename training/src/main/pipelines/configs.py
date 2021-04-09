@@ -22,13 +22,17 @@ try:
 except ImportError:
     GOOGLE_CLOUD_PROJECT = ''
 
+OUTPUT_TABLE = "res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.model_results"
 #GOOGLE_CLOUD_PROJECT = "res-nbcupea-dev-ds-sandbox-001"
 BQ_DATASET = 'metadata_enhancement'
 BQ_TABLE = 'merlin_data'
+TOKEN_LIMIT = 250
+
 TEST_LIMIT = 20 
 
-#IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/metadata-dev-pipeline-base'
-IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/peacock-tfx-metadata-dev-base'
+IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/metadata-dev-pipeline-base'
+#IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/temp_metadata_pipeline'
+#IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/peacock-tfx-metadata-dev-base'
 #IMAGE = "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
 
 # BQ data 
@@ -41,12 +45,13 @@ file_loader = FileSystemLoader('src/main/queries')
 env = Environment(loader=file_loader)
 template = env.get_template('ingest_query.sql')
 
-partially_rendered_query = partial(template.render, 
+partially_rendered_query = partial(template.render,
+                                   token_limit=TOKEN_LIMIT,
                                    project=GOOGLE_CLOUD_PROJECT, 
                                    dataset=BQ_DATASET, 
                                    table=BQ_TABLE)
 
-query = partially_rendered_query(limit=1000)
+query = partially_rendered_query(limit=TEST_LIMIT)
 query_test = partially_rendered_query(limit=TEST_LIMIT)
 
 # Local testing data
@@ -71,7 +76,8 @@ custom_config = {
 
 
 # TODO: update this (too many steps?)
-TRAIN_NUM_STEPS = 25000
+#TRAIN_NUM_STEPS = 25000
+TRAIN_NUM_STEPS = 5
 EVAL_NUM_STEPS = 0
 
 TRAIN_NUM_STEPS_TEST = 3 
@@ -82,11 +88,28 @@ EVAL_NUM_STEPS_TEST = 0
 #### Infrastructure Configs #
 #############################
 
+def set_memory_request_and_limits(memory_request, memory_limit):
+    def _set_memory_request_and_limits(task):
+        return (
+            task.container.set_memory_request(memory_request)
+                .set_memory_limit(memory_limit)
+            )
+        
+    return _set_memory_request_and_limits
+
+MEMORY_REQUEST = '10G'
+MEMORY_LIMIT = '11G'
+
 # Beam args to use BigQueryExampleGen with Beam DirectRunner.
+
 BIG_QUERY_WITH_DIRECT_RUNNER_BEAM_PIPELINE_ARGS = [
      "--project=" + GOOGLE_CLOUD_PROJECT,
      "--temp_location=" + os.path.join("gs://", GCS_BUCKET_NAME, "tmp"),
- ]
+     "--machine_type=n1-standard-16",
+     "--disk_size_gb=100",
+     "--runner=DataflowRunner",
+     "--region=" + GOOGLE_CLOUD_REGION,
+]
 
 
 # Use AI Platform training.

@@ -31,7 +31,7 @@ from tfx.utils.dsl_utils import external_input
 from tfx.dsl.components.base import executor_spec
 
 from main.pipelines import configs
-
+from main.components.embedding_eval_component import EmbeddingEvaluator 
 
 def create_pipeline(
     pipeline_name: Text,
@@ -122,7 +122,12 @@ def create_pipeline(
         )
     trainer = Trainer(**trainer_args)
     components.append(trainer)
-
+    
+    evaluator = EmbeddingEvaluator(model=trainer.outputs['model'],
+                                   name='test-model',
+                                   output_table=configs.OUTPUT_TABLE)
+    
+    components.append(evaluator)
     ### PUSHER ###
     pusher = Pusher(
         model=trainer.outputs["model"],

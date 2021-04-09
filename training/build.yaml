@@ -4,7 +4,7 @@ build:
   - context: .
     docker:
       dockerfile: Dockerfile
-    image: gcr.io/res-nbcupea-dev-ds-sandbox-001/peacock-tfx-metadata-dev-base
+    image: gcr.io/res-nbcupea-dev-ds-sandbox-001/metadata-dev-pipeline-base
   tagPolicy:
     envTemplate:
       template: '{{.IMAGE_NAME}}:latest'

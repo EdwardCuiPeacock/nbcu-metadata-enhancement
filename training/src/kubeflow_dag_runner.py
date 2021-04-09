@@ -20,6 +20,7 @@ OUTPUT_FILENAME = f"{PIPELINE_NAME}.tar.gz"
 #OUTPUT_FILENAME = f"{PIPELINE_NAME}.yaml"
 IMAGE = configs.IMAGE
 
+
 def run(output_dir=OUTPUT_DIR, output_filename=OUTPUT_FILENAME, pipeline_name=PIPELINE_NAME, image=IMAGE):
     # TFX produces two types of outputs, files and metadata.
     # - Files will be created under PIPELINE_ROOT directory.
@@ -34,7 +35,8 @@ def run(output_dir=OUTPUT_DIR, output_filename=OUTPUT_FILENAME, pipeline_name=PI
     tfx_image = os.environ.get("KUBEFLOW_TFX_IMAGE", image)
 
     runner_config = kubeflow_dag_runner.KubeflowDagRunnerConfig(
-        kubeflow_metadata_config=metadata_config, tfx_image=tfx_image
+        kubeflow_metadata_config=metadata_config,
+        tfx_image=tfx_image
     )
 
     kubeflow_dag_runner.KubeflowDagRunner(

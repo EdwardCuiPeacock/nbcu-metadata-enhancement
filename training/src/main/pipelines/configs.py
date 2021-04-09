@@ -8,7 +8,7 @@ from functools import partial
 
 # Pipeline name will be used to identify this pipeline.
 PIPELINE_NAME = "metadata-dev-base"
-
+MODEL_NAME = "base"
 
 GCS_BUCKET_NAME = "metadata-bucket-base"
 
@@ -32,9 +32,6 @@ TOKEN_LIMIT = 250
 TEST_LIMIT = 20 
 
 IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/metadata-dev-pipeline-base'
-#IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/temp_metadata_pipeline'
-#IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/peacock-tfx-metadata-dev-base'
-#IMAGE = "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
 
 # BQ data 
 # TODO: This needs to go somewhere else
@@ -71,19 +68,22 @@ def get_domain_size(schema_path, feature):
     return len(domain.value)
 
 num_labels = get_domain_size('src/schema/schema.pbtxt', 'tags')
-custom_config = {
-    'num_labels': num_labels
-}
 
 
-# TODO: update this (too many steps?)
-#TRAIN_NUM_STEPS = 25000
-TRAIN_NUM_STEPS = 5
+
+## TRAINING ARGS
+TRAIN_NUM_STEPS = 25000
 EVAL_NUM_STEPS = 0
 
 TRAIN_NUM_STEPS_TEST = 3 
 EVAL_NUM_STEPS_TEST = 0
 
+EPOCHS = 3
+
+custom_config = {
+    'num_labels': num_labels,
+    'epochs': EPOCHS
+}
 
 #############################
 #### Infrastructure Configs #

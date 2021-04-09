@@ -100,7 +100,8 @@ def run_fn(fn_args):
     # Not sure why its like this
     # TODO: fix this, might be a version issue?
     num_labels = fn_args.custom_config['num_labels']
-    
+    num_epochs = fn_args.custom_config['epochs'
+                                      ]
     train_dataset = _input_fn(
         file_pattern=fn_args.train_files,
         tf_transform_output=tf_transform_output,
@@ -111,8 +112,8 @@ def run_fn(fn_args):
     # TODO pass in epochs
     history = model.fit(
         train_dataset, 
-        epochs=3,
-        steps_per_epoch=fn_args.train_steps // 3
+        epochs=num_epochs,
+        steps_per_epoch=fn_args.train_steps // num_epochs
     )
     
     signatures = {

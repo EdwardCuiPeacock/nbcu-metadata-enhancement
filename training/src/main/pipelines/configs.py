@@ -26,6 +26,7 @@ OUTPUT_TABLE = "res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.model_result
 #GOOGLE_CLOUD_PROJECT = "res-nbcupea-dev-ds-sandbox-001"
 BQ_DATASET = 'metadata_enhancement'
 BQ_TABLE = 'merlin_data'
+
 TOKEN_LIMIT = 250
 
 TEST_LIMIT = 20 
@@ -51,7 +52,7 @@ partially_rendered_query = partial(template.render,
                                    dataset=BQ_DATASET, 
                                    table=BQ_TABLE)
 
-query = partially_rendered_query(limit=TEST_LIMIT)
+query = partially_rendered_query()
 query_test = partially_rendered_query(limit=TEST_LIMIT)
 
 # Local testing data

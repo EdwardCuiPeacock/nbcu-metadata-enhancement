@@ -1,5 +1,47 @@
 # NBCU Metadata Enhancement
 
+
+SETUP NEW MODEL:
+
+STEP 0 - CHANGE DIRECTORY:
+
+set working dir to training
+```
+cd training
+```
+STEP 1 - CHANGE CONFIGS:
+
+- [training/pipeline_commands.sh](training/pipeline_commands.sh)
+  - Make sure to change  `CUSTOM_TFX_IMAGE` and `PIPELINE_NAME`
+  - `CUSTOM_TFX_IMAGE` must also match the image in [training/build.yaml](training/build.yaml) and `IMAGE` in [training/main/src/pipelines/configs.py](training/main/src/pipelines/configs.py)
+  - `PIPELINE_NAME` must also match in [training/main/src/pipelines/configs.py](training/main/src/pipelines/configs.py)
+- `GCS_BUCKET_NAME` needs to be changed in [training/main/src/pipelines/configs.py](training/main/src/pipelines/configs.py) to whatever bucket you want to save the model to
+- pretty much everything high level is controlled in the config so change values to your hearts content i.e training length, input token length etc.
+
+STEP 2 - SOURCE COMMANDS:
+
+```
+source pipeline_commands.sh
+```
+
+STEP 3 - SETUP PIPELINE:
+
+you can now just use the commands
+```
+build_pipeline
+update_pipeline
+run_pipeline
+```
+to build/update/launch your kubeflow pipeline
+
+**NOTE: VERSIONS USED**
+```
+tfx=0.28
+skaffold=v1.17.0 (should work with v2, just change the build.yaml)
+tensorflow=2.4.1
+```
+-------------------
+
 This codebase is split into two main folders:
 - [training](training/README.md)
 - [serving](./serving/README.md)

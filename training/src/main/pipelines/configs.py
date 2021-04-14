@@ -8,7 +8,9 @@ from functools import partial
 
 # Pipeline name will be used to identify this pipeline.
 PIPELINE_NAME = "metadata-dev-base"
-MODEL_NAME = "base"
+
+###IMPORTANT CHANGE THIS ALWAYS
+MODEL_NAME = "base-3-epoch"
 
 GCS_BUCKET_NAME = "metadata-bucket-base"
 
@@ -72,7 +74,7 @@ num_labels = get_domain_size('src/schema/schema.pbtxt', 'tags')
 
 
 ## TRAINING ARGS
-TRAIN_NUM_STEPS = 25000
+TRAIN_NUM_STEPS = 12000
 EVAL_NUM_STEPS = 0
 
 TRAIN_NUM_STEPS_TEST = 3 

@@ -97,25 +97,25 @@ def run_fn(fn_args):
         fn_args: Holds args used to train the model as name/value pairs
     """
     
-    batch_size = 64
-    
     tf_transform_output = tft.TFTransformOutput(fn_args.transform_output)
     # Not sure why its like this
     # TODO: fix this, might be a version issue?
     num_labels = fn_args.custom_config['num_labels']
     num_epochs = fn_args.custom_config['epochs']
+    batch_size = fn_args.custom_config['batch_size']
     train_dataset = _input_fn(
         file_pattern=fn_args.train_files,
         tf_transform_output=tf_transform_output,
-        batch_size=batch_size)
+        batch_size=batch_size,
+        epochs=num_epochs)
     
     model = get_compiled_model(num_labels)
     
     # TODO pass in epochs
     history = model.fit(
         train_dataset, 
-        epochs=num_epochs,
-        steps_per_epoch=fn_args.train_steps // num_epochs
+        epochs=num_epochs
+        #steps_per_epoch=fn_args.train_steps // num_epochs
     )
     
     signatures = {

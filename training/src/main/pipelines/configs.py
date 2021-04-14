@@ -81,10 +81,12 @@ TRAIN_NUM_STEPS_TEST = 3
 EVAL_NUM_STEPS_TEST = 0
 
 EPOCHS = 3
+BATCH_SIZE = 1024
 
 custom_config = {
     'num_labels': num_labels,
-    'epochs': EPOCHS
+    'epochs': EPOCHS,
+    'batch_size': BATCH_SIZE
 }
 
 #############################

@@ -17,6 +17,8 @@ STEP 1 - CHANGE CONFIGS:
   - `PIPELINE_NAME` must also match in [training/main/src/pipelines/configs.py](training/main/src/pipelines/configs.py)
 - `GCS_BUCKET_NAME` needs to be changed in [training/main/src/pipelines/configs.py](training/main/src/pipelines/configs.py) to whatever bucket you want to save the model to
 - pretty much everything high level is controlled in the config so change values to your hearts content i.e training length, input token length etc.
+- MOST IMPORTANT MAYBE: make sure to change `MODEL_NAME` in [training/main/src/pipelines/configs.py](training/main/src/pipelines/configs.py) to the model name, (something descriptive) as this is what is used for eval and querying metrics for a model
+
 
 STEP 2 - SOURCE COMMANDS:
 

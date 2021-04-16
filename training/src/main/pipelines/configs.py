@@ -7,12 +7,12 @@ from jinja2 import Environment, FileSystemLoader
 from functools import partial
 
 # Pipeline name will be used to identify this pipeline.
-PIPELINE_NAME = "metadata-dev-base"
+PIPELINE_NAME = "metadata-dev-edc-base" # TODO: change this
 
 ###IMPORTANT CHANGE THIS ALWAYS
-MODEL_NAME = "base-epochs-3-real"
+MODEL_NAME = "ncr_meta_edc_dev_0_0_1" # TODO: change this, this is an entry on metadata_enhacement.model_results
 
-GCS_BUCKET_NAME = "metadata-bucket-base"
+GCS_BUCKET_NAME = "metadata-bucket-base" # TODO: HOLD
 
 GOOGLE_CLOUD_REGION = "us-east1"
 try:
@@ -51,7 +51,7 @@ partially_rendered_query = partial(template.render,
                                    dataset=BQ_DATASET, 
                                    table=BQ_TABLE)
 
-query = partially_rendered_query()
+query = partially_rendered_query(limit=TEST_LIMIT)
 query_test = partially_rendered_query(limit=TEST_LIMIT)
 
 # Local testing data

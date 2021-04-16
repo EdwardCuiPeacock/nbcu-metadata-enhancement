@@ -3,3 +3,4 @@ WORKDIR /pipeline
 COPY ./ ./
 ENV PYTHONPATH="/pipeline:${PYTHONPATH}"
 RUN python -m pip install --upgrade poetry
+RUN pip install tensorflow_text

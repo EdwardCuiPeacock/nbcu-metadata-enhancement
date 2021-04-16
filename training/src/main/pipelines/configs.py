@@ -41,7 +41,7 @@ IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/metadata-dev-pipeline-base'
 #       eventually we'll want to do this at RUN time, since this 
 #       will allow us to template out any temporal aspects of the query
 
-file_loader = FileSystemLoader('src/main/queries')
+file_loader = FileSystemLoader('src/main/queries') # TODO: src/
 env = Environment(loader=file_loader)
 template = env.get_template('ingest_query.sql')
 
@@ -55,11 +55,11 @@ query = partially_rendered_query(limit=TEST_LIMIT)
 query_test = partially_rendered_query(limit=TEST_LIMIT)
 
 # Local testing data
-DATA_PATH_TEST = "test_data/"
+DATA_PATH_TEST = "src/test_data/" # TODO: src/
 
 
-PREPROCESSING_FN = "src.main.components.transform.preprocessing_fn"
-RUN_FN = "src.main.components.bert_model.run_fn"
+PREPROCESSING_FN = "src.main.components.transform.preprocessing_fn" # TODO: src.
+RUN_FN = "src.main.components.bert_model.run_fn" # TODO: src.
 
 
 # TODO: Should go somewhere else?

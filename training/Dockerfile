@@ -6,4 +6,4 @@ RUN python -m pip install --upgrade poetry
 RUN pip install tensorflow_text
 
 COPY src src 
-WORKDIR /
+WORKDIR /src

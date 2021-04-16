@@ -41,7 +41,7 @@ IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/metadata-dev-pipeline-base'
 #       eventually we'll want to do this at RUN time, since this 
 #       will allow us to template out any temporal aspects of the query
 
-file_loader = FileSystemLoader('main/queries')
+file_loader = FileSystemLoader('src/main/queries')
 env = Environment(loader=file_loader)
 template = env.get_template('ingest_query.sql')
 

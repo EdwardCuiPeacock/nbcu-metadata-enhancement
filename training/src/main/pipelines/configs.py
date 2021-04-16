@@ -58,8 +58,8 @@ query_test = partially_rendered_query(limit=TEST_LIMIT)
 DATA_PATH_TEST = "test_data/"
 
 
-PREPROCESSING_FN = "main.components.transform.preprocessing_fn"
-RUN_FN = "main.components.bert_model.run_fn"
+PREPROCESSING_FN = "src.main.components.transform.preprocessing_fn"
+RUN_FN = "src.main.components.bert_model.run_fn"
 
 
 # TODO: Should go somewhere else?

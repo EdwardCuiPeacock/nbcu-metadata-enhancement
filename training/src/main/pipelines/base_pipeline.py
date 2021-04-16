@@ -62,13 +62,14 @@ def create_pipeline(
     example_gen = BigQueryExampleGen(query=query, 
                                      output_config=output)
     components.append(example_gen)
+    print(f"pwd: {os.getcwd()}")
     schema_files = os.listdir("schema/")
     print(f"Schema files: {schema_files}")
     ### Import Curated Schema ###
     # Import user-provided schema.
     schema_importer = ImporterNode(
         instance_name='import_user_schema',
-        source_uri='schema/',
+        source_uri='src/schema/',
         artifact_type=Schema)
     components.append(schema_importer)
 

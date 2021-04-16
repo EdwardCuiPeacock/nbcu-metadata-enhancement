@@ -103,6 +103,7 @@ def run_fn(fn_args):
     num_labels = fn_args.custom_config['num_labels']
     num_epochs = fn_args.custom_config['epochs']
     batch_size = fn_args.custom_config['batch_size']
+    
     train_dataset = _input_fn(
         file_pattern=fn_args.train_files,
         tf_transform_output=tf_transform_output,
@@ -111,13 +112,32 @@ def run_fn(fn_args):
     
     model = get_compiled_model(num_labels)
     
-    # TODO pass in epochs
-    history = model.fit(
-        train_dataset, 
-        epochs=num_epochs
-        #steps_per_epoch=fn_args.train_steps // num_epochs
-    )
+    if fn_args.custom_config['use_steps']:
+        
+        train_dataset = _input_fn(
+                    file_pattern=fn_args.train_files,
+                    tf_transform_output=tf_transform_output,
+                    batch_size=batch_size)
+        
+        history = model.fit(
+            train_dataset, 
+            epochs=num_epochs,
+            steps_per_epoch=fn_args.train_steps // num_epochs
+        )
     
+    else:
+        
+        train_dataset = _input_fn(
+                    file_pattern=fn_args.train_files,
+                    tf_transform_output=tf_transform_output,
+                    batch_size=batch_size,
+                    epochs=1)
+        
+        history = model.fit(
+            train_dataset, 
+            epochs=num_epochs
+        )
+        
     signatures = {
         "serving_default": _get_serve_tf_examples_fn(model, tf_transform_output).get_concrete_function(
             tf.TensorSpec(shape=[None], dtype=tf.string, name="examples")

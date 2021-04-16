@@ -65,12 +65,13 @@ GROUP BY
     cid.content_ordinal_id
 """
 
-date_start = "2020-11-01"
-date_end = "2020-12-20"
+date_start = "2021-2-01"
+date_end = "2021-4-01"
 
 PREV_WINDOW = 20
 TEST_WINDOW = 5
 DATA_LENGTH = PREV_WINDOW + TEST_WINDOW
+NUM_SAMPLES = 50000
 
 USERS_QUERY = ("""
 SELECT psv2.user_ordinal_id, 
@@ -85,15 +86,15 @@ SELECT user_ordinal_id,
        row_number() over (order by farm_fingerprint(concat(user_ordinal_id, '3')) ) as seqnum
 FROM `res-nbcupea-dev-ds-sandbox-001.recsystem.PlaySequenceV2`, 
 UNNEST(session_sequence) AS ss
-WHERE session_date >= {{date_start}}
-      AND session_date < {{date_end}}
+WHERE session_date >= "{0}"
+      AND session_date < "{1}"
 GROUP BY user_ordinal_id
-HAVING COUNT(DISTINCT(ss.content_id)) > {{DATA_LENGTH}}
+HAVING COUNT(DISTINCT(ss.content_id)) > {2}
 ) filtered_data
 ON filtered_data.user_ordinal_id = psv2.user_ordinal_id
-WHERE seqnum <= 10000
+WHERE seqnum <= {3}
 ORDER BY session_timestamp
-""").format(date_start, date_end, DATA_LENGTH)
+""").format(date_start, date_end, DATA_LENGTH, NUM_SAMPLES)
 
 
 def ntail(g, n):

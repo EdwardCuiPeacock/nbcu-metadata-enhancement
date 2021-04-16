@@ -10,7 +10,7 @@ from functools import partial
 PIPELINE_NAME = "metadata-dev-base"
 
 ###IMPORTANT CHANGE THIS ALWAYS
-MODEL_NAME = "base-3-epoch"
+MODEL_NAME = "base-epochs-3-real"
 
 GCS_BUCKET_NAME = "metadata-bucket-base"
 
@@ -27,7 +27,7 @@ except ImportError:
 OUTPUT_TABLE = "res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.model_results"
 #GOOGLE_CLOUD_PROJECT = "res-nbcupea-dev-ds-sandbox-001"
 BQ_DATASET = 'metadata_enhancement'
-BQ_TABLE = 'merlin_data'
+BQ_TABLE = 'merlin_data_with_lang_and_type'
 
 TOKEN_LIMIT = 250
 
@@ -72,21 +72,22 @@ def get_domain_size(schema_path, feature):
 num_labels = get_domain_size('src/schema/schema.pbtxt', 'tags')
 
 
-
 ## TRAINING ARGS
-TRAIN_NUM_STEPS = 12000
+USE_STEPS = False
+TRAIN_NUM_STEPS = 10000
 EVAL_NUM_STEPS = 0
 
 TRAIN_NUM_STEPS_TEST = 3 
 EVAL_NUM_STEPS_TEST = 0
 
 EPOCHS = 3
-BATCH_SIZE = 1024
+BATCH_SIZE = 128
 
 custom_config = {
     'num_labels': num_labels,
     'epochs': EPOCHS,
-    'batch_size': BATCH_SIZE
+    'batch_size': BATCH_SIZE,
+    'use_steps': USE_STEPS
 }
 
 #############################

@@ -26,7 +26,7 @@ from __future__ import division
 from __future__ import print_function
 
 from typing import Optional, Text, List
-from main.components.embedding_eval_executor import Executor
+from src.main.components.embedding_eval_executor import Executor
 from tfx import types
 from tfx.dsl.components.base import base_component
 from tfx.dsl.components.base import executor_spec

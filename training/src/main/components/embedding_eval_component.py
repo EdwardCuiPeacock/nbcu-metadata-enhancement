@@ -28,7 +28,7 @@ from __future__ import print_function
 from typing import Optional, Text, List
 import logging
 logging.info("Attempting: from main.components.embedding_eval_executor import Executor")
-from main.components.embedding_eval_executor import Executor
+from components.embedding_eval_executor import Executor
 from tfx import types
 from tfx.dsl.components.base import base_component
 from tfx.dsl.components.base import executor_spec

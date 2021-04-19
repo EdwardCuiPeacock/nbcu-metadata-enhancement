@@ -3,6 +3,7 @@ TFX Pipeline for Peacock Deep Learning Recs Enginge model
 """
 import os
 import tensorflow_data_validation as tfdv
+import jinja2
 from jinja2 import Environment, FileSystemLoader
 from functools import partial
 
@@ -43,21 +44,23 @@ IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/metadata-dev-pipeline-base'
 #       eventually we'll want to do this at RUN time, since this 
 #       will allow us to template out any temporal aspects of the query
 
-file_loader = FileSystemLoader('main/queries') # TODO: src/
-env = Environment(loader=file_loader)
-template = env.get_template('ingest_query_new.sql')
+#file_loader = FileSystemLoader('main/queries') # TODO: src/
+#env = Environment(loader=file_loader)
+#template = env.get_template('ingest_query_new.sql')
 
-partially_rendered_query = partial(template.render,
-                                   token_limit=TOKEN_LIMIT,
-                                   project=GOOGLE_CLOUD_PROJECT, 
-                                   dataset=BQ_DATASET, 
-                                   table=BQ_TABLE)
-
-query = template.render(GOOGLE_CLOUD_PROJECT=GOOGLE_CLOUD_PROJECT,
-                        TOKEN_LIMIT=TOKEN_LIMIT,
-                        TEST_LIMIT=TEST_LIMIT, 
-                       )
-query_test = partially_rendered_query(limit=TEST_LIMIT)
+#partially_rendered_query = partial(template.render,
+#                                   token_limit=TOKEN_LIMIT,
+#                                   project=GOOGLE_CLOUD_PROJECT, 
+#                                   dataset=BQ_DATASET, 
+#                                   table=BQ_TABLE)
+with open(os.path.join("main/queries/ingest_query_new.sql"), "r") as fid:
+    query_str = fid.read() # read everything    
+# Apply / parse any templated fields
+query = jinja2.Template(query_str).render(
+    GOOGLE_CLOUD_PROJECT=GOOGLE_CLOUD_PROJECT,
+    TOKEN_LIMIT=TOKEN_LIMIT,
+    TEST_LIMIT=TEST_LIMIT,)
+# query_test = partially_rendered_query(limit=TEST_LIMIT)
 
 # Local testing data
 DATA_PATH_TEST = "test_data/" # TODO: src/

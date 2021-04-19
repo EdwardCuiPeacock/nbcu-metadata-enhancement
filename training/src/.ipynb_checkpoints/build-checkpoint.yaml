@@ -4,8 +4,11 @@ build:
   - context: .
     docker:
       dockerfile: Dockerfile
-    image: gcr.io/res-nbcupea-dev-ds-sandbox-001/metadata-dev-edc/pipeline-base
+    image: gcr.io/res-nbcupea-dev-ds-sandbox-001/tfx-pipeline
+  local:
+    push: true
+    useDockerCLI: true
   tagPolicy:
     envTemplate:
-      template: '{{.IMAGE_NAME}}:latest'
+      template: latest
 kind: Config

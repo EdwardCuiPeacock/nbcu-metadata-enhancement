@@ -1,20 +1,3 @@
-CREATE TEMP FUNCTION dedup(val ANY TYPE) AS (
-    (
-        SELECT ARRAY_AGG(DISTINCT t)
-        FROM UNNEST(val) t
-    )
-);
-CREATE TEMP FUNCTION limit_sen_length(val ANY TYPE) AS (
-    (
-        ARRAY_TO_STRING(
-            ARRAY(
-                SELECT *
-                FROM UNNEST(SPLIT(val, " "))
-                LIMIT {{ TOKEN_LIMIT }}
-            ), " "
-        )
-    )
-);
 WITH program_processed AS (
     SELECT program_val AS program_id,
         program_longsynopsis,
@@ -55,18 +38,32 @@ tags_processed AS (
 ),
 program_tags_map AS (
     SELECT a.program_id,
-        limit_sen_length(a.program_longsynopsis) AS program_longsynopsis,
+        ARRAY_TO_STRING(
+            ARRAY(
+                SELECT *
+                FROM UNNEST(SPLIT(a.program_longsynopsis, " "))
+                LIMIT {{ TOKEN_LIMIT }}
+            ), " "
+        ) AS program_longsynopsis,
         a.program_language,
         a.program_title,
         ARRAY_CONCAT(a.partial_tags, b.tag_value) AS tags
     FROM program_processed a
         LEFT JOIN tags_processed b ON a.program_id = b.program_id
     WHERE ARRAY_LENGTH(a.partial_tags) + ARRAY_LENGTH(b.tag_value) > 0
+),
+program_tags_agg AS (
+    SELECT program_longsynopsis,
+        ARRAY_CONCAT_AGG(tags) AS tags
+    FROM program_tags_map
+    GROUP BY program_longsynopsis
 )
 SELECT program_longsynopsis,
-    dedup(ARRAY_CONCAT_AGG(tags)) AS tags
-FROM program_tags_map
-GROUP BY program_longsynopsis
+    (
+        SELECT ARRAY_AGG(DISTINCT t)
+        FROM UNNEST(tags) t
+    ) AS ttags
+FROM program_tags_agg
 {% if limit -%}
    LIMIT {{ TEST_LIMIT }}
 {% endif %}

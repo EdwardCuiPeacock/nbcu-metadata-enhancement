@@ -122,6 +122,10 @@ def run_fn(fn_args):
         batch_size=batch_size,
         epochs=num_epochs)
     
+    print("Print what the data looks like before feeding into training ...")
+    for ii in train_dataset:
+        print(ii)
+    
     model = get_compiled_model(num_labels)
     
     if fn_args.custom_config['use_steps']:
@@ -156,7 +160,6 @@ def run_fn(fn_args):
     with gcs_file_system.open(gcs_json_path, "w") as f:
         json.dump(history, f)
 
-        
     signatures = {
         "serving_default": _get_serve_tf_examples_fn(model, tf_transform_output).get_concrete_function(
             tf.TensorSpec(shape=[None], dtype=tf.string, name="examples")

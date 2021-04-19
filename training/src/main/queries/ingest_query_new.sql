@@ -58,11 +58,11 @@ program_tags_agg AS (
     FROM program_tags_map
     GROUP BY program_longsynopsis
 )
-SELECT program_longsynopsis,
+SELECT program_longsynopsis AS synopsis,
     (
         SELECT ARRAY_AGG(DISTINCT t)
         FROM UNNEST(tags) t
-    ) AS ttags
+    ) AS tags
 FROM program_tags_agg
 {% if TEST_LIMIT -%}
    LIMIT {{ TEST_LIMIT }}

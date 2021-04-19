@@ -25,11 +25,11 @@ except ImportError:
     GOOGLE_CLOUD_PROJECT = ''
 
 OUTPUT_TABLE = "res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.model_results"
-#GOOGLE_CLOUD_PROJECT = "res-nbcupea-dev-ds-sandbox-001"
+GOOGLE_CLOUD_PROJECT = "res-nbcupea-dev-ds-sandbox-001"
 BQ_DATASET = 'metadata_enhancement'
 BQ_TABLE = 'merlin_data_with_lang_and_type'
 
-TOKEN_LIMIT = 250
+TOKEN_LIMIT = 256
 
 TEST_LIMIT = 20 
 
@@ -43,7 +43,7 @@ IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/metadata-dev-pipeline-base'
 
 file_loader = FileSystemLoader('main/queries') # TODO: src/
 env = Environment(loader=file_loader)
-template = env.get_template('ingest_query.sql')
+template = env.get_template('ingest_query_new.sql')
 
 partially_rendered_query = partial(template.render,
                                    token_limit=TOKEN_LIMIT,
@@ -51,7 +51,10 @@ partially_rendered_query = partial(template.render,
                                    dataset=BQ_DATASET, 
                                    table=BQ_TABLE)
 
-query = partially_rendered_query(limit=TEST_LIMIT)
+query = template.render(GOOGLE_CLOUD_PROJECT=GOOGLE_CLOUD_PROJECT,
+                        TOKEN_LIMIT=TOKEN_LIMIT,
+                        TEST_LIMIT=TEST_LIMIT, 
+                       )
 query_test = partially_rendered_query(limit=TEST_LIMIT)
 
 # Local testing data

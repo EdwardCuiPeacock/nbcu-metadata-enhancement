@@ -3,6 +3,10 @@ import tensorflow_transform as tft
 import pandas as pd
 import numpy as np
 
+import gcsfs
+import json
+from main.pipelines import configs
+
 from tensorflow.keras import callbacks, layers
 
 from tensorflow.keras.losses import BinaryCrossentropy
@@ -47,23 +51,31 @@ def _input_fn(file_pattern, tf_transform_output, batch_size=64, shuffle=True, ep
     )
     return dataset
 
+
 def build_bert_tagger(num_labels):
     # TODO: think about alternative architecture
     text_input = tf.keras.layers.Input(shape=(), dtype=tf.string, name='synopsis')
     preprocessing_layer = hub.KerasLayer(TFHUB_HANDLE_PREPROCESSOR, name='preprocessing')
     encoder_inputs = preprocessing_layer(text_input)
-    encoder = hub.KerasLayer(TFHUB_HANDLE_ENCODER, trainable=True, name='BERT_encoder')
+    # TODO: try freezing the BERT encoder layer
+    encoder = hub.KerasLayer(TFHUB_HANDLE_ENCODER, trainable=False, name='BERT_encoder')
     outputs = encoder(encoder_inputs)
     net = outputs['pooled_output']
     output = tf.keras.layers.Dense(num_labels, activation="sigmoid")(net)
-    return tf.keras.Model(text_input, output)
+    model = tf.keras.Model(text_input, output)
+    print(model.summary())
+    return model
+
 
 def get_compiled_model(num_labels):
     # TODO: figure out more about optimizer 
     strategy = tf.distribute.MirroredStrategy()
     with strategy.scope():
         model = build_bert_tagger(num_labels)
-        metrics = [tf.keras.metrics.Precision(), tf.keras.metrics.Recall()]
+        metrics = [tf.keras.metrics.Precision(), tf.keras.metrics.Recall(), 
+                   tf.keras.metrics.AUC(curve="ROC", name="ROC_AUC"), 
+                   tf.keras.metrics.Accuracy(),
+                  ]
         # clipnorm only seems to work in TF 2.4 with distribution strategy 
         model.compile(
             optimizer=tf.keras.optimizers.Adam(learning_rate=0.00003,
@@ -137,6 +149,13 @@ def run_fn(fn_args):
             train_dataset, 
             epochs=num_epochs
         )
+
+    # TODO: (Test) Write training history to google cloud storage
+    gcs_file_system = gcsfs.GCSFileSystem(project=configs.GOOGLE_CLOUD_PROJECT)
+    gcs_json_path = fn_args.serving_model_dir.replace("serving_model_dir", "training_history")
+    with gcs_file_system.open(gcs_json_path, "w") as f:
+        json.dump(history, f)
+
         
     signatures = {
         "serving_default": _get_serve_tf_examples_fn(model, tf_transform_output).get_concrete_function(

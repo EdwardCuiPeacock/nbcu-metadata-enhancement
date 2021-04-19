@@ -64,6 +64,6 @@ SELECT program_longsynopsis,
         FROM UNNEST(tags) t
     ) AS ttags
 FROM program_tags_agg
-{% if limit -%}
+{% if TEST_LIMIT -%}
    LIMIT {{ TEST_LIMIT }}
 {% endif %}

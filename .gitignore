@@ -11,4 +11,8 @@ htmlcov/
 # Text editor/IDE
 .vscode/
 
+# IPython notebook checkpoint
+*.ipynb_checkpoints*
+
 # Application specific
+*.tar.gz

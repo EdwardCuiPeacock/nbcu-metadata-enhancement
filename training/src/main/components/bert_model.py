@@ -86,6 +86,7 @@ def get_compiled_model(num_labels):
         )
     return model
 
+
 def _get_serve_tf_examples_fn(model, tf_transform_output):
     """Returns a function that parses JSON input"""
     # TODO: Create alternative serving function, especially if using evaluator

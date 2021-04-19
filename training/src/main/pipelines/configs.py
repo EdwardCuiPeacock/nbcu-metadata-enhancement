@@ -34,7 +34,7 @@ TOKEN_LIMIT = 256
 
 TEST_LIMIT = 20 
 
-enable_cache = True
+enable_cache = False
 
 IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/metadata-dev-pipeline-base'
 
@@ -59,7 +59,7 @@ with open(os.path.join("main/queries/ingest_query_new.sql"), "r") as fid:
 query = jinja2.Template(query_str).render(
     GOOGLE_CLOUD_PROJECT=GOOGLE_CLOUD_PROJECT,
     TOKEN_LIMIT=TOKEN_LIMIT,
-    TEST_LIMIT=TEST_LIMIT,)
+    TEST_LIMIT=None,)
 # query_test = partially_rendered_query(limit=TEST_LIMIT)
 
 # Local testing data

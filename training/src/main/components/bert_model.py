@@ -116,16 +116,7 @@ def run_fn(fn_args):
     num_labels = fn_args.custom_config['num_labels']
     num_epochs = fn_args.custom_config['epochs']
     batch_size = fn_args.custom_config['batch_size']
-    
-    train_dataset = _input_fn(
-        file_pattern=fn_args.train_files,
-        tf_transform_output=tf_transform_output,
-        batch_size=batch_size,
-        epochs=num_epochs)
-    
-    print("Print what the data looks like before feeding into training ...")
-    for ii in train_dataset:
-        print(ii)
+    print(f"Num labels: {num_labels}")
     
     model = get_compiled_model(num_labels)
     
@@ -143,7 +134,6 @@ def run_fn(fn_args):
         )
     
     else:
-        
         train_dataset = _input_fn(
                     file_pattern=fn_args.train_files,
                     tf_transform_output=tf_transform_output,
@@ -155,11 +145,12 @@ def run_fn(fn_args):
             epochs=num_epochs
         )
 
-    # TODO: (Test) Write training history to google cloud storage
-    gcs_file_system = gcsfs.GCSFileSystem(project=configs.GOOGLE_CLOUD_PROJECT)
-    gcs_json_path = fn_args.serving_model_dir.replace("serving_model_dir", "training_history")
-    with gcs_file_system.open(gcs_json_path, "w") as f:
-        json.dump(history, f)
+    #print("Print what the data looks like before feeding into training ...")
+    #for ii in train_dataset:
+    #    print(ii)
+
+
+    # raise(ValueError("Artificial Error: attempt to rerun the model"))
 
     signatures = {
         "serving_default": _get_serve_tf_examples_fn(model, tf_transform_output).get_concrete_function(

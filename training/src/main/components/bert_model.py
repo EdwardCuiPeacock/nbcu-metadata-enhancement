@@ -72,15 +72,15 @@ def get_compiled_model(num_labels):
     strategy = tf.distribute.MirroredStrategy()
     with strategy.scope():
         model = build_bert_tagger(num_labels)
-        metrics = [tf.keras.metrics.Precision(), tf.keras.metrics.Recall(), 
-                   tf.keras.metrics.AUC(curve="ROC", name="ROC_AUC"), 
-                   tf.keras.metrics.Accuracy(),
+        metrics = [tf.keras.metrics.Accuracy(),
+                   tf.keras.metrics.AUC(curve="ROC", name="ROC_AUC"),
+                   tf.keras.metrics.AUC(curve="PR", name="PR_AUC"),
                   ]
         # clipnorm only seems to work in TF 2.4 with distribution strategy 
         model.compile(
-            optimizer=tf.keras.optimizers.Adam(learning_rate=0.00003,
-                                               clipnorm=1,
-                                               epsilon=1e-8),
+            optimizer=tf.keras.optimizers.Adam(),#learning_rate=0.00003,
+                                               #clipnorm=1,
+                                               #epsilon=1e-8),
             loss=BinaryCrossentropy(),
             metrics=metrics,
         )

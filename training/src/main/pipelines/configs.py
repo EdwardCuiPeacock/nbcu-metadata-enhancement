@@ -66,7 +66,7 @@ query = jinja2.Template(query_str).render(
 DATA_PATH_TEST = "test_data/" # TODO: src/
 
 PREPROCESSING_FN = "main.components.transform.preprocessing_fn" # TODO: src.
-RUN_FN = "main.components.bert_model.run_fn" # TODO: src.
+RUN_FN = "main.components.bert_model2.run_fn" # TODO: src.
 
 
 # TODO: Should go somewhere else?

@@ -122,14 +122,14 @@ def create_pipeline(
             {ai_platform_trainer_executor.TRAINING_ARGS_KEY: ai_platform_training_args}
         )
 
-        trainer_args["custom_config"][
-            ai_platform_trainer_executor.JOB_ID_KEY
-        ] = "tfx_{}_{}".format(
-            re.sub(r"[^a-z0-9\_]", "_", configs.PIPELINE_NAME.lower()),
-            datetime.datetime.now().strftime("%Y%m%d%H%M%S"),
-        )[
-            -63:
-        ]
+        # trainer_args["custom_config"][
+        #     ai_platform_trainer_executor.JOB_ID_KEY
+        # ] = "tfx_{}_{}".format(
+        #     re.sub(r"[^a-z0-9\_]", "_", configs.PIPELINE_NAME.lower()),
+        #     datetime.datetime.now().strftime("%Y%m%d%H%M%S"),
+        # )[
+        #     -63:
+        # ]
 
     trainer = Trainer(**trainer_args)
     components.append(trainer)

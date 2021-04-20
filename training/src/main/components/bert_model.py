@@ -7,7 +7,6 @@ from absl import logging
 
 import gcsfs
 import json
-from main.pipelines import configs
 
 from tensorflow.keras import callbacks, layers
 
@@ -58,7 +57,7 @@ def _input_fn(
     return dataset
 
 
-def build_bert_tagger(num_labels):
+def build_bert_tagger(num_labels, seq_length):
     # TODO: think about alternative architecture
     preprocessor = hub.load(TFHUB_HANDLE_PREPROCESSOR)
     text_input = tf.keras.layers.Input(shape=(), dtype=tf.string, name="synopsis")
@@ -66,7 +65,7 @@ def build_bert_tagger(num_labels):
     tokenized_inputs = [tokenize(text_input)]
     preprocessing_layer = hub.KerasLayer(
         preprocessor.bert_pack_inputs,
-        arguments=dict(seq_length=configs.TOKEN_LIMIT),
+        arguments=dict(seq_length=seq_length),
         name="preprocessing",
     )
     # preprocessing_layer = hub.KerasLayer(TFHUB_HANDLE_PREPROCESSOR, name='preprocessing')
@@ -81,11 +80,11 @@ def build_bert_tagger(num_labels):
     return model
 
 
-def get_compiled_model(num_labels):
+def get_compiled_model(num_labels, seq_length):
     # TODO: figure out more about optimizer
     strategy = tf.distribute.MirroredStrategy()
     with strategy.scope():
-        model = build_bert_tagger(num_labels)
+        model = build_bert_tagger(num_labels, seq_length)
         metrics = [
             tf.keras.metrics.Accuracy(),
             tf.keras.metrics.AUC(curve="ROC", name="ROC_AUC"),
@@ -130,9 +129,10 @@ def run_fn(fn_args):
     num_labels = fn_args.custom_config["num_labels"]
     num_epochs = fn_args.custom_config["epochs"]
     batch_size = fn_args.custom_config["batch_size"]
+    seq_length = fn_args.custom_config["seq_length"]
     print(f"Num labels: {num_labels}")
 
-    model = get_compiled_model(num_labels)
+    model = get_compiled_model(num_labels, seq_length)
 
     if fn_args.custom_config["use_steps"]:
 

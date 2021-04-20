@@ -34,7 +34,7 @@ TOKEN_LIMIT = 256
 
 TEST_LIMIT = 20 
 
-enable_cache = False
+enable_cache = True
 
 IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/metadata-dev-pipeline-base'
 
@@ -94,7 +94,8 @@ custom_config = {
     'num_labels': num_labels,
     'epochs': EPOCHS,
     'batch_size': BATCH_SIZE,
-    'use_steps': USE_STEPS
+    'use_steps': USE_STEPS,
+    'seq_length': TOKEN_LIMIT,
 }
 
 #############################

@@ -8,10 +8,10 @@ from jinja2 import Environment, FileSystemLoader
 from functools import partial
 
 # Pipeline name will be used to identify this pipeline.
-PIPELINE_NAME = "metadata_dev_edc_base_0_0_1" # TODO: change this
+PIPELINE_NAME = "metadata_dev_edc_base_0_0_2" # TODO: change this
 
 ###IMPORTANT CHANGE THIS ALWAYS
-MODEL_NAME = "ncr_meta_edc_dev_0_0_1" # TODO: change this, this is an entry on metadata_enhacement.model_results
+MODEL_NAME = "ncr_meta_edc_dev_0_0_2" # TODO: change this, this is an entry on metadata_enhacement.model_results
 
 GCS_BUCKET_NAME = "metadata-bucket-base" # TODO: HOLD
 

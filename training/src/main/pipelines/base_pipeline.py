@@ -4,6 +4,8 @@ TFX pipeline definition
 This is the full pipeline using the BQ example gen component
 """
 import os
+import re
+import datetime
 from typing import Optional, Text, List, Dict, Any
 import tensorflow as tf
 
@@ -17,7 +19,8 @@ from tfx.components import (
     StatisticsGen,
     Trainer,
     ImporterNode,
-    Transform)
+    Transform,
+)
 from tfx.components.trainer import executor as trainer_executor
 from tfx.extensions.google_cloud_ai_platform.trainer import (
     executor as ai_platform_trainer_executor,
@@ -31,7 +34,8 @@ from tfx.utils.dsl_utils import external_input
 from tfx.dsl.components.base import executor_spec
 
 from main.pipelines import configs
-from main.components.embedding_eval_component import EmbeddingEvaluator 
+from main.components.embedding_eval_component import EmbeddingEvaluator
+
 
 def create_pipeline(
     pipeline_name: Text,
@@ -46,50 +50,48 @@ def create_pipeline(
     custom_config: Dict[Text, int],
     metadata_connection_config: Optional[metadata_store_pb2.ConnectionConfig] = None,
     beam_pipeline_args: Optional[List[Text]] = None,
-    ai_platform_training_args: Optional[Dict[Text, Text]] = None
+    ai_platform_training_args: Optional[Dict[Text, Text]] = None,
 ) -> pipeline.Pipeline:
 
     components = []
 
-    # Dont split the data for now. Not really sure how to set the hash buckets 
-    # when there's only one split? 
+    # Dont split the data for now. Not really sure how to set the hash buckets
+    # when there's only one split?
     output = example_gen_pb2.Output(
-             split_config=example_gen_pb2.SplitConfig(splits=[
-                 example_gen_pb2.SplitConfig.Split(name='train', hash_buckets=10)
-             ],
-    ))
+        split_config=example_gen_pb2.SplitConfig(
+            splits=[example_gen_pb2.SplitConfig.Split(name="train", hash_buckets=10)],
+        )
+    )
     # Input data is in BQ
-    example_gen = BigQueryExampleGen(query=query, 
-                                     output_config=output)
+    example_gen = BigQueryExampleGen(query=query, output_config=output)
     components.append(example_gen)
     ### Import Curated Schema ###
     # Import user-provided schema.
     schema_importer = ImporterNode(
-        instance_name='import_user_schema',
-        source_uri='schema/',
-        artifact_type=Schema)
+        instance_name="import_user_schema", source_uri="schema/", artifact_type=Schema
+    )
     components.append(schema_importer)
 
     # Computes statistics over data for visualization and example validation.
     statistics_gen = StatisticsGen(
-        examples=example_gen.outputs['examples'],
-        schema=schema_importer.outputs['result'],
+        examples=example_gen.outputs["examples"],
+        schema=schema_importer.outputs["result"],
     )
     components.append(statistics_gen)
 
     # Performs anomaly detection based on statistics and data schema.
     example_validator = ExampleValidator(
         statistics=statistics_gen.outputs["statistics"],
-        schema=schema_importer.outputs['result']
+        schema=schema_importer.outputs["result"],
     )
     components.append(example_validator)
 
     # Performs transformations and feature engineering in training and serving.
     transform = Transform(
         examples=example_gen.outputs["examples"],
-        schema=schema_importer.outputs['result'],
+        schema=schema_importer.outputs["result"],
         preprocessing_fn=preprocessing_fn,
-        custom_config=custom_config
+        custom_config=custom_config,
     )
     components.append(transform)
 
@@ -97,7 +99,7 @@ def create_pipeline(
     trainer_args = {
         "run_fn": run_fn,
         "transformed_examples": transform.outputs["transformed_examples"],
-        "schema": schema_importer.outputs['result'],
+        "schema": schema_importer.outputs["result"],
         "transform_graph": transform.outputs["transform_graph"],
         "train_args": train_args,
         "eval_args": eval_args,
@@ -114,18 +116,28 @@ def create_pipeline(
                 )
             }
         )
-        trainer_args['custom_config'].update(
-            {
-                ai_platform_trainer_executor.TRAINING_ARGS_KEY: ai_platform_training_args
-            }
+        trainer_args["custom_config"].update(
+            {ai_platform_trainer_executor.TRAINING_ARGS_KEY: ai_platform_training_args}
         )
+
+        trainer_args["custom_config"][
+            ai_platform_trainer_executor.JOB_ID_KEY
+        ] = "tfx_{}_{}".format(
+            re.sub(r"[^a-z0-9\_]", "_", configs.PIPELINE_NAME.lower()),
+            datetime.datetime.now().strftime("%Y%m%d%H%M%S"),
+        )[
+            -63:
+        ]
+
     trainer = Trainer(**trainer_args)
     components.append(trainer)
-    
-    evaluator = EmbeddingEvaluator(model=trainer.outputs['model'],
-                                   name=configs.MODEL_NAME,
-                                   output_table=configs.OUTPUT_TABLE)
-    
+
+    evaluator = EmbeddingEvaluator(
+        model=trainer.outputs["model"],
+        name=configs.MODEL_NAME,
+        output_table=configs.OUTPUT_TABLE,
+    )
+
     components.append(evaluator)
     ### PUSHER ###
     pusher = Pusher(

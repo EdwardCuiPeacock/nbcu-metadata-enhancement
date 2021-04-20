@@ -3,6 +3,8 @@ import tensorflow_transform as tft
 import pandas as pd
 import numpy as np
 
+from absl import logging
+
 import gcsfs
 import json
 from main.pipelines import configs
@@ -154,6 +156,12 @@ def run_fn(fn_args):
             batch_size=batch_size,
             epochs=1,
         )
+
+        # Find out how large the dataset is
+        count_rows = 0
+        for kk in train_dataset:
+            count_rows += len(kk)
+        logging.info(f"Total number of rows of training: {count_rows}")
 
         history = model.fit(train_dataset, epochs=num_epochs, verbose=1)
 

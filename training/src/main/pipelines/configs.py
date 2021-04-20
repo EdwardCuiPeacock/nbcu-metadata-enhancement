@@ -53,7 +53,7 @@ IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/metadata-dev-pipeline-base'
 #                                   project=GOOGLE_CLOUD_PROJECT, 
 #                                   dataset=BQ_DATASET, 
 #                                   table=BQ_TABLE)
-with open(os.path.join("main/queries/ingest_query_new.sql"), "r") as fid:
+with open(os.path.join("main/queries/ingest_query_new_fixed.sql"), "r") as fid:
     query_str = fid.read() # read everything    
 # Apply / parse any templated fields
 query = jinja2.Template(query_str).render(
@@ -64,7 +64,6 @@ query = jinja2.Template(query_str).render(
 
 # Local testing data
 DATA_PATH_TEST = "test_data/" # TODO: src/
-
 
 PREPROCESSING_FN = "main.components.transform.preprocessing_fn" # TODO: src.
 RUN_FN = "main.components.bert_model.run_fn" # TODO: src.

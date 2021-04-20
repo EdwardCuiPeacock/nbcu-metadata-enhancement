@@ -54,7 +54,7 @@ def run(output_dir=OUTPUT_DIR, output_filename=OUTPUT_FILENAME, pipeline_name=PI
             serving_model_dir=serving_model_dir,
             custom_config=configs.custom_config,
             beam_pipeline_args=configs.BIG_QUERY_WITH_DIRECT_RUNNER_BEAM_PIPELINE_ARGS,
-            ai_platform_training_args=configs.GCP_AI_PLATFORM_TRAINING_ARGS,
+            ai_platform_training_args=configs.GCP_AI_PLATFORM_TRAINING_ARGS
         )
     )
 

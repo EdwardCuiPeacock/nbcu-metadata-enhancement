@@ -121,6 +121,8 @@ def run_fn(fn_args):
     """
     logging.info("Fn args")
     logging.info(fn_args)
+    gpus = tf.config.list_physical_devices("GPU")
+    logging.info(f"GPUs available: {gpus}")
 
     tf_transform_output = tft.TFTransformOutput(fn_args.transform_output)
     # Not sure why its like this
@@ -128,10 +130,10 @@ def run_fn(fn_args):
     num_labels = fn_args.custom_config["num_labels"]
     num_epochs = fn_args.custom_config["epochs"]
     batch_size = fn_args.custom_config["batch_size"]
-    # seq_length = fn_args.custom_config["seq_length"]
-    print(f"Num labels: {num_labels}")
+    seq_length = fn_args.custom_config["seq_length"]
+    logging.info(f"Num labels: {num_labels}")
 
-    model = get_compiled_model(num_labels, 256)
+    model = get_compiled_model(num_labels, seq_length)
 
     if fn_args.custom_config["use_steps"]:
 

@@ -131,7 +131,7 @@ def create_pipeline(
             -63:
         ]
 
-    trainer = Trainer(**trainer_args).with_id("Trainer_node_updated")
+    trainer = Trainer(**trainer_args)
     components.append(trainer)
 
     evaluator = EmbeddingEvaluator(

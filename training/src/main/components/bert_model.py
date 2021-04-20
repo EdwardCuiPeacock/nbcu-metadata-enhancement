@@ -5,9 +5,6 @@ import numpy as np
 
 from absl import logging
 
-import gcsfs
-import json
-
 from tensorflow.keras import callbacks, layers
 
 from tensorflow.keras.losses import BinaryCrossentropy

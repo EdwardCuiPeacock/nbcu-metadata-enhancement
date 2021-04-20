@@ -20,10 +20,10 @@ from tensorflow.keras.metrics import Precision, Recall
 
 # TODO: Add these in config instead of hard-coding
 TFHUB_HANDLE_PREPROCESSOR = "https://tfhub.dev/tensorflow/bert_en_uncased_preprocess/3"
-# TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-512_A-8/1"
-TFHUB_HANDLE_ENCODER = (
-    "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-256_A-4/2"
-)
+TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-512_A-8/1"
+#TFHUB_HANDLE_ENCODER = (
+#    "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-256_A-4/2"
+#)
 
 
 def _gzip_reader_fn(filenames):
@@ -66,7 +66,7 @@ def build_bert_tagger(num_labels):
     preprocessor = hub.load(TFHUB_HANDLE_PREPROCESSOR)
     preprocessing_layer = hub.KerasLayer(
         preprocessor.bert_pack_inputs,
-        arguments={"seq_length": 256},
+        arguments=dict(seq_length=256),
         name="preprocessing",
     )
     # preprocessing_layer = hub.KerasLayer(TFHUB_HANDLE_PREPROCESSOR, name='preprocessing')

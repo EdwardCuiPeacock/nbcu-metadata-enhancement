@@ -18,8 +18,8 @@ from tensorflow.keras.metrics import Precision, Recall
 
 # TODO: Add these in config instead of hard-coding
 TFHUB_HANDLE_PREPROCESSOR = "https://tfhub.dev/tensorflow/bert_en_uncased_preprocess/3"
-TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-512_A-8/1"
-
+#TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-512_A-8/1"
+TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-256_A-4/2"
 def _gzip_reader_fn(filenames):
     """Small utility returning a record reader that can read gzip'ed fies"""
     return tf.data.TFRecordDataset(filenames, compression_type="GZIP")
@@ -55,7 +55,11 @@ def _input_fn(file_pattern, tf_transform_output, batch_size=64, shuffle=True, ep
 def build_bert_tagger(num_labels):
     # TODO: think about alternative architecture
     text_input = tf.keras.layers.Input(shape=(), dtype=tf.string, name='synopsis')
-    preprocessing_layer = hub.KerasLayer(TFHUB_HANDLE_PREPROCESSOR, name='preprocessing')
+    
+    preprocessor = hub.load(TFHUB_HANDLE_PREPROCESSOR)
+    preprocessing_layer = hub.KerasLayer(preprocessor.bert_pack_inputs, 
+        arguments={"seq_length": 256}, name="preprocessing")
+    #preprocessing_layer = hub.KerasLayer(TFHUB_HANDLE_PREPROCESSOR, name='preprocessing')
     encoder_inputs = preprocessing_layer(text_input)
     # TODO: try freezing the BERT encoder layer
     encoder = hub.KerasLayer(TFHUB_HANDLE_ENCODER, trainable=False, name='BERT_encoder')
@@ -78,10 +82,8 @@ def get_compiled_model(num_labels):
                   ]
         # clipnorm only seems to work in TF 2.4 with distribution strategy 
         model.compile(
-            optimizer=tf.keras.optimizers.Adam(),#learning_rate=0.00003,
-                                               #clipnorm=1,
-                                               #epsilon=1e-8),
-            loss=BinaryCrossentropy(),
+            optimizer="sgd",
+            loss="binary_crossentropy",
             metrics=metrics,
         )
     return model

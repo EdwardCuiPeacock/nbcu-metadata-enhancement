@@ -128,10 +128,10 @@ def run_fn(fn_args):
     num_labels = fn_args.custom_config["num_labels"]
     num_epochs = fn_args.custom_config["epochs"]
     batch_size = fn_args.custom_config["batch_size"]
-    seq_length = fn_args.custom_config["seq_length"]
+    # seq_length = fn_args.custom_config["seq_length"]
     print(f"Num labels: {num_labels}")
 
-    model = get_compiled_model(num_labels, seq_length)
+    model = get_compiled_model(num_labels, 256)
 
     if fn_args.custom_config["use_steps"]:
 

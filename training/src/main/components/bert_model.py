@@ -61,16 +61,17 @@ def _input_fn(
 
 def build_bert_tagger(num_labels):
     # TODO: think about alternative architecture
-    text_input = tf.keras.layers.Input(shape=(), dtype=tf.string, name="synopsis")
-
     preprocessor = hub.load(TFHUB_HANDLE_PREPROCESSOR)
+    text_input = tf.keras.layers.Input(shape=(), dtype=tf.string, name="synopsis")
+    tokenize = hub.KerasLayer(preprocessor.tokenize, name="tokenize")
+    tokenized_input = tokenize(text_input)
     preprocessing_layer = hub.KerasLayer(
         preprocessor.bert_pack_inputs,
         arguments=dict(seq_length=256),
         name="preprocessing",
     )
     # preprocessing_layer = hub.KerasLayer(TFHUB_HANDLE_PREPROCESSOR, name='preprocessing')
-    encoder_inputs = preprocessing_layer(text_input)
+    encoder_inputs = preprocessing_layer(tokenized_input)
     # TODO: try freezing the BERT encoder layer
     encoder = hub.KerasLayer(TFHUB_HANDLE_ENCODER, trainable=False, name="BERT_encoder")
     outputs = encoder(encoder_inputs)

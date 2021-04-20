@@ -3,8 +3,6 @@ import tensorflow_transform as tft
 import pandas as pd
 import numpy as np
 
-from absl import logging
-
 from tensorflow.keras import callbacks, layers
 
 from tensorflow.keras.losses import BinaryCrossentropy
@@ -119,10 +117,10 @@ def run_fn(fn_args):
     Args:
         fn_args: Holds args used to train the model as name/value pairs
     """
-    logging.info("Fn args")
-    logging.info(fn_args)
+    print("Fn args")
+    print(fn_args)
     gpus = tf.config.list_physical_devices("GPU")
-    logging.info(f"GPUs available: {gpus}")
+    print(f"GPUs available: {gpus}")
 
     tf_transform_output = tft.TFTransformOutput(fn_args.transform_output)
     # Not sure why its like this
@@ -131,7 +129,7 @@ def run_fn(fn_args):
     num_epochs = fn_args.custom_config["epochs"]
     batch_size = fn_args.custom_config["batch_size"]
     seq_length = fn_args.custom_config["seq_length"]
-    logging.info(f"Num labels: {num_labels}")
+    print(f"Num labels: {num_labels}")
 
     model = get_compiled_model(num_labels, seq_length)
 
@@ -162,7 +160,7 @@ def run_fn(fn_args):
         count_rows = 0
         for kk in train_dataset:
             count_rows += kk[-1].shape[0]
-        logging.info(f"Total number of rows of training: {count_rows}")
+        print(f"Total number of rows of training: {count_rows}")
 
         history = model.fit(train_dataset, epochs=num_epochs, verbose=1)
 

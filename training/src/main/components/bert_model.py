@@ -66,7 +66,7 @@ def build_bert_tagger(num_labels):
     tokenized_inputs = [tokenize(text_input)]
     preprocessing_layer = hub.KerasLayer(
         preprocessor.bert_pack_inputs,
-        arguments=dict(seq_length=256),
+        arguments=dict(seq_length=configs.TOKEN_LIMIT),
         name="preprocessing",
     )
     # preprocessing_layer = hub.KerasLayer(TFHUB_HANDLE_PREPROCESSOR, name='preprocessing')
@@ -162,6 +162,10 @@ def run_fn(fn_args):
         for kk in train_dataset:
             count_rows += len(kk)
         logging.info(f"Total number of rows of training: {count_rows}")
+
+        for kk in train_dataset:
+            logging.info(kk)
+            break
 
         history = model.fit(train_dataset, epochs=num_epochs, verbose=1)
 

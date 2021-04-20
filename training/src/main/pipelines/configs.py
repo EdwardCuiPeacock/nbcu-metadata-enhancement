@@ -36,7 +36,7 @@ TEST_LIMIT = 20
 
 enable_cache = False
 
-IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/metadata-dev-pipeline-base'
+IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/edc-dev-pipeline'
 
 # BQ data 
 # TODO: This needs to go somewhere else

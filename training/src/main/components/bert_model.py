@@ -122,6 +122,8 @@ def run_fn(fn_args):
     Args:
         fn_args: Holds args used to train the model as name/value pairs
     """
+    logging.info("Fn args")
+    logging.info(fn_args)
 
     tf_transform_output = tft.TFTransformOutput(fn_args.transform_output)
     # Not sure why its like this

@@ -144,6 +144,7 @@ def run_fn(fn_args):
             train_dataset,
             epochs=num_epochs,
             steps_per_epoch=fn_args.train_steps // num_epochs,
+            verbose=1,
         )
 
     else:
@@ -154,7 +155,7 @@ def run_fn(fn_args):
             epochs=1,
         )
 
-        history = model.fit(train_dataset, epochs=num_epochs)
+        history = model.fit(train_dataset, epochs=num_epochs, verbose=1)
 
     # print("Print what the data looks like before feeding into training ...")
     # for ii in train_dataset:

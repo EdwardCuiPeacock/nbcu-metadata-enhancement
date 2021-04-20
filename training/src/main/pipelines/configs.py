@@ -88,7 +88,7 @@ TRAIN_NUM_STEPS_TEST = 3
 EVAL_NUM_STEPS_TEST = 0
 
 EPOCHS = 3
-BATCH_SIZE = 2048
+BATCH_SIZE = 128
 
 custom_config = {
     'num_labels': num_labels,

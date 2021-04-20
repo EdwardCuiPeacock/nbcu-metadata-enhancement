@@ -160,12 +160,8 @@ def run_fn(fn_args):
         # Find out how large the dataset is
         count_rows = 0
         for kk in train_dataset:
-            count_rows += len(kk)
+            count_rows += kk[-1].shape[0]
         logging.info(f"Total number of rows of training: {count_rows}")
-
-        for kk in train_dataset:
-            logging.info(kk)
-            break
 
         history = model.fit(train_dataset, epochs=num_epochs, verbose=1)
 

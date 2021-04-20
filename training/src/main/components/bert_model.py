@@ -10,7 +10,7 @@ from main.pipelines import configs
 from tensorflow.keras import callbacks, layers
 
 from tensorflow.keras.losses import BinaryCrossentropy
-import tensorflow_text
+import tensorflow_text  # Registers the ops for preprocessing
 import tensorflow_hub as hub
 from tensorflow.keras.models import Model, Sequential
 from tensorflow.keras.optimizers import Adam
@@ -18,13 +18,20 @@ from tensorflow.keras.metrics import Precision, Recall
 
 # TODO: Add these in config instead of hard-coding
 TFHUB_HANDLE_PREPROCESSOR = "https://tfhub.dev/tensorflow/bert_en_uncased_preprocess/3"
-#TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-512_A-8/1"
-TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-256_A-4/2"
+# TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-512_A-8/1"
+TFHUB_HANDLE_ENCODER = (
+    "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-256_A-4/2"
+)
+
+
 def _gzip_reader_fn(filenames):
     """Small utility returning a record reader that can read gzip'ed fies"""
     return tf.data.TFRecordDataset(filenames, compression_type="GZIP")
 
-def _input_fn(file_pattern, tf_transform_output, batch_size=64, shuffle=True, epochs=None):
+
+def _input_fn(
+    file_pattern, tf_transform_output, batch_size=64, shuffle=True, epochs=None
+):
     """Generates features and label for tuning/training.
     Args:
         file_pattern: input tfrecord file pattern.
@@ -36,9 +43,7 @@ def _input_fn(file_pattern, tf_transform_output, batch_size=64, shuffle=True, ep
         is a dictionary of Tensors, and indices is a single Tensor of
         label indices.
     """
-    transformed_feature_spec = (
-        tf_transform_output.transformed_feature_spec().copy()
-    )
+    transformed_feature_spec = tf_transform_output.transformed_feature_spec().copy()
 
     dataset = tf.data.experimental.make_batched_features_dataset(
         file_pattern=file_pattern,
@@ -46,25 +51,28 @@ def _input_fn(file_pattern, tf_transform_output, batch_size=64, shuffle=True, ep
         features=transformed_feature_spec,
         reader=_gzip_reader_fn,
         shuffle=shuffle,
-        label_key='tags_xf',
-        num_epochs=epochs
+        label_key="tags_xf",
+        num_epochs=epochs,
     )
     return dataset
 
 
 def build_bert_tagger(num_labels):
     # TODO: think about alternative architecture
-    text_input = tf.keras.layers.Input(shape=(), dtype=tf.string, name='synopsis')
-    
+    text_input = tf.keras.layers.Input(shape=(), dtype=tf.string, name="synopsis")
+
     preprocessor = hub.load(TFHUB_HANDLE_PREPROCESSOR)
-    preprocessing_layer = hub.KerasLayer(preprocessor.bert_pack_inputs, 
-        arguments={"seq_length": 256}, name="preprocessing")
-    #preprocessing_layer = hub.KerasLayer(TFHUB_HANDLE_PREPROCESSOR, name='preprocessing')
+    preprocessing_layer = hub.KerasLayer(
+        preprocessor.bert_pack_inputs,
+        arguments={"seq_length": 256},
+        name="preprocessing",
+    )
+    # preprocessing_layer = hub.KerasLayer(TFHUB_HANDLE_PREPROCESSOR, name='preprocessing')
     encoder_inputs = preprocessing_layer(text_input)
     # TODO: try freezing the BERT encoder layer
-    encoder = hub.KerasLayer(TFHUB_HANDLE_ENCODER, trainable=False, name='BERT_encoder')
+    encoder = hub.KerasLayer(TFHUB_HANDLE_ENCODER, trainable=False, name="BERT_encoder")
     outputs = encoder(encoder_inputs)
-    net = outputs['pooled_output']
+    net = outputs["pooled_output"]
     output = tf.keras.layers.Dense(num_labels, activation="sigmoid")(net)
     model = tf.keras.Model(text_input, output)
     print(model.summary())
@@ -72,15 +80,16 @@ def build_bert_tagger(num_labels):
 
 
 def get_compiled_model(num_labels):
-    # TODO: figure out more about optimizer 
+    # TODO: figure out more about optimizer
     strategy = tf.distribute.MirroredStrategy()
     with strategy.scope():
         model = build_bert_tagger(num_labels)
-        metrics = [tf.keras.metrics.Accuracy(),
-                   tf.keras.metrics.AUC(curve="ROC", name="ROC_AUC"),
-                   tf.keras.metrics.AUC(curve="PR", name="PR_AUC"),
-                  ]
-        # clipnorm only seems to work in TF 2.4 with distribution strategy 
+        metrics = [
+            tf.keras.metrics.Accuracy(),
+            tf.keras.metrics.AUC(curve="ROC", name="ROC_AUC"),
+            tf.keras.metrics.AUC(curve="PR", name="PR_AUC"),
+        ]
+        # clipnorm only seems to work in TF 2.4 with distribution strategy
         model.compile(
             optimizer="sgd",
             loss="binary_crossentropy",
@@ -93,7 +102,7 @@ def _get_serve_tf_examples_fn(model, tf_transform_output):
     """Returns a function that parses JSON input"""
     # TODO: Create alternative serving function, especially if using evaluator
     model.tft_layer = tf_transform_output.transform_features_layer()
-    
+
     @tf.function
     def serve_tf_examples_fn(raw_text):
         """Returns the output to be used in the serving signature."""
@@ -105,64 +114,60 @@ def _get_serve_tf_examples_fn(model, tf_transform_output):
 
     return serve_tf_examples_fn
 
+
 def run_fn(fn_args):
     """Train the model based on given args
-    
+
     Args:
         fn_args: Holds args used to train the model as name/value pairs
     """
-    
+
     tf_transform_output = tft.TFTransformOutput(fn_args.transform_output)
     # Not sure why its like this
     # TODO: fix this, might be a version issue?
-    num_labels = fn_args.custom_config['num_labels']
-    num_epochs = fn_args.custom_config['epochs']
-    batch_size = fn_args.custom_config['batch_size']
+    num_labels = fn_args.custom_config["num_labels"]
+    num_epochs = fn_args.custom_config["epochs"]
+    batch_size = fn_args.custom_config["batch_size"]
     print(f"Num labels: {num_labels}")
-    
+
     model = get_compiled_model(num_labels)
-    
-    if fn_args.custom_config['use_steps']:
-        
+
+    if fn_args.custom_config["use_steps"]:
+
         train_dataset = _input_fn(
-                    file_pattern=fn_args.train_files,
-                    tf_transform_output=tf_transform_output,
-                    batch_size=batch_size)
-        
-        history = model.fit(
-            train_dataset, 
-            epochs=num_epochs,
-            steps_per_epoch=fn_args.train_steps // num_epochs
+            file_pattern=fn_args.train_files,
+            tf_transform_output=tf_transform_output,
+            batch_size=batch_size,
         )
-    
+
+        history = model.fit(
+            train_dataset,
+            epochs=num_epochs,
+            steps_per_epoch=fn_args.train_steps // num_epochs,
+        )
+
     else:
         train_dataset = _input_fn(
-                    file_pattern=fn_args.train_files,
-                    tf_transform_output=tf_transform_output,
-                    batch_size=batch_size,
-                    epochs=1)
-        
-        history = model.fit(
-            train_dataset, 
-            epochs=num_epochs
+            file_pattern=fn_args.train_files,
+            tf_transform_output=tf_transform_output,
+            batch_size=batch_size,
+            epochs=1,
         )
 
-    #print("Print what the data looks like before feeding into training ...")
-    #for ii in train_dataset:
-    #    print(ii)
+        history = model.fit(train_dataset, epochs=num_epochs)
 
+    # print("Print what the data looks like before feeding into training ...")
+    # for ii in train_dataset:
+    #    print(ii)
 
     # raise(ValueError("Artificial Error: attempt to rerun the model"))
 
     signatures = {
-        "serving_default": _get_serve_tf_examples_fn(model, tf_transform_output).get_concrete_function(
+        "serving_default": _get_serve_tf_examples_fn(
+            model, tf_transform_output
+        ).get_concrete_function(
             tf.TensorSpec(shape=[None], dtype=tf.string, name="examples")
         ),
     }
-    
-    model.save(
-        fn_args.serving_model_dir, save_format="tf", signatures=signatures
-    )
 
-
-
+    model.save(fn_args.serving_model_dir, save_format="tf", signatures=signatures)

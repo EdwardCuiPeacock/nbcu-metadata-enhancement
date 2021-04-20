@@ -165,10 +165,6 @@ def run_fn(fn_args):
 
         history = model.fit(train_dataset, epochs=num_epochs, verbose=1)
 
-    # print("Print what the data looks like before feeding into training ...")
-    # for ii in train_dataset:
-    #    print(ii)
-
     # raise(ValueError("Artificial Error: attempt to rerun the model"))
 
     signatures = {

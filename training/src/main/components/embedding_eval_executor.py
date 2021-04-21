@@ -25,6 +25,7 @@ from __future__ import division
 from __future__ import print_function
 
 import json
+import gcsfs
 import os
 from typing import Any, Dict, List, Text
 
@@ -317,6 +318,25 @@ class Executor(base_executor.BaseExecutor):
         metric_vals['Coverage@1'] = len(coverage[-1]) / len(seen[-1])
         metric_vals['Coverage@5'] = len(coverage[-5]) / len(seen[-5])
         metric_vals['Coverage@10'] = len(coverage[-10]) / len(seen[-10])
+        
+        # save metrics into json
+        metrics_series = {
+            "total": total,
+            "coverage": coverage,
+            "accuracy": accuracy,
+            "precision": precision,
+            "recall": recall,
+            "coverage": coverage,
+            "seen": seen,
+            "summary": metric_vals,
+        }
+
+        fs = gcsfs.GCSFileSystem(project="res-nbcupea-dev-ds-sandbox-001")
+        time_stamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+        with fs.open(f"gs://metadata-bucket-base/tfx-metadata-dev-pipeline-output/metadata_dev_edc_base_0_0_2/Evaluator/metrics/metrics_series_{time_stamp}.json", "w") as fid:
+            json.dump(metrics_series, fid)
+
+
         ### Write Metrics
         client = bigquery.Client()
         date = datetime.datetime.now().strftime("%Y-%2m-%d %H:%M:%S")

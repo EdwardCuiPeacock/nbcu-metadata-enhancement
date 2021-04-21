@@ -7,6 +7,7 @@ RUN pip install pyarrow==3.0.0
 RUN pip install google-cloud-storage==1.32.0 
 RUN pip install google-cloud-bigquery-storage==2.4.0
 
+# CUDA settings below only works with tfx:0.26.0
 ENV CUDA_VERSION 10.1.243
 ENV CUDA_PKG_VERSION 10-1=$CUDA_VERSION-1
 ENV PATH /usr/local/nvidia/bin:/usr/local/cuda/bin:${PATH}

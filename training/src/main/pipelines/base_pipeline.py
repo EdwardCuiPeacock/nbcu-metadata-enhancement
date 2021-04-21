@@ -132,7 +132,7 @@ def create_pipeline(
     components.append(trainer)
 
     evaluator = EmbeddingEvaluator(
-        model="mymodel",#trainer.outputs["model"],
+        model=trainer.outputs["model"],
         name=configs.MODEL_NAME,
         output_table=configs.OUTPUT_TABLE,
     )
@@ -149,8 +149,6 @@ def create_pipeline(
         ),
     )
     components.append(pusher)
-
-    components = [evaluator] # TODO: overwrite
 
     return pipeline.Pipeline(
         pipeline_name=pipeline_name,

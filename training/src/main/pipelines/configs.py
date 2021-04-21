@@ -66,8 +66,8 @@ num_labels = get_domain_size('schema/schema.pbtxt', 'tags') # TODO: src/
 
 
 ## TRAINING ARGS
-USE_STEPS = False
-TRAIN_NUM_STEPS = 10000
+USE_STEPS = True
+TRAIN_NUM_STEPS = 1
 EVAL_NUM_STEPS = 0
 
 TRAIN_NUM_STEPS_TEST = 3 

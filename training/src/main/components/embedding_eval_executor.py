@@ -229,10 +229,18 @@ class Executor(base_executor.BaseExecutor):
         tnow = time.time()
         avg_emb = avg_emb.apply(lambda x: np.asarray([i / PREV_WINDOW for i in x]))
         used_time = time.time() - tnow
-        print(f"Average embed: {used_time:.2f}s")
+        print(f"Average embed: {used_time:.2f} s")
 
         tnow = time.time()
-        cos_sim = avg_emb.apply(lambda x: [1 - spatial.distance.cosine(u, x) for u in preds['pred']])
+        #cos_sim = avg_emb.apply(lambda x: [1 - spatial.distance.cosine(u, x) for u in preds['pred']])
+        avg_emb_mat = np.stack(avg_emb.values)
+        preds_emb_mat = np.stack(preds["pred"].values)
+        # L2 Normalize
+        avg_emb_norm = avg_emb_mat / np.sqrt(np.sum(avg_emb_mat**2, axis=1, keepdims=True))
+        preds_emb_norm = preds_emb_mat / np.sqrt(np.sum(preds_emb_mat**2, axis=1, keepdims=True))
+        # Cosine similarity Scoring
+        user_content_mat = avg_emb_norm @ preds_emb_norm.T
+        cos_sim = pd.Series(list(user_content_mat), index=avg_emb.index, name="user_ordinal_id")
         used_time = time.time() - tnow
         print(f"Cosine sim: {used_time:.2f}s")
 
@@ -264,11 +272,10 @@ class Executor(base_executor.BaseExecutor):
         total = len(user_data['user_ordinal_id'].unique())
 
         tnow = time.time()
+        top_all = cos_sim.apply(lambda x: np.argsort(x))
         for n in [-1,-5,-10]:
-
-            top = cos_sim.apply(lambda x: np.argsort(x)[n:])
             #topn = top.apply(lambda x: x[n:])
-            top_with_ids = top.apply(lambda x: set([preds['content_ordinal_id'][i] for i in x])).reset_index()
+            top_with_ids = top_all.apply(lambda x: set([preds['content_ordinal_id'][i] for i in x[:n]])).reset_index()
 
             for _ , userid in top_with_ids.iterrows():
 
@@ -278,7 +285,7 @@ class Executor(base_executor.BaseExecutor):
                 if n in coverage.keys():
                     coverage[n] = coverage[n].union(topn)
                     seen[n] = seen[n].union(future_data)
-                    recall[n].append(len(topn.intersection(future_data)) / TEST_WINDOW)
+                    recall[n].append(len(topn.intersection(future_data)) / len(future_data))
                     precision[n].append(len(topn.intersection(future_data)) / -n)
                 else:
                     coverage[n] = topn

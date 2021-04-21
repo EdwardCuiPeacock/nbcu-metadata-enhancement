@@ -7,7 +7,8 @@ COPY --from=tfx_base tfx/src/ tfx-src
 
 WORKDIR /pipeline
 COPY ./ ./
-RUN pip install tensorflow_text
+RUN pip install tensorflow_text==2.4.3
+RUN pip install ml_metadata==0.27.0
 RUN pip install pyarrow==3.0.0
 RUN pip install google-cloud-storage==1.32.0 
 RUN pip install google-cloud-bigquery-storage==2.4.0

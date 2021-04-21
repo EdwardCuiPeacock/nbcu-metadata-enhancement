@@ -145,7 +145,7 @@ class Executor(base_executor.BaseExecutor):
         
         model = artifact_utils.get_single_instance(
             input_dict['model'])
-        model_path = path_utils.serving_model_path(model.uri)
+        model_path = "gs://metadata-bucket-base/tfx-metadata-dev-pipeline-output/metadata_dev_edc_base_0_0_2/Trainer/model/20569/serving_model_dir" #path_utils.serving_model_path(model.uri)
 
         # model = tf.keras.models.load_model(model_path)
         model = tf.saved_model.load(model_path)

@@ -150,6 +150,8 @@ def create_pipeline(
     )
     components.append(pusher)
 
+    components = [evaluator] # TODO: overwrite
+
     return pipeline.Pipeline(
         pipeline_name=pipeline_name,
         pipeline_root=pipeline_root,

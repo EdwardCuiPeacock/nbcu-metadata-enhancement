@@ -39,20 +39,6 @@ enable_cache = True
 IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/edc-dev-pipeline'
 
 # BQ data 
-# TODO: This needs to go somewhere else
-# TODO: Right now we are templating at pipeline COMPILE time 
-#       eventually we'll want to do this at RUN time, since this 
-#       will allow us to template out any temporal aspects of the query
-
-#file_loader = FileSystemLoader('main/queries') # TODO: src/
-#env = Environment(loader=file_loader)
-#template = env.get_template('ingest_query_new.sql')
-
-#partially_rendered_query = partial(template.render,
-#                                   token_limit=TOKEN_LIMIT,
-#                                   project=GOOGLE_CLOUD_PROJECT, 
-#                                   dataset=BQ_DATASET, 
-#                                   table=BQ_TABLE)
 with open(os.path.join("main/queries/ingest_query_new_fixed.sql"), "r") as fid:
     query_str = fid.read() # read everything    
 # Apply / parse any templated fields

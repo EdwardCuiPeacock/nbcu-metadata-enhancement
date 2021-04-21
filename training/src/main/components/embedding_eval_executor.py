@@ -184,7 +184,7 @@ class Executor(base_executor.BaseExecutor):
             y = model(element)
             res.append(y)
         used_time = time.time() - tnow
-        print("Successfully made predictions on synopsis: {used_time:.2f} s")
+        print(f"Successfully made predictions on synopsis: {used_time:.2f} s")
         
         f = tf.concat(res, axis=0).numpy()
         preds = pd.DataFrame(f)

@@ -162,7 +162,7 @@ def run_fn(fn_args):
             count_rows += kk[-1].shape[0]
         print(f"Total number of rows of training: {count_rows}")
 
-        history = model.fit(train_dataset, epochs=num_epochs, verbose=1)
+        #history = model.fit(train_dataset, epochs=num_epochs, verbose=1)
 
     # raise(ValueError("Artificial Error: attempt to rerun the model"))
 

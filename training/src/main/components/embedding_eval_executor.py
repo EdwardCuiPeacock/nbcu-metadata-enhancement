@@ -147,7 +147,8 @@ class Executor(base_executor.BaseExecutor):
             input_dict['model'])
         model_path = path_utils.serving_model_path(model.uri)
 
-        model = tf.keras.models.load_model(model_path)
+        # model = tf.keras.models.load_model(model_path)
+        model = tf.saved_model.load(model_path)
         
         ### Load User Data
         """

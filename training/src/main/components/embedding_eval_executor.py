@@ -42,6 +42,7 @@ from scipy import spatial
 import sys
 import random
 import datetime
+import time
 
 import subprocess
 import sys
@@ -163,7 +164,7 @@ class Executor(base_executor.BaseExecutor):
         
         client = bigquery.Client()
         raw_user_data = client.query(USERS_QUERY).result().to_dataframe()
-        
+
         ### Create embeddings
         unscored_titles = client.query(TITLES_QUERY) \
                                 .result() \
@@ -173,13 +174,17 @@ class Executor(base_executor.BaseExecutor):
 
         input_data = unscored_titles[['TitleDetails_longsynopsis']]
         dataset = tf.data.Dataset.from_tensor_slices(
-                {'synopsis': tf.cast(input_data['TitleDetails_longsynopsis'].values.tolist(), tf.string)}
+                tf.cast(input_data['TitleDetails_longsynopsis'].values.tolist(), tf.string)
                 ).batch(50)
-        
+
+        print("Start making predictions on synopsis")
+        tnow = time.time()
         res = []
         for element in dataset:
-            y = model.predict(element)
+            y = model(element)
             res.append(y)
+        used_time = time.time() - tnow
+        print("Successfully made predictions on synopsis: {used_time:.2f} s")
         
         f = tf.concat(res, axis=0).numpy()
         preds = pd.DataFrame(f)
@@ -221,16 +226,25 @@ class Executor(base_executor.BaseExecutor):
         avg_emb = history_df.groupby(['user_ordinal_id'])['pred'] \
                             .apply(np.sum)
 
+        tnow = time.time()
         avg_emb = avg_emb.apply(lambda x: np.asarray([i / PREV_WINDOW for i in x]))
+        used_time = time.time() - tnow
+        print(f"Average embed: {used_time:.2f}s")
 
+        tnow = time.time()
         cos_sim = avg_emb.apply(lambda x: [1 - spatial.distance.cosine(u, x) for u in preds['pred']])
-        
+        used_time = time.time() - tnow
+        print(f"Cosine sim: {used_time:.2f}s")
+
         # make cosine sim for things in the history -1 so they don't get predicted
+        tnow = time.time()
         for x in cos_sim.index:
             user_hist = history_df.loc[history_df['user_ordinal_id'] == x].content_id.unique().tolist()
             histidx = preds.loc[preds['content_ordinal_id'].isin(user_hist)]
             for i in histidx.index:
                 cos_sim[x][i] = -1
+        used_time = time.time() - tnow
+        print(f"cos sim slicer for loop: {used_time} s")
 
         ## Predict / Eval on test-data using cos sim
         # prev_window: how many prior shows to average into user embedding
@@ -249,6 +263,7 @@ class Executor(base_executor.BaseExecutor):
         accuracy = {}
         total = len(user_data['user_ordinal_id'].unique())
 
+        tnow = time.time()
         for n in [-1,-5,-10]:
 
             top = cos_sim.apply(lambda x: np.argsort(x)[n:])
@@ -276,6 +291,8 @@ class Executor(base_executor.BaseExecutor):
                         accuracy[n] = 1
                     else:
                         accuracy[n] += 1
+        used_time = time.time() - tnow
+        print(f"Double for loop to get top 1/5/10 metrics: {used_time} s")
 
         metric_vals = {}
         metric_vals['Precision@1'] = sum(precision[-1]) / total
@@ -297,6 +314,7 @@ class Executor(base_executor.BaseExecutor):
         client = bigquery.Client()
         date = datetime.datetime.now().strftime("%Y-%2m-%d %H:%M:%S")
 
+        tnow = time.time()
         for k,v in metric_vals.items():
             row_to_insert = {}
             row_to_insert['model_name'] = exec_properties['name']
@@ -306,7 +324,10 @@ class Executor(base_executor.BaseExecutor):
             row_to_insert['model_path'] = model_path
             
             errors = client.insert_rows_json(exec_properties['output_table'], [row_to_insert])
+       
         print("errors: ", errors)
+        used_time = time.time() - tnow
+        print(f"For loop to insert data in bigquery: {used_time} s")
 
         
         

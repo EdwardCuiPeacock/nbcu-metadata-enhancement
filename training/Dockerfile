@@ -6,7 +6,6 @@ FROM tensorflow/tensorflow:2.4.0-gpu
 COPY --from=tfx_base tfx/src/ tfx-src 
 
 RUN python -m pip install --upgrade poetry 
-
 COPY pyproject.toml .
 RUN poetry config virtualenvs.create false
 RUN poetry install 

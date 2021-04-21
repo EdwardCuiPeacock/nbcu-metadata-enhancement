@@ -247,12 +247,19 @@ class Executor(base_executor.BaseExecutor):
 
         # make cosine sim for things in the history -1 so they don't get predicted
         tnow = time.time()
-        for x in cos_sim.index:
-            user_hist = history_df.loc[history_df['user_ordinal_id'] == x].content_id.unique().tolist()
-            histidx = preds.loc[preds['content_ordinal_id'].isin(user_hist)]
-            for i in histidx.index:
-                cos_sim[x][i] = -1
-        used_time = time.time() - tnow
+        df_joined_history = history_df[["user_ordinal_id", "content_id"]].merge(
+            preds.reset_index(drop=False)[["index", "content_ordinal_id"]], 
+            left_on="content_id", right_on="content_ordinal_id")
+        df_user_hist = df_joined_history.groupby(by=["user_ordinal_id"]).agg({"index":list})
+        df_user_hist = df_user_hist.join(cos_sim.to_frame(name="cos_sim"), on="user_ordinal_id")
+
+        def zeroing_func(pdf):
+            pdf["cos_sim"][pdf["index"]] = -1
+            return pdf
+
+        df_user_hist = df_user_hist.apply(zeroing_func, axis=1)
+        # Reset cos_sim
+        cos_sim = df_user_hist["cos_sim"]
         print(f"cos sim slicer for loop: {used_time} s")
 
         ## Predict / Eval on test-data using cos sim
@@ -260,10 +267,6 @@ class Executor(base_executor.BaseExecutor):
         # test_window: how many shows to allow into the future for correctly guessing.
         #              i.e test_window=1 means predict next show exactly,
         #                  test_window=5 means prediction must be within next 5 shows watched
-
-        counter = 0
-
-        correct = 0
 
         recall = {}
         precision = {}
@@ -275,14 +278,17 @@ class Executor(base_executor.BaseExecutor):
         tnow = time.time()
         top_all = cos_sim.apply(lambda x: np.argsort(x))
         for n in [-1,-5,-10]:
-            #topn = top.apply(lambda x: x[n:])
-            top_with_ids = top_all.apply(lambda x: set([preds['content_ordinal_id'][i] for i in x[:n]])).reset_index()
-
+            print(f"top {n}")
+            top_with_ids = np.take(preds["content_ordinal_id"].values, np.stack(top_all.values)[:, n:])
+            top_with_ids = pd.Series(list(top_with_ids), index=cos_sim.index, name="user_ordinal_id")\
+                .to_frame(name="content_ordinal_id").reset_index()
+            print("Computing metrics for each user")
             for _ , userid in top_with_ids.iterrows():
-
                 future_data = set(test_df.loc[test_df['user_ordinal_id'] == userid['user_ordinal_id']].content_id.values.tolist())
-                topn = top_with_ids.loc[top_with_ids['user_ordinal_id'] == userid['user_ordinal_id']].pred.values[0]
-                
+                if len(future_data) < 1:
+                    continue
+                topn = set(userid["content_ordinal_id"])
+
                 if n in coverage.keys():
                     coverage[n] = coverage[n].union(topn)
                     seen[n] = seen[n].union(future_data)
@@ -318,16 +324,15 @@ class Executor(base_executor.BaseExecutor):
         metric_vals['Coverage@1'] = len(coverage[-1]) / len(seen[-1])
         metric_vals['Coverage@5'] = len(coverage[-5]) / len(seen[-5])
         metric_vals['Coverage@10'] = len(coverage[-10]) / len(seen[-10])
-        
+                
         # save metrics into json
         metrics_series = {
             "total": total,
-            "coverage": coverage,
+            "coverage": {k:list(map(int, v)) for k, v in coverage.items()},
             "accuracy": accuracy,
-            "precision": precision,
-            "recall": recall,
-            "coverage": coverage,
-            "seen": seen,
+            "precision": {k:list(map(float, v)) for k, v in precision.items()},
+            "recall": {k:list(map(float, v)) for k, v in recall.items()},
+            "seen": {k:list(map(int, v)) for k, v in seen.items()},
             "summary": metric_vals,
         }
 
@@ -335,7 +340,6 @@ class Executor(base_executor.BaseExecutor):
         time_stamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
         with fs.open(f"gs://metadata-bucket-base/tfx-metadata-dev-pipeline-output/metadata_dev_edc_base_0_0_2/Evaluator/metrics/metrics_series_{time_stamp}.json", "w") as fid:
             json.dump(metrics_series, fid)
-
 
         ### Write Metrics
         client = bigquery.Client()

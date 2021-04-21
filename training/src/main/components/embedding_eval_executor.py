@@ -162,7 +162,7 @@ class Executor(base_executor.BaseExecutor):
         metrics = exec_properties['run_fn'](embeddings,
                                             user_data)
         """
-        
+        print("Loading data")
         client = bigquery.Client()
         raw_user_data = client.query(USERS_QUERY).result().to_dataframe()
 
@@ -300,7 +300,6 @@ class Executor(base_executor.BaseExecutor):
                     recall[n] = [len(topn.intersection(future_data))]
                     precision[n] = [len(topn.intersection(future_data)) / -n]
                 if len(topn.intersection(future_data)) >= 1:
-
                     if n not in accuracy.keys():
                         accuracy[n] = 1
                     else:
@@ -324,6 +323,10 @@ class Executor(base_executor.BaseExecutor):
         metric_vals['Coverage@1'] = len(coverage[-1]) / len(seen[-1])
         metric_vals['Coverage@5'] = len(coverage[-5]) / len(seen[-5])
         metric_vals['Coverage@10'] = len(coverage[-10]) / len(seen[-10])
+
+        # Print the results
+        for k, v in metric_vals.items():
+            print(k, ":", v)
                 
         # save metrics into json
         metrics_series = {

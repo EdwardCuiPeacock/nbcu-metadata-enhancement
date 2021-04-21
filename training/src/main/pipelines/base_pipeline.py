@@ -111,16 +111,13 @@ def create_pipeline(
         ),
     }
     if ai_platform_training_args is not None:
-        trainer_args.update(
-            {
-                "custom_executor_spec": executor_spec.ExecutorClassSpec(
-                    ai_platform_trainer_executor.GenericExecutor
-                )
-            }
+        trainer_args["custom_executor_spec"] = executor_spec.ExecutorClassSpec(
+            ai_platform_trainer_executor.GenericExecutor
         )
-        trainer_args["custom_config"].update(
-            {ai_platform_trainer_executor.TRAINING_ARGS_KEY: ai_platform_training_args}
-        )
+
+        trainer_args["custom_config"][
+            ai_platform_trainer_executor.TRAINING_ARGS_KEY
+        ] = ai_platform_training_args
 
         trainer_args["custom_config"][
             ai_platform_trainer_executor.JOB_ID_KEY

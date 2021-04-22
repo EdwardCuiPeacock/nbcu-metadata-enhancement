@@ -24,9 +24,7 @@ IMAGE = configs.IMAGE
 def run(output_dir=OUTPUT_DIR, output_filename=OUTPUT_FILENAME, pipeline_name=PIPELINE_NAME, image=IMAGE):
     # TFX produces two types of outputs, files and metadata.
     # - Files will be created under PIPELINE_ROOT directory.
-    pipeline_root = os.path.join(
-        output_dir, "tfx-metadata-dev-pipeline-output", pipeline_name
-    )
+    pipeline_root = configs.PIPELINE_ROOT
 
     serving_model_dir = os.path.join(pipeline_root, "serving_model")
 
@@ -54,7 +52,7 @@ def run(output_dir=OUTPUT_DIR, output_filename=OUTPUT_FILENAME, pipeline_name=PI
             serving_model_dir=serving_model_dir,
             custom_config=configs.custom_config,
             beam_pipeline_args=configs.BIG_QUERY_WITH_DIRECT_RUNNER_BEAM_PIPELINE_ARGS,
-            ai_platform_training_args=None, #configs.GCP_AI_PLATFORM_TRAINING_ARGS
+            ai_platform_training_args=None if not configs.USE_AI_PLATFORM else configs.GCP_AI_PLATFORM_TRAINING_ARGS
         )
     )
 

@@ -48,6 +48,8 @@ import time
 import subprocess
 import sys
 
+from main.pipelines import configs
+
 TITLES_QUERY = """
 SELECT 
     DISTINCT
@@ -147,7 +149,7 @@ class Executor(base_executor.BaseExecutor):
         
         model = artifact_utils.get_single_instance(
             input_dict['model'])
-        model_path = "gs://metadata-bucket-base/tfx-metadata-dev-pipeline-output/metadata_dev_edc_base_0_0_2/Trainer/model/20569/serving_model_dir" #path_utils.serving_model_path(model.uri)
+        model_path = path_utils.serving_model_path(model.uri)
 
         # model = tf.keras.models.load_model(model_path)
         model = tf.saved_model.load(model_path)
@@ -341,7 +343,8 @@ class Executor(base_executor.BaseExecutor):
 
         fs = gcsfs.GCSFileSystem(project="res-nbcupea-dev-ds-sandbox-001")
         time_stamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-        with fs.open(f"gs://metadata-bucket-base/tfx-metadata-dev-pipeline-output/metadata_dev_edc_base_0_0_2/Evaluator/metrics/metrics_series_{time_stamp}.json", "w") as fid:
+        pipeline_root = configs.PIPELINE_ROOT
+        with fs.open(f"{pipeline_root}/Evaluator/metrics/metrics_series_{time_stamp}.json", "w") as fid:
             json.dump(metrics_series, fid)
 
         ### Write Metrics

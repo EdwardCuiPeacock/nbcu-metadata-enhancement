@@ -18,7 +18,6 @@ TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_
 #TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-256_A-4/2"
 
 
-
 def _gzip_reader_fn(filenames):
     """Small utility returning a record reader that can read gzip'ed fies"""
     return tf.data.TFRecordDataset(filenames, compression_type="GZIP")

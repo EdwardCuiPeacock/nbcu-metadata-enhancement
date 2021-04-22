@@ -26,10 +26,11 @@ def compute_tags(transformed_tags, num_labels):
     """
     tags_multi_binarized = tf.sparse.to_indicator(transformed_tags, 
                                                   vocab_size=num_labels)
-    tags_multi_binarized = tf.cast(tags_multi_binarized, tf.float32)
+    #tags_multi_binarized = tf.cast(tags_multi_binarized, tf.float32)
     # Normalize the tags by their sum
-    tags_normalized = tags_multi_binarized / tf.reduce_sum(tags_multi_binarized, axis=1, keepdims=True)
-    return tags_normalized #tf.cast(tags_multi_binarized, tf.int64)
+    #tags_normalized = tags_multi_binarized / tf.reduce_sum(tags_multi_binarized, axis=1, keepdims=True)
+    #return tags_normalized 
+    return tf.cast(tags_multi_binarized, tf.int64)
 
 def preprocessing_fn(inputs, custom_config):
     """Preprocess input columns into transformed columns."""

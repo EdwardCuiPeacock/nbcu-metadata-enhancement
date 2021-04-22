@@ -14,7 +14,7 @@ LABEL = 'tags'
 def _transformed_name(key):
     return key + '_xf'
 
-def binarize_tags(transformed_tags, num_labels): 
+def compute_tags(transformed_tags, num_labels): 
     """
     Function for turning tags from sparse tensor to multilabel binarized 
     data. The final result is that tags is a binary matrix with shape (none, NUM_TAGS) 
@@ -26,7 +26,9 @@ def binarize_tags(transformed_tags, num_labels):
     """
     tags_multi_binarized = tf.sparse.to_indicator(transformed_tags, 
                                                   vocab_size=num_labels)
-    return tf.cast(tags_multi_binarized, tf.int64)
+    # Normalize the tags by their sum
+    tags_normalized = tags_multi_binarized / tf.reduce_sum(tags_multi_binarized, axis=1, keepdims=True)
+    return tags_normalized #tf.cast(tags_multi_binarized, tf.int64)
 
 def preprocessing_fn(inputs, custom_config):
     """Preprocess input columns into transformed columns."""
@@ -42,7 +44,7 @@ def preprocessing_fn(inputs, custom_config):
     )
 
     outputs[FEATURE] = text
-    outputs[_transformed_name(LABEL)] = binarize_tags(labels, num_labels)
+    outputs[_transformed_name(LABEL)] = compute_tags(labels, num_labels)
 
     return outputs
 

@@ -69,7 +69,7 @@ def build_bert_tagger(num_labels, seq_length):
     encoder = hub.KerasLayer(TFHUB_HANDLE_ENCODER, trainable=False, name="BERT_encoder")
     outputs = encoder(encoder_inputs)
     net = outputs["pooled_output"]
-    output = tf.keras.layers.Dense(num_labels, activation="sigmoid")(net)
+    output = tf.keras.layers.Dense(num_labels, activation="softmax")(net)
     model = tf.keras.Model(text_input, output)
     print(model.summary())
     return model
@@ -82,13 +82,13 @@ def get_compiled_model(num_labels, seq_length):
         model = build_bert_tagger(num_labels, seq_length)
         metrics = [
             tf.keras.metrics.Accuracy(),
-            tf.keras.metrics.AUC(curve="ROC", name="ROC_AUC"),
-            tf.keras.metrics.AUC(curve="PR", name="PR_AUC"),
+            #tf.keras.metrics.AUC(curve="ROC", name="ROC_AUC"),
+            #tf.keras.metrics.AUC(curve="PR", name="PR_AUC"),
         ]
         # clipnorm only seems to work in TF 2.4 with distribution strategy
         model.compile(
-            optimizer="sgd",
-            loss="binary_crossentropy",
+            optimizer="adam",
+            loss="categorical_crossentropy",
             metrics=metrics,
         )
     return model

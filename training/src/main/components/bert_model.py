@@ -80,14 +80,15 @@ def get_compiled_model(num_labels, seq_length):
     with strategy.scope():
         model = build_bert_tagger(num_labels, seq_length)
         metrics = [
-            tf.keras.metrics.Accuracy(),
+            "kullback_leibler_divergence",
+            "cosine_similarity",
             #tf.keras.metrics.AUC(curve="ROC", name="ROC_AUC"),
             #tf.keras.metrics.AUC(curve="PR", name="PR_AUC"),
         ]
         # clipnorm only seems to work in TF 2.4 with distribution strategy
         model.compile(
             optimizer="adam",
-            loss="categorical_crossentropy",
+            loss=tf.keras.losses.Huber(delta=1.0),
             metrics=metrics,
         )
     return model

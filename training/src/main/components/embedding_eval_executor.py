@@ -243,6 +243,10 @@ class Executor(base_executor.BaseExecutor):
         preds_emb_norm = preds_emb_mat / np.sqrt(np.sum(preds_emb_mat**2, axis=1, keepdims=True))
         # Cosine similarity Scoring
         user_content_mat = avg_emb_norm @ preds_emb_norm.T
+        print("cosine similarity")
+        print("mean:", np.mean(user_content_mat.ravel()))
+        print("std:", np.std(user_content_mat.ravel()))
+        print("median:", np.median(user_content_mat.ravel()))
         cos_sim = pd.Series(list(user_content_mat), index=avg_emb.index, name="user_ordinal_id")
         used_time = time.time() - tnow
         print(f"Cosine sim: {used_time:.2f}s")

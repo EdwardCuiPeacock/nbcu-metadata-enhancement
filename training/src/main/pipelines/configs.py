@@ -65,7 +65,7 @@ def get_domain_size(schema_path, feature):
 
     return len(domain.value)
 
-num_labels = get_domain_size('schema/schema.pbtxt', 'tags') # TODO: src/
+num_labels = get_domain_size('schema_dylan_150/schema.pbtxt', 'tags') # TODO: src/
 
 
 ## TRAINING ARGS

@@ -69,7 +69,7 @@ def create_pipeline(
     # Import user-provided schema.
     schema_importer = ImporterNode(
         instance_name="import_user_schema",
-        source_uri="schema/",
+        source_uri="schema_dylan_150/",
         artifact_type=Schema,
     )
     components.append(schema_importer)

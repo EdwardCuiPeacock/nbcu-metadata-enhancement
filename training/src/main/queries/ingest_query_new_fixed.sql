@@ -7,6 +7,3 @@ FROM `{{ GOOGLE_CLOUD_PROJECT }}.metadata_enhancement.merlin_data_with_lang_and_
 {% if TEST_LIMIT -%}
    LIMIT {{ TEST_LIMIT }}
 {% endif %}
-
--- SELECT * 
--- FROM `{{ GOOGLE_CLOUD_PROJECT }}.metadata_enhancement.meta_synopsis_100tag_edc_dev`

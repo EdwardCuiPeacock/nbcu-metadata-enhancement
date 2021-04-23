@@ -34,9 +34,9 @@ BQ_TABLE = 'merlin_data_with_lang_and_type'
 
 TOKEN_LIMIT = 256
 
-TEST_LIMIT = 20 
+TEST_LIMIT = 20
 
-enable_cache = True
+enable_cache = False
 USE_AI_PLATFORM = True
 
 IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/edc-dev-pipeline'

@@ -56,7 +56,7 @@ DATA_PATH_TEST = "test_data/" # TODO: src/
 
 PREPROCESSING_FN = "main.components.transform.preprocessing_fn" # TODO: src.
 RUN_FN = "main.components.bert_model.run_fn" # TODO: src.
-schema_path = "schema_dylan_150/"
+schema_path = "schema/"
 
 # TODO: Should go somewhere else?
 def get_domain_size(schema_path, feature):

@@ -1,7 +1,7 @@
 SELECT 
   ARRAY_TO_STRING(ARRAY(
     SELECT * 
-        FROM UNNEST(SPLIT(program_longsynopsis, " ")) LIMIT {{ TOKEN_LIMIT }}), " ") as synopsis,
+        FROM UNNEST(SPLIT(synopsis, " ")) LIMIT {{ TOKEN_LIMIT }}), " ") as synopsis,
   tags
 FROM `{{ GOOGLE_CLOUD_PROJECT }}.metadata_enhancement.meta_synopsis_100tag_edc_dev`
 {% if TEST_LIMIT -%}

@@ -85,6 +85,7 @@ custom_config = {
     'batch_size': BATCH_SIZE,
     'use_steps': USE_STEPS,
     'seq_length': TOKEN_LIMIT,
+    'token_vocab_list': "gs://edc-dev/kubeflowpipelines-default/tfx_pipeline_output/node2vec_sports_syn_0_1_0/Transform/transform_graph/18561/transform_fn/assets/node_vocab_txt"
 }
 
 #############################

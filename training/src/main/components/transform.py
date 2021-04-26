@@ -10,6 +10,7 @@ import tensorflow as tf
 
 FEATURE = 'synopsis'
 LABEL = 'tags'
+TOKENS = 'token'
 
 def _transformed_name(key):
     return key + '_xf'
@@ -37,6 +38,7 @@ def preprocessing_fn(inputs, custom_config):
     outputs = {}
     text = tf.squeeze(inputs[FEATURE], axis=1)
     labels = inputs[LABEL]
+    # tokens = inputs[TOKENS]
     
     num_labels = custom_config.get('num_labels')
     
@@ -49,8 +51,13 @@ def preprocessing_fn(inputs, custom_config):
     #     num_oov_buckets=1,
     #     )
 
+    #tokens = tft.apply_vocabulary(tokens, 
+    #    deferred_vocab_filename_tensor=tf.constant(custom_config["token_vocab_list"]), 
+    #    num_oov_buckets=0)
+
     outputs[FEATURE] = text
     outputs[_transformed_name(LABEL)] = compute_tags(labels, num_labels)
+    # outputs[TOKENS] = tokens.indices[:, 1]
 
     return outputs
 

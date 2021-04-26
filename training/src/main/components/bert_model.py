@@ -16,7 +16,7 @@ from tensorflow.keras.metrics import Precision, Recall
 TFHUB_HANDLE_PREPROCESSOR = "https://tfhub.dev/tensorflow/bert_en_uncased_preprocess/3"
 TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-512_A-8/1"
 #TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-256_A-4/2"
-
+TOKEN_EMBEDDINGS = "gs://edc-dev/kubeflowpipelines-default/tfx_pipeline_output/node2vec_sports_syn_0_1_1/Trainer/model/19130/serving_model_dir"
 
 def _gzip_reader_fn(filenames):
     """Small utility returning a record reader that can read gzip'ed fies"""
@@ -68,9 +68,13 @@ def build_bert_tagger(num_labels, seq_length):
     encoder = hub.KerasLayer(TFHUB_HANDLE_ENCODER, trainable=False, name="BERT_encoder")
     outputs = encoder(encoder_inputs)
     net = outputs["pooled_output"]
+    # Token embeddings
+    #token_input = tf.kras.layers.Input(shape=(), name="token")
+    #token_embeddings = tf.keras.models.load_model(TOKEN_EMBEDDINGS).get_layer("Embedding")
+    # Outputs
     hidden1 = tf.keras.layers.Dense(512, activation="relu")(net)
     drop1 = tf.keras.layers.Dropout(0.2)(hidden1)
-    hidden2 = tf.keras.Dense(256, activation="relu")(drop1)
+    hidden2 = tf.keras.layers.Dense(256, activation="relu")(drop1)
     drop2 = tf.keras.layers.Dropout(0.2)(hidden2)
     output = tf.keras.layers.Dense(num_labels, activation="sigmoid")(drop2)
     model = tf.keras.Model(text_input, output)

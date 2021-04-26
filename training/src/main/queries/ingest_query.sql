@@ -1,14 +1,9 @@
-CREATE TEMP FUNCTION dedup(val ANY TYPE) AS ((
-  SELECT ARRAY_AGG(t)
-  FROM (SELECT DISTINCT * FROM UNNEST(val) v) t
-)); -- deduplicate tags
-
 SELECT 
   ARRAY_TO_STRING(ARRAY(
     SELECT * 
-        FROM UNNEST(SPLIT(program_longsynopsis, " ")) LIMIT {{ token_limit }}), " ") as synopsis,
-  dedup(tags) AS tags
-FROM `{{ project }}.{{ dataset }}.{{ table }}`
-{% if limit -%}
-   LIMIT {{ limit }}
+        FROM UNNEST(SPLIT(program_longsynopsis, " ")) LIMIT {{ TOKEN_LIMIT }}), " ") as synopsis,
+  tags
+FROM `{{ GOOGLE_CLOUD_PROJECT }}.metadata_enhancement.meta_synopsis_100tag_edc_dev`
+{% if TEST_LIMIT -%}
+   LIMIT {{ TEST_LIMIT }}
 {% endif %}

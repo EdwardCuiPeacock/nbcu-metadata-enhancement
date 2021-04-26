@@ -42,7 +42,7 @@ USE_AI_PLATFORM = True
 IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/edc-dev-pipeline'
 
 # BQ data 
-with open(os.path.join("main/queries/ingest_query_new_fixed.sql"), "r") as fid:
+with open(os.path.join("main/queries/ingest_query.sql"), "r") as fid:
     query_str = fid.read() # read everything    
 # Apply / parse any templated fields
 query = jinja2.Template(query_str).render(

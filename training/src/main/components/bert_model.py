@@ -68,7 +68,11 @@ def build_bert_tagger(num_labels, seq_length):
     encoder = hub.KerasLayer(TFHUB_HANDLE_ENCODER, trainable=False, name="BERT_encoder")
     outputs = encoder(encoder_inputs)
     net = outputs["pooled_output"]
-    output = tf.keras.layers.Dense(num_labels, activation="sigmoid")(net)
+    hidden1 = tf.keras.layers.Dense(512, activation="relu")(net)
+    drop1 = tf.keras.layers.Dropout(0.2)(hidden1)
+    hidden2 = tf.keras.Dense(256, activation="relu")(drop1)
+    drop2 = tf.keras.layers.Dropout(0.2)(hidden2)
+    output = tf.keras.layers.Dense(num_labels, activation="sigmoid")(drop2)
     model = tf.keras.Model(text_input, output)
     print(model.summary())
     return model
@@ -82,7 +86,7 @@ def get_compiled_model(num_labels, seq_length):
         metrics = [
             "accuracy",
             #"kullback_leibler_divergence",
-            #"cosine_similarity",
+            "cosine_similarity",
             #tf.keras.metrics.AUC(curve="ROC", name="ROC_AUC"),
             #tf.keras.metrics.AUC(curve="PR", name="PR_AUC"),
         ]

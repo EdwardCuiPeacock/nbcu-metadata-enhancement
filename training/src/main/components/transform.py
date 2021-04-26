@@ -41,13 +41,13 @@ def preprocessing_fn(inputs, custom_config):
     num_labels = custom_config.get('num_labels')
     
     # Create and apply a full vocabulary for the labels (subgenres)
-    #labels = tft.compute_and_apply_vocabulary(
-    #    labels, vocab_filename=LABEL, num_oov_buckets=1
-    #)
-    labels = tft.apply_vocabulary(labels, 
-        deferred_vocab_filename_tensor=tf.constant("gs://metadata-bucket-base/tfx-metadata-dev-pipeline-output/metadata_dev_edc_base_0_0_3/Transform/transform_graph/20890/transform_fn/assets/tags"),
-        num_oov_buckets=1,
-        )
+    labels = tft.compute_and_apply_vocabulary(
+       labels, vocab_filename=LABEL, num_oov_buckets=1
+    )
+    # labels = tft.apply_vocabulary(labels, 
+    #     deferred_vocab_filename_tensor=tf.constant("gs://metadata-bucket-base/tfx-metadata-dev-pipeline-output/metadata_dev_edc_base_0_0_3/Transform/transform_graph/20890/transform_fn/assets/tags"),
+    #     num_oov_buckets=1,
+    #     )
 
     outputs[FEATURE] = text
     outputs[_transformed_name(LABEL)] = compute_tags(labels, num_labels)

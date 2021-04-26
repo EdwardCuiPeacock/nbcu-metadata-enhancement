@@ -1,0 +1,136 @@
+feature {
+  name: "synopsis"
+  type: BYTES
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  shape {
+    dim {
+      size: 1
+    }
+  }
+}
+feature {
+  name: "tags"
+  value_count {
+    min: 1
+  }
+  type: BYTES
+  string_domain {
+    value: "eng"
+    value: "Movie"
+    value: "Art"
+    value: "Nature"
+    value: "Special"
+    value: "Auto"
+    value: "Sports"
+    value: "Sports non-event"
+    value: "Documentary"
+    value: "Food"
+    value: "Game Show"
+    value: "News"
+    value: "Local"
+    value: "Episode"
+    value: "Fantasy"
+    value: "Children\'s/Family Entertainment"
+    value: "kids (ages 5-9)"
+    value: "Action & Adventure"
+    value: "Anime"
+    value: "Animated"
+    value: "Newscast"
+    value: "Talk"
+    value: "Interview"
+    value: "teens (ages 13-14)"
+    value: "Entertainment"
+    value: "Comedy"
+    value: "Drama"
+    value: "Romance"
+    value: "Politics & Government"
+    value: "older teens (ages 15+)"
+    value: "Music"
+    value: "Reality"
+    value: "Crime"
+    value: "Science fiction"
+    value: "Thriller"
+    value: "Crime drama"
+    value: "Comedy drama"
+    value: "tweens (ages 10-12)"
+    value: "Horror"
+    value: "Mystery"
+    value: "Biography"
+    value: "Western"
+    value: "Military & War"
+    value: "Documentary drama"
+    value: "History"
+    value: "Religion"
+    value: "History drama"
+    value: "Miniseries"
+    value: "Outdoors"
+    value: "Sitcom"
+    value: "Teens"
+    value: "Holiday"
+    value: "Christmas"
+    value: "Soccer"
+    value: "Animals"
+    value: "SeriesMaster"
+    value: "Basketball"
+    value: "Travel"
+    value: "Football"
+    value: "Educational"
+    value: "Paranormal"
+    value: "Event"
+    value: "Public Affairs"
+    value: "preschoolers (ages 2-4)"
+    value: "Pop Music"
+    value: "Boxing"
+    value: "Baseball"
+    value: "Tennis"
+    value: "Anthology"
+    value: "Hockey"
+    value: "Health"
+    value: "Science & Technology"
+    value: "Golf"
+    value: "Auto Racing"
+    value: "Action Sports"
+    value: "Sports talk"
+    value: "Fashion"
+    value: "Hunting"
+    value: "Fishing"
+    value: "Mixed Martial Arts"
+    value: "Legal"
+    value: "How-To"
+    value: "Medical"
+    value: "Variety"
+    value: "spa"
+    value: "Consumer"
+    value: "Olympics"
+    value: "Newsmagazine"
+    value: "Home & Garden"
+    value: "Motorcycle Racing"
+    value: "Business & Finance"
+    value: "Shopping"
+    value: "SportingEvent"
+    value: "Volleyball"
+    value: "Weather"
+    value: "Soap Opera"
+    value: "Real Estate"
+    value: "Home improvement"
+    value: "Rugby"
+    value: "Cricket"
+    value: "Classic Sport Event"
+    value: "Paid Program"
+  }
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  distribution_constraints {
+    min_domain_mass: 0.95
+  }
+  drift_comparator {
+    infinity_norm {
+      threshold: 0.05
+    }
+  }
+}

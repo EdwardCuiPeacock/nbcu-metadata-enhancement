@@ -34,11 +34,12 @@ def compute_tags(transformed_tags, num_labels):
     return tf.cast(tags_multi_binarized, tf.int64)
 
 
-def compute_tokens(tokens):
+def compute_tokens(tokens, max_token_length):
     """Convert a sparse tensor to RaggedTensor."""
     tokens = tf.sparse.reorder(tokens)
     out = tf.RaggedTensor.from_value_rowids(values=tokens.indices[:, 1], \
                                             value_rowids=tokens.indices[:, 0])
+    out = out.to_tensor(default_value=-1, shape=(None, max_token_length))
     return out
 
 def preprocessing_fn(inputs, custom_config):
@@ -69,7 +70,7 @@ def preprocessing_fn(inputs, custom_config):
 
     outputs[FEATURE] = text
     outputs[_transformed_name(LABEL)] = compute_tags(labels, num_labels)
-    outputs[TOKENS] = compute_tokens(tokens)
+    outputs[TOKENS] = compute_tokens(tokens, custom_config["max_token_length"])
 
     return outputs
 

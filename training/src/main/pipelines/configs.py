@@ -7,6 +7,10 @@ import jinja2
 from jinja2 import Environment, FileSystemLoader
 from functools import partial
 
+from google.cloud import bigquery
+import pandas as pd
+import numpy as np
+
 # Pipeline name will be used to identify this pipeline.
 PIPELINE_NAME = "metadata_dev_edc_base_0_0_4" # TODO: change this
 
@@ -36,7 +40,7 @@ TOKEN_LIMIT = 256
 
 TEST_LIMIT = 20
 
-enable_cache = True
+enable_cache = False
 USE_AI_PLATFORM = False
 
 IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/edc-dev-pipeline'
@@ -67,6 +71,15 @@ def get_domain_size(schema_path, feature):
 
 num_labels = get_domain_size(f'{schema_path}/schema.pbtxt', 'tags') # TODO: src/
 
+############## Finding out the padding necessary for tokens ################
+client = bigquery.Client()
+query_token = f"""
+    SELECT MAX(tokens_length) AS tokens_length
+    FROM {GOOGLE_CLOUD_PROJECT}.meta_synopsis_100_tag_with_token_edc_dev
+"""
+token_counter = client.query(query_token).result().to_dataframe()
+N2V_TOKEN_LENGTH = int(token_counter["token_length"].values)
+
 
 ## TRAINING ARGS
 USE_STEPS = False
@@ -85,8 +98,11 @@ custom_config = {
     'batch_size': BATCH_SIZE,
     'use_steps': USE_STEPS,
     'seq_length': TOKEN_LIMIT,
-    'token_vocab_list': "gs://edc-dev/kubeflowpipelines-default/tfx_pipeline_output/node2vec_sports_syn_0_1_0/Transform/transform_graph/18561/transform_fn/assets/node_vocab_txt"
+    'token_vocab_list': "gs://edc-dev/kubeflowpipelines-default/tfx_pipeline_output/node2vec_sports_syn_0_1_0/Transform/transform_graph/18561/transform_fn/assets/node_vocab_txt",
+    'max_token_length': N2V_TOKEN_LENGTH,
 }
+
+
 
 #############################
 #### Infrastructure Configs #

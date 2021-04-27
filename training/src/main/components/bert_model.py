@@ -95,7 +95,7 @@ def get_compiled_model(num_labels, seq_length):
         # clipnorm only seems to work in TF 2.4 with distribution strategy
         model.compile(
             optimizer="adam",
-            loss="cosine_similarity",
+            loss="binary_crossentropy",
             #metrics=metrics,
         )
     return model

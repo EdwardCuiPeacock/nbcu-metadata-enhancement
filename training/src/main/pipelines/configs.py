@@ -34,7 +34,8 @@ except ImportError:
 OUTPUT_TABLE = "res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.model_results"
 GOOGLE_CLOUD_PROJECT = "res-nbcupea-dev-ds-sandbox-001"
 BQ_DATASET = 'metadata_enhancement'
-BQ_TABLE = 'merlin_data_with_lang_and_type'
+BQ_TABLE = 'meta_synopsis_100tag_with_token_edc_dev'
+DATA_SOURCE_TABLE = f"{GOOGLE_CLOUD_PROJECT}.{BQ_DATASET}.{BQ_TABLE}"
 
 TOKEN_LIMIT = 256
 
@@ -50,7 +51,7 @@ with open(os.path.join("main/queries/ingest_query.sql"), "r") as fid:
     query_str = fid.read() # read everything    
 # Apply / parse any templated fields
 query = jinja2.Template(query_str).render(
-    GOOGLE_CLOUD_PROJECT=GOOGLE_CLOUD_PROJECT,
+    DATA_SOURCE_TABLE=DATA_SOURCE_TABLE,
     TOKEN_LIMIT=TOKEN_LIMIT,
     TEST_LIMIT=TEST_LIMIT,)
 # query_test = partially_rendered_query(limit=TEST_LIMIT)
@@ -62,22 +63,31 @@ PREPROCESSING_FN = "main.components.transform.preprocessing_fn" # TODO: src.
 RUN_FN = "main.components.bert_model.run_fn" # TODO: src.
 schema_path = "schema/"
 
-# TODO: Should go somewhere else?
-def get_domain_size(schema_path, feature):
-    schema_text = tfdv.load_schema_text(schema_path)
-    domain = tfdv.get_domain(schema_text, feature)
+############ Finding out the number of labels. 
+# This is needed for building the model #######
+# def get_domain_size(schema_path, feature):
+#     schema_text = tfdv.load_schema_text(schema_path)
+#     domain = tfdv.get_domain(schema_text, feature)
 
-    return len(domain.value)
+#     return len(domain.value)
 
-num_labels = get_domain_size(f'{schema_path}/schema.pbtxt', 'tags') # TODO: src/
+# num_labels = get_domain_size(f'{schema_path}/schema.pbtxt', 'tags') # TODO: src/
+client = bigquery.Client()
+query_labels = f"""
+    SELECT COUNT(DISTINCT t) AS labels_count
+    FROM `{DATA_SOURCE_TABLE}`,
+    UNNEST(tags) t
+"""
+num_labels = int(client.query(query_labels).to_dataframe()["labels_count"].values)
+
 
 ############## Finding out the padding necessary for tokens ################
 #client = bigquery.Client()
-# query_token = f"""
+# query_tokens = f"""
 #     SELECT MAX(tokens_length) AS tokens_length
-#     FROM `{GOOGLE_CLOUD_PROJECT}.metadata_enhancement.meta_synopsis_100tag_with_token_edc_dev`
+#     FROM `{DATA_SOURCE_TABLE}`
 # """
-# token_counter = client.query(query_token).result().to_dataframe()
+# token_counter = client.query(query_tokens).to_dataframe()
 N2V_TOKEN_LENGTH = 64 #int(token_counter["tokens_length"].values)
 
 

@@ -37,7 +37,7 @@ def compute_tags(transformed_tags, num_labels):
 def compute_tokens(tokens, max_token_length):
     """Convert a sparse tensor to RaggedTensor."""
     tokens = tf.sparse.reorder(tokens)
-    out = tf.RaggedTensor.from_value_rowids(values=tokens.indices[:, 1], \
+    out = tf.RaggedTensor.from_value_rowids(values=tokens.values, \
                                             value_rowids=tokens.indices[:, 0])
     out = out.to_tensor(default_value=-1, shape=(None, max_token_length))
     return out

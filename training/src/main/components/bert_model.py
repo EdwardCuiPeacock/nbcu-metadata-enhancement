@@ -68,9 +68,6 @@ def build_bert_tagger(num_labels, seq_length):
     encoder = hub.KerasLayer(TFHUB_HANDLE_ENCODER, trainable=False, name="BERT_encoder")
     outputs = encoder(encoder_inputs)
     net = outputs["pooled_output"]
-    # Token embeddings
-    #token_input = tf.kras.layers.Input(shape=(), name="token")
-    #token_embeddings = tf.keras.models.load_model(TOKEN_EMBEDDINGS).get_layer("Embedding")
     # Outputs
     hidden1 = tf.keras.layers.Dense(512, activation="relu")(net)
     drop1 = tf.keras.layers.Dropout(0.2)(hidden1)
@@ -82,6 +79,7 @@ def build_bert_tagger(num_labels, seq_length):
     return model
 
 
+
 def get_compiled_model(num_labels, seq_length):
     # TODO: figure out more about optimizer
     strategy = tf.distribute.MirroredStrategy()
@@ -90,14 +88,15 @@ def get_compiled_model(num_labels, seq_length):
         metrics = [
             "accuracy",
             #"kullback_leibler_divergence",
-            "cosine_similarity",
+            #"cosine_similarity",
+            "binary_crossentropy",
             #tf.keras.metrics.AUC(curve="ROC", name="ROC_AUC"),
             #tf.keras.metrics.AUC(curve="PR", name="PR_AUC"),
         ]
         # clipnorm only seems to work in TF 2.4 with distribution strategy
         model.compile(
             optimizer="adam",
-            loss="binary_crossentropy",
+            loss="cosine_similarity",
             metrics=metrics,
         )
     return model

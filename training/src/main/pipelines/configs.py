@@ -72,13 +72,13 @@ def get_domain_size(schema_path, feature):
 num_labels = get_domain_size(f'{schema_path}/schema.pbtxt', 'tags') # TODO: src/
 
 ############## Finding out the padding necessary for tokens ################
-client = bigquery.Client()
-query_token = f"""
-    SELECT MAX(tokens_length) AS tokens_length
-    FROM {GOOGLE_CLOUD_PROJECT}.meta_synopsis_100_tag_with_token_edc_dev
-"""
-token_counter = client.query(query_token).result().to_dataframe()
-N2V_TOKEN_LENGTH = int(token_counter["token_length"].values)
+#client = bigquery.Client()
+# query_token = f"""
+#     SELECT MAX(tokens_length) AS tokens_length
+#     FROM `{GOOGLE_CLOUD_PROJECT}.metadata_enhancement.meta_synopsis_100tag_with_token_edc_dev`
+# """
+# token_counter = client.query(query_token).result().to_dataframe()
+N2V_TOKEN_LENGTH = 64 #int(token_counter["tokens_length"].values)
 
 
 ## TRAINING ARGS

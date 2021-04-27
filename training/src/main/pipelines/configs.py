@@ -36,7 +36,7 @@ TOKEN_LIMIT = 256
 
 TEST_LIMIT = 20
 
-enable_cache = True
+enable_cache = False
 USE_AI_PLATFORM = True
 
 IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/edc-dev-pipeline'
@@ -56,7 +56,7 @@ DATA_PATH_TEST = "test_data/" # TODO: src/
 
 PREPROCESSING_FN = "main.components.transform.preprocessing_fn" # TODO: src.
 RUN_FN = "main.components.bert_model.run_fn" # TODO: src.
-schema_path = "schema/"
+schema_path = "schema_dylan_150/"
 
 # TODO: Should go somewhere else?
 def get_domain_size(schema_path, feature):

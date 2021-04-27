@@ -12,6 +12,8 @@ from tensorflow.keras.models import Model, Sequential
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.metrics import Precision, Recall
 
+from main.components.tagger_model import TaggerModel
+
 # TODO: Add these in config instead of hard-coding
 TFHUB_HANDLE_PREPROCESSOR = "https://tfhub.dev/tensorflow/bert_en_uncased_preprocess/3"
 TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-512_A-8/1"
@@ -48,10 +50,16 @@ def _input_fn(
         label_key="tags_xf",
         num_epochs=epochs,
     )
+
+    print("print what the data looks like")
+    for ii in dataset:
+        print(ii)
+        break
+
     return dataset
 
 
-def build_bert_tagger(num_labels, seq_length):
+def build_bert_tagger_old(num_labels, seq_length):
     # TODO: think about alternative architecture
     preprocessor = hub.load(TFHUB_HANDLE_PREPROCESSOR)
     text_input = tf.keras.layers.Input(shape=(), dtype=tf.string, name="synopsis")
@@ -78,6 +86,10 @@ def build_bert_tagger(num_labels, seq_length):
     print(model.summary())
     return model
 
+def build_bert_tagger(num_labels, seq_length):
+    model = TaggerModel(TFHUB_HANDLE_PREPROCESSOR, TFHUB_HANDLE_ENCODER, 
+        TOKEN_EMBEDDINGS, num_labels, seq_length)
+    return model
 
 
 def get_compiled_model(num_labels, seq_length):

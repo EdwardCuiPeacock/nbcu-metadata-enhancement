@@ -67,6 +67,9 @@ def preprocessing_fn(inputs, custom_config):
        deferred_vocab_filename_tensor=tf.constant(custom_config["token_vocab_list"]), 
        num_oov_buckets=0)
 
+    print("tokens")
+    print(tokens)
+
     outputs[FEATURE] = text
     outputs[_transformed_name(LABEL)] = compute_tags(labels, num_labels)
     outputs[TOKENS] = compute_tokens(tokens)

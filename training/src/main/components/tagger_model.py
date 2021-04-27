@@ -41,9 +41,9 @@ class TaggerModel(tf.keras.Model):
     def call(self, inputs, training=False):
         text_input, tokens = inputs["synopsis"], inputs["tokens"]
         # Squeeze the extra dim
-        text_input = Reshape((-1, ))(text_input)
-        print("text input: ", text_input.shape)
-        print(text_input)
+        text_input = tf.squeeze(text_input)
+        #print("text input: ", text_input.shape)
+        #print(text_input)
         # Convert tokens to ragged tensor
         tokens = tf.RaggedTensor.from_tensor(tokens, padding=-1)
         # Synopsis

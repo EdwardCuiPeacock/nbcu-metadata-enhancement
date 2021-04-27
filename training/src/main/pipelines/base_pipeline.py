@@ -156,5 +156,5 @@ def create_pipeline(
         components=components,
         enable_cache=configs.enable_cache,
         metadata_connection_config=metadata_connection_config,
-        beam_pipeline_args=None, #beam_pipeline_args,
+        beam_pipeline_args=beam_pipeline_args,
     )

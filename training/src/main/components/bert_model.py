@@ -198,7 +198,7 @@ def run_fn(fn_args):
             model, tf_transform_output
         ).get_concrete_function(
             tf.TensorSpec(shape=[None], dtype=tf.string, name="synopsis"),
-            tf.SparseTensorSpec(shape=[None, None], dtype=tf.string),
+            tf.SparseTensorSpec(shape=[None, None], dtype=tf.string), # token
         ),
     }
 

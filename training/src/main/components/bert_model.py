@@ -86,6 +86,7 @@ def build_bert_tagger_old(num_labels, seq_length):
     print(model.summary())
     return model
 
+
 def build_bert_tagger(num_labels, seq_length):
     model = TaggerModel(TFHUB_HANDLE_PREPROCESSOR, TFHUB_HANDLE_ENCODER, 
         TOKEN_EMBEDDINGS, num_labels, seq_length)

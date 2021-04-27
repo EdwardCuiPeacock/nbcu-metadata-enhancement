@@ -1,9 +1,10 @@
+from numpy.core.numeric import False_
 import tensorflow as tf
 import tensorflow_text  # Registers the ops for preprocessing
 import tensorflow_hub as hub
 
 from tensorflow.keras import backend as K
-from tensorflow.keras.layers import Dense, Lambda, Dropout, Concatenate
+from tensorflow.keras.layers import Dense, Lambda, Dropout, Concatenate, Reshape
 
 
 class TaggerModel(tf.keras.Model):
@@ -37,12 +38,12 @@ class TaggerModel(tf.keras.Model):
         self.drop2 = Dropout(0.2)
         self.output_layer = Dense(num_labels, activation="sigmoid")
 
-    def call(self, inputs):
+    def call(self, inputs, training=False):
         text_input, tokens = inputs["synopsis"], inputs["tokens"]
+        # Squeeze the extra dim
+        text_input = Reshape((-1, ))(text_input)
         print("text input: ", text_input.shape)
         print(text_input)
-        print("tokens: ", tokens.shape)
-        print(tokens)
         # Convert tokens to ragged tensor
         tokens = tf.RaggedTensor.from_tensor(tokens, padding=-1)
         # Synopsis
@@ -58,9 +59,11 @@ class TaggerModel(tf.keras.Model):
         output = Concatenate(axis=1)([synopsis_net, t_embed])
         # Pass through the dense layers
         output = self.hidden1(output)
-        output = self.drop1(output)
+        if training:
+            output = self.drop1(output, training=training)
         output = self.hidden2(output)
-        output = self.drop2(output)
+        if training:
+            output = self.drop2(output, training=training)
         output = self.output_layer(output)
 
         return output

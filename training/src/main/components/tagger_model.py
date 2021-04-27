@@ -39,6 +39,10 @@ class TaggerModel(tf.keras.Model):
 
     def call(self, inputs):
         text_input, tokens = inputs["synopsis"], inputs["tokens"]
+        print("text input: ", text_input.shape)
+        print(text_input)
+        print("tokens: ", tokens.shape)
+        print(tokens)
         # Convert tokens to ragged tensor
         tokens = tf.RaggedTensor.from_tensor(tokens, padding=-1)
         # Synopsis

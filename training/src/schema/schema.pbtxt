@@ -12,6 +12,26 @@ feature {
   }
 }
 feature {
+  name: "tokens"
+  value_count {
+    min: 1
+  }
+  type: BYTES
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  distribution_constraints {
+    min_domain_mass: 0.95
+  }
+  drift_comparator {
+    infinity_norm {
+      threshold: 0.05
+    }
+  }
+}
+
+feature {
   name: "tags"
   value_count {
     min: 1

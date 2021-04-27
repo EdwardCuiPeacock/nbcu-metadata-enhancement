@@ -93,9 +93,14 @@ def get_compiled_model(num_labels, seq_length):
             #tf.keras.metrics.AUC(curve="PR", name="PR_AUC"),
         ]
         # clipnorm only seems to work in TF 2.4 with distribution strategy
+        def cos_sim(y_true, y_pred, axis=1):
+            y_true = tf.cast(y_true, tf.float64)
+            y_pred = tf.cast(y_pred, tf.float64)
+            return tf.keras.losses.cosine_similarity(y_true, y_pred, axis=axis)
+        
         model.compile(
             optimizer="adam",
-            loss=tf.keras.losses.cosine_similarity,
+            loss=cos_sim,
             #metrics=metrics,
         )
     return model

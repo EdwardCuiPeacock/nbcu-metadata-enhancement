@@ -37,7 +37,7 @@ TOKEN_LIMIT = 256
 TEST_LIMIT = 20
 
 enable_cache = False
-USE_AI_PLATFORM = True
+USE_AI_PLATFORM = False
 
 IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/edc-dev-pipeline'
 
@@ -48,7 +48,7 @@ with open(os.path.join("main/queries/ingest_query.sql"), "r") as fid:
 query = jinja2.Template(query_str).render(
     GOOGLE_CLOUD_PROJECT=GOOGLE_CLOUD_PROJECT,
     TOKEN_LIMIT=TOKEN_LIMIT,
-    TEST_LIMIT=None,)
+    TEST_LIMIT=TEST_LIMIT,)
 # query_test = partially_rendered_query(limit=TEST_LIMIT)
 
 # Local testing data
@@ -76,7 +76,7 @@ EVAL_NUM_STEPS = 0
 TRAIN_NUM_STEPS_TEST = 3 
 EVAL_NUM_STEPS_TEST = 0
 
-EPOCHS = 4
+EPOCHS = 3
 BATCH_SIZE = 128
 
 custom_config = {

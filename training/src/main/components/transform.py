@@ -10,7 +10,7 @@ import tensorflow as tf
 
 FEATURE = 'synopsis'
 LABEL = 'tags'
-TOKENS = 'token'
+TOKENS = 'tokens'
 
 def _transformed_name(key):
     return key + '_xf'
@@ -43,12 +43,13 @@ def compute_tokens(tokens):
     row_starts = tf.squeeze(tf.where(tf.greater(indices, 0)))
     return tf.RaggedTensor.from_row_starts(tokens.indices[:, 1], row_starts)
 
+
 def preprocessing_fn(inputs, custom_config):
     """Preprocess input columns into transformed columns."""
     outputs = {}
     text = tf.squeeze(inputs[FEATURE], axis=1)
     labels = inputs[LABEL]
-    # tokens = inputs[TOKENS]
+    tokens = inputs[TOKENS]
     
     num_labels = custom_config.get('num_labels')
     
@@ -61,15 +62,13 @@ def preprocessing_fn(inputs, custom_config):
     #     num_oov_buckets=1,
     #     )
 
-    #tokens = tft.apply_vocabulary(tokens, 
-    #    deferred_vocab_filename_tensor=tf.constant(custom_config["token_vocab_list"]), 
-    #    num_oov_buckets=0)
+    tokens = tft.apply_vocabulary(tokens, 
+       deferred_vocab_filename_tensor=tf.constant(custom_config["token_vocab_list"]), 
+       num_oov_buckets=0)
 
     outputs[FEATURE] = text
     outputs[_transformed_name(LABEL)] = compute_tags(labels, num_labels)
-    # tokens = tf.sparse.SparseTensor(tokens.indices, 
-    #    values=token.indices[:, 1], dense_shape=token.shape)
-
+    outputs[TOKENS] = compute_tokens(tokens)
 
     return outputs
 

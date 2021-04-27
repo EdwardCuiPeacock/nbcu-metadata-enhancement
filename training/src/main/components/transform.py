@@ -31,7 +31,7 @@ def compute_tags(transformed_tags, num_labels):
     # Normalize the tags by their sum
     #tags_normalized = tags_multi_binarized / tf.reduce_sum(tags_multi_binarized, axis=1, keepdims=True)
     #return tags_normalized 
-    return tf.cast(tags_multi_binarized, tf.float64)
+    return tf.cast(tags_multi_binarized, tf.int64)
 
 def preprocessing_fn(inputs, custom_config):
     """Preprocess input columns into transformed columns."""

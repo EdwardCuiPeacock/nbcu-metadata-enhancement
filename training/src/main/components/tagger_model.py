@@ -38,9 +38,9 @@ class TaggerModel(tf.keras.Model):
         self.output_layer = Dense(num_labels, activation="sigmoid")
 
     def call(self, inputs):
-        text_input, tokens = inputs
+        text_input, tokens = inputs["synopsis"], inputs["tokens"]
         # Convert tokens to ragged tensor
-        tokens = tf.RaggedTensor.from_tensor(tokens, paddings=-1)
+        tokens = tf.RaggedTensor.from_tensor(tokens, padding=-1)
         # Synopsis
         tokenized_inputs = [self.tokenize(text_input)]
         encoder_inputs = self.preprocessing_layer(tokenized_inputs)

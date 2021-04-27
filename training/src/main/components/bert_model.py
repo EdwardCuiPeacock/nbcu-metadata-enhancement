@@ -100,8 +100,8 @@ def get_compiled_model(num_labels, seq_length):
         
         model.compile(
             optimizer="adam",
-            loss="binary_crossentropy",
-            metrics=metrics,
+            loss=cos_sim,
+            #metrics=metrics,
         )
     return model
 

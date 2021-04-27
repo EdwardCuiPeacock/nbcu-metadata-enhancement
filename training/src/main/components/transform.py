@@ -33,6 +33,16 @@ def compute_tags(transformed_tags, num_labels):
     #return tags_normalized 
     return tf.cast(tags_multi_binarized, tf.int64)
 
+
+def compute_tokens(tokens):
+    """Convert a sparse tensor to RaggedTensor."""
+    index = tokens.indices[:, 0] # row
+    indices = tf.concat(
+        [tf.constant([1], dtype="int64"), index[1:] - index[:-1]], axis=0
+    )
+    row_starts = tf.squeeze(tf.where(tf.greater(indices, 0)))
+    return tf.RaggedTensor.from_row_starts(tokens.indices[:, 1], row_starts)
+
 def preprocessing_fn(inputs, custom_config):
     """Preprocess input columns into transformed columns."""
     outputs = {}
@@ -57,7 +67,9 @@ def preprocessing_fn(inputs, custom_config):
 
     outputs[FEATURE] = text
     outputs[_transformed_name(LABEL)] = compute_tags(labels, num_labels)
-    # outputs[TOKENS] = tokens.indices[:, 1]
+    # tokens = tf.sparse.SparseTensor(tokens.indices, 
+    #    values=token.indices[:, 1], dense_shape=token.shape)
+
 
     return outputs
 

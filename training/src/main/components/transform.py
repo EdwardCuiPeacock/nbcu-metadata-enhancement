@@ -36,6 +36,7 @@ def compute_tags(transformed_tags, num_labels):
 
 def compute_tokens(tokens):
     """Convert a sparse tensor to RaggedTensor."""
+    tokens = tf.sparse.reorder(tokens)
     index = tokens.indices[:, 0] # row
     indices = tf.concat(# assuming each row has something
         [tf.constant([1], dtype="int64"), index[1:] - index[:-1]], axis=0

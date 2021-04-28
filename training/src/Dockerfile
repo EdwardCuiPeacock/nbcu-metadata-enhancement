@@ -3,6 +3,7 @@ WORKDIR /pipeline
 COPY ./ ./
 ENV PYTHONPATH="/pipeline:${PYTHONPATH}"
 RUN pip install tensorflow_text==2.3.0
+RUN pip install tensorflow_addons==0.12.1
 RUN pip install pyarrow==3.0.0
 RUN pip install gcsfs==0.8.0
 RUN pip install google-cloud-storage==1.32.0 

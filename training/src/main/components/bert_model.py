@@ -6,6 +6,7 @@ import numpy as np
 from tensorflow.keras import callbacks, layers
 
 from tensorflow.keras.losses import BinaryCrossentropy
+import tensorflow_addons as tfa
 import tensorflow_text  # Registers the ops for preprocessing
 import tensorflow_hub as hub
 from tensorflow.keras.models import Model, Sequential
@@ -113,7 +114,7 @@ def get_compiled_model(num_labels, seq_length):
         
         model.compile(
             optimizer="adam",
-            loss="binary_crossentropy",
+            loss=tfa.losses.SigmoidFocalCrossEntropy(),
             metrics=metrics,
         )
     return model

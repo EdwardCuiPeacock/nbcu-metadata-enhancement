@@ -57,6 +57,7 @@ def preprocessing_fn(inputs, custom_config):
     text = tf.squeeze(inputs[FEATURE], axis=1)
     labels = inputs[LABEL]
     tokens = inputs[TOKENS]
+    outputs["raw_tokens"] = tokens
     
     num_labels = custom_config.get('num_labels')
     

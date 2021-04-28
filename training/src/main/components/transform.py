@@ -79,7 +79,6 @@ def preprocessing_fn(inputs, custom_config):
 
     outputs[FEATURE] = text
     outputs[_transformed_name(LABEL)] = compute_tags(labels, num_labels)
-    outputs["untransformed_tokens"] = tokens
     outputs[TOKENS] = compute_tokens(tokens, custom_config["max_token_length"])
 
     return outputs

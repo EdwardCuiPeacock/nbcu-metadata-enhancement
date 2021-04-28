@@ -50,23 +50,74 @@ import sys
 
 from main.pipelines import configs
 
+TITLES_QUERY_old = """
+    SELECT 
+        DISTINCT
+        TitleDetails_title, 
+        TitleType, 
+        STRING_AGG(DISTINCT TitleDetails_longsynopsis, ' ') as TitleDetails_longsynopsis, 
+        cid.content_ordinal_id,
+    FROM `res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.ContentMetadataView` cmv
+    LEFT JOIN `res-nbcupea-dev-ds-sandbox-001.recsystem.ContentOrdinalId` cid
+        ON cmv.TitleDetails_title = cid.program_title
+    WHERE 
+        TitleDetails_longsynopsis IS NOT NULL
+        AND cid.content_ordinal_id IS NOT NULL
+    GROUP BY 
+        TitleDetails_title, 
+        TitleType, 
+        cid.content_ordinal_id
+"""
+
 TITLES_QUERY = """
-SELECT 
-    DISTINCT
-    TitleDetails_title, 
-    TitleType, 
-    STRING_AGG(DISTINCT TitleDetails_longsynopsis, ' ') as TitleDetails_longsynopsis, 
-    cid.content_ordinal_id,
-FROM `res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.ContentMetadataView` cmv
-LEFT JOIN `res-nbcupea-dev-ds-sandbox-001.recsystem.ContentOrdinalId` cid
-    ON cmv.TitleDetails_title = cid.program_title
-WHERE 
-    TitleDetails_longsynopsis IS NOT NULL
-    AND cid.content_ordinal_id IS NOT NULL
-GROUP BY 
-    TitleDetails_title, 
-    TitleType, 
-    cid.content_ordinal_id
+    WITH titles_data AS (SELECT 
+        TitleDetails_title, 
+        TitleType,
+        STRING_AGG(DISTINCT TitleDetails_longsynopsis, ' ') AS TitleDetails_longsynopsis,
+        SPLIT(STRING_AGG(DISTINCT TitleDetails_longsynopsis, ' '), " ") AS synopsis_list, 
+        cid.content_ordinal_id,
+    FROM `res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.ContentMetadataView` cmv
+    LEFT JOIN `res-nbcupea-dev-ds-sandbox-001.recsystem.ContentOrdinalId` cid
+        ON cmv.TitleDetails_title = cid.program_title
+    WHERE 
+        TitleDetails_longsynopsis IS NOT NULL
+        AND cid.content_ordinal_id IS NOT NULL
+    GROUP BY 
+        TitleDetails_title, 
+        TitleType, 
+        cid.content_ordinal_id),
+    
+    raw_tags AS (
+        SELECT TitleDetails_title, ss AS tokens
+        FROM titles_data,
+        UNNEST(synopsis_list) ss WITH OFFSET index
+        WHERE index BETWEEN 1 AND 256
+    ),
+        
+    tags_data AS (
+        SELECT a.TitleDetails_title, ARRAY_AGG(DISTINCT a.tokens) AS tokens
+        FROM raw_tags a
+        INNER JOIN `res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.node2vec_token_edc_dev` tk
+        ON tk.tokens=a.tokens
+        GROUP BY a.TitleDetails_title
+    ),
+    
+    unfiltered AS (SELECT a.TitleDetails_title, a.TitleType, a.TitleDetails_longsynopsis,
+        a.content_ordinal_id, 
+        CASE
+            WHEN ARRAY_LENGTH(b.tokens) < 1 OR ARRAY_LENGTH(b.tokens) IS NULL THEN ["TV"]
+            ELSE b.tokens
+        END AS tokens,
+    FROM titles_data a
+    LEFT JOIN tags_data b
+    ON a.TitleDetails_title=b.TitleDetails_title)
+    
+    SELECT TitleDetails_title, TitleType, TitleDetails_longsynopsis, content_ordinal_id, 
+        ARRAY_AGG(DISTINCT tk) AS tokens
+    FROM unfiltered,
+    UNNEST(tokens) tk WITH OFFSET index
+    WHERE index BETWEEN 1 AND 64
+    GROUP BY TitleDetails_title, TitleType, TitleDetails_longsynopsis, content_ordinal_id
 """
 
 date_start = "2021-2-01"
@@ -174,18 +225,29 @@ class Executor(base_executor.BaseExecutor):
                                 .to_dataframe() \
                                 .drop_duplicates(subset=['TitleDetails_title']) \
                                 .reset_index()
-
-        input_data = unscored_titles[['TitleDetails_longsynopsis']]
-        dataset = tf.data.Dataset.from_tensor_slices(
-                tf.cast(input_data['TitleDetails_longsynopsis'].values.tolist(), tf.string)
-                ).batch(50)
-
         print("Start making predictions on synopsis")
         tnow = time.time()
         res = []
-        for element in dataset:
-            y = model(element)
-            res.append(y)
+        if True: # using tokens
+            input_data = {"synopsis": unscored_titles['TitleDetails_longsynopsis'].values[:, None], 
+              "tokens": tf.ragged.constant(unscored_titles["tokens"].values).to_sparse(),
+             }
+            dataset = tf.data.Dataset.from_tensor_slices(input_data).batch(50)
+
+            for batch in dataset:
+                transformed_features = model.tft_layer(batch)
+                transformed_features["synopsis"] = transformed_features["synopsis"][:, None]
+                y = model(transformed_features)
+                res.append(y)
+        else:
+            input_data = unscored_titles[['TitleDetails_longsynopsis']]
+            dataset = tf.data.Dataset.from_tensor_slices(
+                    tf.cast(input_data['TitleDetails_longsynopsis'].values.tolist(), tf.string)
+                    ).batch(50)
+            for element in dataset:
+                y = model(element)
+                res.append(y)
+
         used_time = time.time() - tnow
         print(f"Successfully made predictions on synopsis: {used_time:.2f} s")
         

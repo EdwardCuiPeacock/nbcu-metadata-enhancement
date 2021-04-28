@@ -197,7 +197,7 @@ class Executor(base_executor.BaseExecutor):
             input_dict['embeddings'])
         embeddings_path = path_utils.serving_model_path(embeddings.uri)
         """
-        
+        print("Loading saved model")
         model = artifact_utils.get_single_instance(
             input_dict['model'])
         model_path = path_utils.serving_model_path(model.uri)

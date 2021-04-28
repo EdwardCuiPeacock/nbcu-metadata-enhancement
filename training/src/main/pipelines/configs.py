@@ -89,7 +89,7 @@ query_tokens = f"""
 """
 token_counter = client.query(query_tokens).to_dataframe()
 # buffer space for raggedtensor to dense tensor
-N2V_TOKEN_LENGTH = int(token_counter["keyword_length"].values)
+N2V_TOKEN_LENGTH = int(token_counter["tokens_length"].values)
 
 ## TRAINING ARGS
 USE_STEPS = False

@@ -40,12 +40,14 @@ class TaggerModel(tf.keras.Model):
 
     def call(self, inputs, training=False):
         text_input, tokens = inputs["synopsis"], inputs["tokens"]
+        #keywords = inputs["keywords"]
         # Squeeze the extra dim
         text_input = tf.squeeze(text_input)
         #print("text input: ", text_input.shape)
         #print(text_input)
         # Convert tokens to ragged tensor
         tokens = tf.RaggedTensor.from_tensor(tokens, padding=-1)
+        #keywords = tf.RaggedTensor.from_tensor(keywords, padding=-1)
         # Synopsis
         tokenized_inputs = [self.tokenize(text_input)]
         encoder_inputs = self.preprocessing_layer(tokenized_inputs)
@@ -55,8 +57,11 @@ class TaggerModel(tf.keras.Model):
         t_embed = self.token_embed(tokens)
         # Pool the embed
         t_embed = self.embed_pool(t_embed)
+        # Keywords
+        #k_embed = self.token_embed(keywords)
+        #k_embed = self.embed_pool(k_embed)
         # Concatenate
-        output = Concatenate(axis=1)([synopsis_net, t_embed])
+        output = Concatenate(axis=1)([synopsis_net, t_embed]) # k_embed
         # Pass through the dense layers
         # output = self.hidden1(output)
         # if training:

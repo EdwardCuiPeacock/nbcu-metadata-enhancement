@@ -131,11 +131,14 @@ def _get_serve_tf_examples_fn(model, tf_transform_output):
     model.tft_layer = tf_transform_output.transform_features_layer()
 
     @tf.function
-    def serve_tf_examples_fn(raw_text, tokens):
+    def serve_tf_examples_fn(raw_text, tokens): # keywords
         """Returns the output to be used in the serving signature."""
         reshaped_text = tf.reshape(raw_text, [-1, 1])
         transformed_features = model.tft_layer(
-            {"synopsis": reshaped_text, "tokens": tokens})
+            {"synopsis": reshaped_text, 
+            "tokens": tokens, 
+            #'keywords': keywords
+            })
 
         outputs = model(transformed_features)
         return {"outputs": outputs}
@@ -205,6 +208,7 @@ def run_fn(fn_args):
         ).get_concrete_function(
             tf.TensorSpec(shape=[None], dtype=tf.string, name="synopsis"),
             tf.SparseTensorSpec(shape=[None, None], dtype=tf.string), # token
+            #tf.SparseTensorSpec(shape=[None, None], dtype=tf.string), # keywords
         ),
     }
 

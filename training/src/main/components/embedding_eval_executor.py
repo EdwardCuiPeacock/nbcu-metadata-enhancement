@@ -69,7 +69,7 @@ TITLES_QUERY_old = """
         cid.content_ordinal_id
 """
 
-TITLES_QUERY = """
+TITLES_QUERY_tokens = """
     WITH titles_data AS (SELECT 
         TitleDetails_title, 
         TitleType,
@@ -120,6 +120,37 @@ TITLES_QUERY = """
     GROUP BY TitleDetails_title, TitleType, TitleDetails_longsynopsis, content_ordinal_id
 """
 
+TITLES_QUERY_keywords = """
+    CREATE TEMP FUNCTION strip_str_array(val ANY TYPE) AS ((
+      SELECT ARRAY_AGG(DISTINCT TRIM(t))
+      FROM UNNEST(val) t
+      WHERE t != ""
+    ));
+    
+    WITH titles_data AS (
+        SELECT DISTINCT
+            TitleDetails_title, 
+            TitleType, 
+            cid.content_ordinal_id,
+            STRING_AGG(DISTINCT TitleDetails_longsynopsis, ' ') as TitleDetails_longsynopsis,
+            STRING_AGG(DISTINCT TitleTags, ',') as TitleTags,
+        FROM `res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.ContentMetadataView` cmv
+        LEFT JOIN `res-nbcupea-dev-ds-sandbox-001.recsystem.ContentOrdinalId` cid
+            ON cmv.TitleDetails_title = cid.program_title
+        WHERE 
+            TitleDetails_longsynopsis IS NOT NULL
+            AND cid.content_ordinal_id IS NOT NULL
+        GROUP BY 
+            TitleDetails_title, 
+            TitleType, 
+            cid.content_ordinal_id
+        )
+    SELECT TitleDetails_title, TitleType, content_ordinal_id, TitleDetails_longsynopsis, 
+        strip_str_array(SPLIT(TitleTags, ",")) AS tokens
+    FROM titles_data
+    
+"""
+
 date_start = "2021-2-01"
 date_end = "2021-4-01"
 
@@ -129,27 +160,27 @@ DATA_LENGTH = PREV_WINDOW + TEST_WINDOW
 NUM_SAMPLES = 50000
 
 USERS_QUERY = ("""
-SELECT psv2.user_ordinal_id, 
-       session_date, 
-       session_timestamp, 
-       ss.content_id
-FROM `res-nbcupea-dev-ds-sandbox-001.recsystem.PlaySequenceV2` as psv2,
-UNNEST(session_sequence) AS ss
-LEFT JOIN (
-SELECT user_ordinal_id, 
-       COUNT(DISTINCT(ss.content_id)),
-       row_number() over (order by farm_fingerprint(concat(user_ordinal_id, '3')) ) as seqnum
-FROM `res-nbcupea-dev-ds-sandbox-001.recsystem.PlaySequenceV2`, 
-UNNEST(session_sequence) AS ss
-WHERE session_date >= "{0}"
-      AND session_date < "{1}"
-GROUP BY user_ordinal_id
-HAVING COUNT(DISTINCT(ss.content_id)) > {2}
-) filtered_data
-ON filtered_data.user_ordinal_id = psv2.user_ordinal_id
-WHERE seqnum <= {3}
-ORDER BY session_timestamp
-""").format(date_start, date_end, DATA_LENGTH, NUM_SAMPLES)
+    SELECT psv2.user_ordinal_id, 
+        session_date, 
+        session_timestamp, 
+        ss.content_id
+    FROM `res-nbcupea-dev-ds-sandbox-001.recsystem.PlaySequenceV2` as psv2,
+    UNNEST(session_sequence) AS ss
+    LEFT JOIN (
+    SELECT user_ordinal_id, 
+        COUNT(DISTINCT(ss.content_id)),
+        row_number() over (order by farm_fingerprint(concat(user_ordinal_id, '3')) ) as seqnum
+    FROM `res-nbcupea-dev-ds-sandbox-001.recsystem.PlaySequenceV2`, 
+    UNNEST(session_sequence) AS ss
+    WHERE session_date >= "{0}"
+        AND session_date < "{1}"
+    GROUP BY user_ordinal_id
+    HAVING COUNT(DISTINCT(ss.content_id)) > {2}
+    ) filtered_data
+    ON filtered_data.user_ordinal_id = psv2.user_ordinal_id
+    WHERE seqnum <= {3}
+    ORDER BY session_timestamp
+    """).format(date_start, date_end, DATA_LENGTH, NUM_SAMPLES)
 
 
 def ntail(g, n):
@@ -220,7 +251,7 @@ class Executor(base_executor.BaseExecutor):
         raw_user_data = client.query(USERS_QUERY).result().to_dataframe()
 
         ### Create embeddings
-        unscored_titles = client.query(TITLES_QUERY) \
+        unscored_titles = client.query(TITLES_QUERY_keywords) \
                                 .result() \
                                 .to_dataframe() \
                                 .drop_duplicates(subset=['TitleDetails_title']) \

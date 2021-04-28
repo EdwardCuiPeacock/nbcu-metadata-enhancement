@@ -114,7 +114,7 @@ def get_compiled_model(num_labels, seq_length):
         
         model.compile(
             optimizer="adam",
-            loss=tfa.losses.SigmoidFocalCrossEntropy(),
+            loss="binary_crossentropy",
             metrics=metrics,
         )
     return model

@@ -56,7 +56,7 @@ class TaggerModel(tf.keras.Model):
         # Pool the embed
         t_embed = self.embed_pool(t_embed)
         # Concatenate
-        output = Concatenate(axis=1)([synopsis_net, t_embed])
+        output = Concatenate(axis=1)([synopsis_net, t_embed, t_embed, t_embed, t_embed])
         # Pass through the dense layers
         # output = self.hidden1(output)
         # if training:

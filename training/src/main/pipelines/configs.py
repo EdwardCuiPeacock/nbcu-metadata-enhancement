@@ -81,7 +81,7 @@ query_labels = f"""
 num_labels = int(client.query(query_labels).to_dataframe()["labels_count"].values)
 
 
-############## Finding out the padding necessary for tokens ################
+############## Finding out the padding necessary for node2vec tokens ################
 #client = bigquery.Client()
 # query_tokens = f"""
 #     SELECT MAX(tokens_length) AS tokens_length

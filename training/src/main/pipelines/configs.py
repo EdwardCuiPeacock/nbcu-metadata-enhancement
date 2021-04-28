@@ -112,8 +112,6 @@ custom_config = {
     'max_token_length': N2V_TOKEN_LENGTH,
 }
 
-
-
 #############################
 #### Infrastructure Configs #
 #############################

@@ -112,9 +112,14 @@ def get_compiled_model(num_labels, seq_length):
             y_pred = tf.cast(y_pred, tf.float64)
             return tf.keras.losses.cosine_similarity(y_true, y_pred, axis=axis)
         
+        def focal_loss(y_true, y_pred):
+            y_true = tf.cast(y_true, tf.float32)
+            y_pred = tf.cast(y_pred, tf.float32)
+            return tfa.losses.sigmoid_focal_crossentropy(y_true, y_pred)
+
         model.compile(
             optimizer="adam",
-            loss="binary_crossentropy",
+            loss=focal_loss,
             metrics=metrics,
         )
     return model

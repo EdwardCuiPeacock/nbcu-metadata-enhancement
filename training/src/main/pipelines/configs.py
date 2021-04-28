@@ -41,7 +41,7 @@ TOKEN_LIMIT = 256
 
 TEST_LIMIT = None
 
-enable_cache = True
+enable_cache = False
 USE_AI_PLATFORM = True
 
 IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/edc-dev-pipeline'

@@ -42,7 +42,7 @@ TOKEN_LIMIT = 256
 TEST_LIMIT = 20
 
 enable_cache = False
-USE_AI_PLATFORM = False
+USE_AI_PLATFORM = True
 
 IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/edc-dev-pipeline'
 
@@ -53,7 +53,7 @@ with open(os.path.join("main/queries/ingest_query.sql"), "r") as fid:
 query = jinja2.Template(query_str).render(
     DATA_SOURCE_TABLE=DATA_SOURCE_TABLE,
     TOKEN_LIMIT=TOKEN_LIMIT,
-    TEST_LIMIT=TEST_LIMIT,)
+    TEST_LIMIT=None,)
 # query_test = partially_rendered_query(limit=TEST_LIMIT)
 
 # Local testing data
@@ -88,8 +88,8 @@ num_labels = int(client.query(query_labels).to_dataframe()["labels_count"].value
 #     FROM `{DATA_SOURCE_TABLE}`
 # """
 # token_counter = client.query(query_tokens).to_dataframe()
+# buffer space for raggedtensor to dense tensor
 N2V_TOKEN_LENGTH = 64 #int(token_counter["tokens_length"].values)
-
 
 ## TRAINING ARGS
 USE_STEPS = False

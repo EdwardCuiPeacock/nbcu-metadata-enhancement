@@ -79,7 +79,7 @@ def preprocessing_fn(inputs, custom_config):
     vocab_file = tf.constant(custom_config["token_vocab_list"])
     tokens = tft.apply_vocabulary(tokens, 
        deferred_vocab_filename_tensor=vocab_file,
-       num_oov_buckets=0)
+       num_oov_buckets=0, default_value=845)
 
     # keywords = tft.apply_vocabulary(keywords,
     #     deferred_vocab_filename_tensor=vocab_file,

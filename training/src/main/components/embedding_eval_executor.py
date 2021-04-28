@@ -123,7 +123,7 @@ TITLES_QUERY = """
 date_start = "2021-2-01"
 date_end = "2021-4-01"
 
-PREV_WINDOW = 20
+PREV_WINDOW = 10
 TEST_WINDOW = 5
 DATA_LENGTH = PREV_WINDOW + TEST_WINDOW
 NUM_SAMPLES = 50000
@@ -251,6 +251,7 @@ class Executor(base_executor.BaseExecutor):
         used_time = time.time() - tnow
         print(f"Successfully made predictions on synopsis: {used_time:.2f} s")
         
+        ######## TODO: Look at this block ####################
         f = tf.concat(res, axis=0).numpy()
         preds = pd.DataFrame(f)
         preds['pred'] = preds.iloc[:,:].values.tolist()
@@ -295,6 +296,8 @@ class Executor(base_executor.BaseExecutor):
         avg_emb = avg_emb.apply(lambda x: np.asarray([i / PREV_WINDOW for i in x]))
         used_time = time.time() - tnow
         print(f"Average embed: {used_time:.2f} s")
+
+        ##############################################################
 
         tnow = time.time()
         #cos_sim = avg_emb.apply(lambda x: [1 - spatial.distance.cosine(u, x) for u in preds['pred']])

@@ -34,7 +34,7 @@ except ImportError:
 OUTPUT_TABLE = "res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.model_results"
 GOOGLE_CLOUD_PROJECT = "res-nbcupea-dev-ds-sandbox-001"
 BQ_DATASET = 'metadata_enhancement'
-BQ_TABLE = 'meta_synopsis_100tag_with_token_edc_dev'
+BQ_TABLE = 'meta_synopsis_dylan_150tag_with_token_edc_dev'#'meta_synopsis_100tag_with_token_edc_dev'
 DATA_SOURCE_TABLE = f"{GOOGLE_CLOUD_PROJECT}.{BQ_DATASET}.{BQ_TABLE}"
 
 TOKEN_LIMIT = 256

@@ -146,7 +146,7 @@ TITLES_QUERY_keywords = """
             cid.content_ordinal_id
         )
     SELECT TitleDetails_title, TitleType, content_ordinal_id, TitleDetails_longsynopsis, 
-        strip_str_array(SPLIT(TitleTags, ",")) AS tokens
+        strip_str_array(SPLIT(CONCAT(TitleType, ",", TitleTags), ",")) AS tokens
     FROM titles_data
     
 """

@@ -82,14 +82,14 @@ num_labels = int(client.query(query_labels).to_dataframe()["labels_count"].value
 
 
 ############## Finding out the padding necessary for node2vec tokens ################
-#client = bigquery.Client()
-# query_tokens = f"""
-#     SELECT MAX(tokens_length) AS tokens_length
-#     FROM `{DATA_SOURCE_TABLE}`
-# """
-# token_counter = client.query(query_tokens).to_dataframe()
+client = bigquery.Client()
+query_tokens = f"""
+    SELECT MAX(keyword_length) AS tokens_length
+    FROM `{DATA_SOURCE_TABLE}`
+"""
+token_counter = client.query(query_tokens).to_dataframe()
 # buffer space for raggedtensor to dense tensor
-N2V_TOKEN_LENGTH = 64 #int(token_counter["tokens_length"].values)
+N2V_TOKEN_LENGTH = int(token_counter["keyword_length"].values)
 
 ## TRAINING ARGS
 USE_STEPS = False

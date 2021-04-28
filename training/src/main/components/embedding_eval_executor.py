@@ -148,7 +148,6 @@ TITLES_QUERY_keywords = """
     SELECT TitleDetails_title, TitleType, content_ordinal_id, TitleDetails_longsynopsis, 
         strip_str_array(SPLIT(CONCAT(TitleType, ",", TitleTags), ",")) AS tokens
     FROM titles_data
-    
 """
 
 date_start = "2021-2-01"

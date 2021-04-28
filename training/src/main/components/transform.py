@@ -21,9 +21,18 @@ def compute_tags(transformed_tags, num_labels):
     data. The final result is that tags is a binary matrix with shape (none, NUM_TAGS) 
     indicating the presence of a tag in an example
     Args: 
-        transformed_tags: sparse tensor with transformed tags 
+        transformed_tags: sparse tensor with transformed tags
+        Looks like: 
+            [[1, 3, 2, 6, x, x, x],
+             [2, 3, 0, x, x, x, x],
+             [3, 0, 5, 2, 4, 1, 6]]
     Returns: 
         Binarized tags, tensor with shape (none, NUM_TAGS)
+        Looks like 
+            [[0, 1, 1, 1, 0, 0, 0],
+             [1, 0, 1, 1, 0, 0, 0],
+             [1, 1, 1, 1, 1, 1, 1]]
+        Given vocab size of 7
     """
     tags_multi_binarized = tf.sparse.to_indicator(transformed_tags, 
                                                   vocab_size=num_labels)
@@ -38,7 +47,7 @@ def compute_tokens(tokens, max_token_length):
     """Convert a sparse tensor to RaggedTensor."""
     tokens = tf.sparse.reorder(tokens)
     out = tf.RaggedTensor.from_value_rowids(values=tokens.values, \
-                                            value_rowids=tokens.indices[:, 0])
+                                           value_rowids=tokens.indices[:, 0])
     out = out.to_tensor(default_value=-1, shape=(None, max_token_length))
     return out
 

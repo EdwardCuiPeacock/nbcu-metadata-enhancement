@@ -56,8 +56,6 @@ def compute_tokens(tokens, max_token_length):
     out = tf.RaggedTensor.from_value_rowids(values=tokens.values, \
                                            value_rowids=tokens.indices[:, 0])
     out = out.to_tensor(default_value=-1, shape=(None, max_token_length))
-    out = tf.sort(out, axis=1, direction="DESCENDING")
-    out.set_shape((None, max_token_length))
     return out
 
 def preprocessing_fn(inputs, custom_config):

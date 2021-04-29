@@ -46,8 +46,8 @@ class TaggerModel(tf.keras.Model):
         #print("text input: ", text_input.shape)
         #print(text_input)
         # Convert tokens to ragged tensor
-        tokens = tf.RaggedTensor.from_tensor(tokens, padding=-1)
-        #keywords = tf.RaggedTensor.from_tensor(keywords, padding=-1)
+        tokens = tf.ragged.boolean_mask(tokens, tokens > -1)
+        #keywords = tf.ragged.boolean_mask(keywords, tokens > -1)
         # Synopsis
         tokenized_inputs = [self.tokenize(text_input)]
         encoder_inputs = self.preprocessing_layer(tokenized_inputs)

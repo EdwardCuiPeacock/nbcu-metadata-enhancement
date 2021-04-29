@@ -115,7 +115,7 @@ def get_compiled_model(num_labels, seq_length):
         def focal_loss(y_true, y_pred):
             y_true = tf.cast(y_true, tf.float32)
             y_pred = tf.cast(y_pred, tf.float32)
-            return tfa.losses.sigmoid_focal_crossentropy(y_true, y_pred)
+            return tfa.losses.sigmoid_focal_crossentropy(y_true, y_pred, alpha=0.25, gamma=2.0)
 
         model.compile(
             optimizer="adam",
@@ -137,7 +137,7 @@ def _get_serve_tf_examples_fn(model, tf_transform_output):
         transformed_features = model.tft_layer(
             {"synopsis": reshaped_text, 
             "tokens": tokens, 
-            #'keywords': keywords
+            'keywords': keywords
             })
 
         outputs = model(transformed_features)
@@ -208,7 +208,7 @@ def run_fn(fn_args):
         ).get_concrete_function(
             tf.TensorSpec(shape=[None], dtype=tf.string, name="synopsis"),
             tf.SparseTensorSpec(shape=[None, None], dtype=tf.string), # token
-            #tf.SparseTensorSpec(shape=[None, None], dtype=tf.string), # keywords
+            tf.SparseTensorSpec(shape=[None, None], dtype=tf.string), # keywords
         ),
     }
 

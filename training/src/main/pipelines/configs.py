@@ -38,10 +38,10 @@ BQ_TABLE = 'synopsis_dylan_150tag_with_tokens_and_keywords'#'meta_synopsis_100ta
 DATA_SOURCE_TABLE = f"{GOOGLE_CLOUD_PROJECT}.{BQ_DATASET}.{BQ_TABLE}"
 
 TOKEN_LIMIT = 256
-TEST_LIMIT = None
+TEST_LIMIT = 20
 
-enable_cache = False
-USE_AI_PLATFORM = True
+enable_cache = True
+USE_AI_PLATFORM = False
 
 IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/edc-dev-pipeline'
 
@@ -109,8 +109,8 @@ custom_config = {
     'use_steps': USE_STEPS,
     'seq_length': TOKEN_LIMIT,
     'token_vocab_list': "gs://edc-dev/kubeflowpipelines-default/tfx_pipeline_output/node2vec_sports_syn_0_1_0/Transform/transform_graph/18561/transform_fn/assets/node_vocab_txt",
-    'max_token_length': N2V_KEYWORD_LENGTH, #N2V_TOKEN_LENGTH,
-    #'max_keyword_length': N2V_KEYWORD_LENGTH,
+    'max_token_length':N2V_TOKEN_LENGTH,
+    'max_keyword_length': N2V_KEYWORD_LENGTH,
 }
 
 #############################

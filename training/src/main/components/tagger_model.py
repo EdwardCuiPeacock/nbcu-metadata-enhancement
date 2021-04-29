@@ -56,10 +56,10 @@ class TaggerModel(tf.keras.Model):
         # Tokens
         t_embed = self.token_embed(tokens)
         # Pool the embed
-        t_embed = self.embed_pool(t_embed)
+        t_embed = tf.reduce_mean(t_embed, axis=1)
         # Keywords
         k_embed = self.token_embed(keywords)
-        k_embed = self.embed_pool(k_embed)
+        k_embed = tf.reduce_mean(k_embed, axis=1)
         # Concatenate
         output = Concatenate(axis=1)([synopsis_net, t_embed, k_embed]) # 
         # Pass through the dense layers

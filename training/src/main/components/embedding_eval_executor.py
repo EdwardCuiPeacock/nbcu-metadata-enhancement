@@ -320,7 +320,8 @@ class Executor(base_executor.BaseExecutor):
                                 .reset_index()
         # Fill empty keywords with ["movie"]
         index = unscored_titles.loc[unscored_titles["tokens"].apply(len)<1, "tokens"].index
-        unscored_titles.loc[index, "tokens"] = ["movie"] * len(index)
+        for i in index:
+            unscored_titles.loc[i, "tokens"] = [["movie"]]
         print("Start making predictions on synopsis")
         tnow = time.time()
         res = []

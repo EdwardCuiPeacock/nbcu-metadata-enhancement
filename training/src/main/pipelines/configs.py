@@ -42,7 +42,7 @@ TEST_LIMIT = 20
 
 enable_cache = False
 USE_AI_PLATFORM = False
-a =1
+
 
 
 IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/edc-dev-pipeline'

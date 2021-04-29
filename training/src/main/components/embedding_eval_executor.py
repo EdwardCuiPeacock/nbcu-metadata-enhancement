@@ -322,8 +322,10 @@ class Executor(base_executor.BaseExecutor):
         tnow = time.time()
         res = []
         if True: # using tokens
-            input_data = {"synopsis": unscored_titles['TitleDetails_longsynopsis'].values[:, None], 
-              "tokens": tf.ragged.constant(unscored_titles["tokens"].values).to_sparse(),
+            input_data = {
+                "synopsis": unscored_titles['TitleDetails_longsynopsis'].values[:, None], 
+                "tokens": tf.ragged.constant(unscored_titles["tokens"].values).to_sparse(),
+                "keywords": tf.ragged.constant(unscored_titles["keywords"].values).to_sparse(),
              }
             dataset = tf.data.Dataset.from_tensor_slices(input_data).batch(50)
 

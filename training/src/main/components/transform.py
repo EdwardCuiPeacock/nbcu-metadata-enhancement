@@ -56,6 +56,7 @@ def compute_tokens(tokens, max_token_length):
     out = tf.RaggedTensor.from_value_rowids(values=tokens.values, \
                                            value_rowids=tokens.indices[:, 0])
     out = out.to_tensor(default_value=-1, shape=(None, max_token_length))
+    out = tf.sort(out, axis=1, direction="DESCENDING") # making sure -1 are at the end
     return out
 
 def preprocessing_fn(inputs, custom_config):
@@ -79,7 +80,7 @@ def preprocessing_fn(inputs, custom_config):
     vocab_file = tf.constant(custom_config["token_vocab_list"])
     tokens = tft.apply_vocabulary(tokens, 
        deferred_vocab_filename_tensor=vocab_file,
-       num_oov_buckets=0, default_value=845)
+       num_oov_buckets=0)
 
     # keywords = tft.apply_vocabulary(keywords,
     #     deferred_vocab_filename_tensor=vocab_file,

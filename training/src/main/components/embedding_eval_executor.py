@@ -146,7 +146,7 @@ TITLES_QUERY_keywords = """
             cid.content_ordinal_id
         )
     SELECT TitleDetails_title, TitleType, content_ordinal_id, TitleDetails_longsynopsis, 
-        strip_str_array(SPLIT(CONCAT("movie", ",", TitleTags), ",")) AS tokens
+        strip_str_array(SPLIT(TitleTags, ",")) AS tokens
     FROM titles_data
 """
 
@@ -318,6 +318,9 @@ class Executor(base_executor.BaseExecutor):
                                 .to_dataframe() \
                                 .drop_duplicates(subset=['TitleDetails_title']) \
                                 .reset_index()
+        # Fill empty keywords with ["movie"]
+        index = unscored_titles.loc[unscored_titles["tokens"].apply(len)<1, "tokens"].index
+        unscored_titles.loc[index, "tokens"] = ["movie"] * len(index)
         print("Start making predictions on synopsis")
         tnow = time.time()
         res = []

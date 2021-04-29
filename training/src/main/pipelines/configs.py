@@ -40,10 +40,8 @@ DATA_SOURCE_TABLE = f"{GOOGLE_CLOUD_PROJECT}.{BQ_DATASET}.{BQ_TABLE}"
 TOKEN_LIMIT = 256
 TEST_LIMIT = 20
 
-enable_cache = False
+enable_cache = True
 USE_AI_PLATFORM = False
-
-
 
 IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/edc-dev-pipeline'
 

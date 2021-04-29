@@ -55,11 +55,10 @@ class TaggerModel(tf.keras.Model):
         synopsis_net = synopsis_outputs["pooled_output"]
         # Tokens
         t_embed = self.token_embed(tokens)
+        # k_embed = self.embed_pool(k_embed)
         # Pool the embed
         t_embed = self.embed_pool(t_embed)
-        # Keywords
         # k_embed = self.token_embed(keywords)
-        # k_embed = self.embed_pool(k_embed)
         # Concatenate
         output = Concatenate(axis=1)([synopsis_net, t_embed]) # k_embed
         # Pass through the dense layers

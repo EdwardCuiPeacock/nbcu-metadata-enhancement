@@ -47,7 +47,7 @@ class TaggerModel(tf.keras.Model):
         #print(text_input)
         # Convert tokens to ragged tensor
         tokens = tf.ragged.boolean_mask(tokens, tokens > -1)
-        keywords = tf.ragged.boolean_mask(keywords, tokens > -1)
+        keywords = tf.ragged.boolean_mask(keywords, keywords > -1)
         # Synopsis
         tokenized_inputs = [self.tokenize(text_input)]
         encoder_inputs = self.preprocessing_layer(tokenized_inputs)
@@ -55,11 +55,10 @@ class TaggerModel(tf.keras.Model):
         synopsis_net = synopsis_outputs["pooled_output"]
         # Tokens
         t_embed = self.token_embed(tokens)
-        # Pool the embed
-        t_embed = tf.reduce_mean(t_embed, axis=1)
-        # Keywords
         k_embed = self.token_embed(keywords)
-        k_embed = tf.reduce_mean(k_embed, axis=1)
+        # Pool the embed
+        t_embed = self.embed_pool(t_embed)
+        k_embed = self.embed_pool(k_embed)
         # Concatenate
         output = Concatenate(axis=1)([synopsis_net, t_embed, k_embed]) # 
         # Pass through the dense layers

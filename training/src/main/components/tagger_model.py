@@ -61,7 +61,7 @@ class TaggerModel(tf.keras.Model):
         t_embed = self.embed_pool(t_embed)
         # k_embed = self.token_embed(keywords)
         # Concatenate
-        #output = Concatenate(axis=1)([synopsis_net, t_embed]) # k_embed
+        output = Concatenate(axis=1)([synopsis_net, t_embed]) # k_embed
         # Pass through the dense layers
         # output = self.hidden1(output)
         # if training:
@@ -69,14 +69,14 @@ class TaggerModel(tf.keras.Model):
         # output = self.hidden2(output)
         # if training:
         #     output = self.drop2(output, training=training)
-        output = self.output_layer(synopsis_net)
+        output = self.output_layer(output)
 
-        #return output
+        return output
 
-        if training:
-            return output
-        else:
-            return Concatenate(axis=1)([output, t_embed])
+        # if training:
+        #     return output
+        # else:
+        #     return Concatenate(axis=1)([output, t_embed])
             
 
     def model(self, inputs):

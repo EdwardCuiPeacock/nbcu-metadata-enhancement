@@ -137,7 +137,7 @@ def _get_serve_tf_examples_fn(model, tf_transform_output):
         transformed_features = model.tft_layer(
             {"synopsis": reshaped_text, 
             "tokens": tokens, 
-            'keywords': keywords
+            #'keywords': keywords
             })
 
         outputs = model(transformed_features)
@@ -208,7 +208,7 @@ def run_fn(fn_args):
         ).get_concrete_function(
             tf.TensorSpec(shape=[None], dtype=tf.string, name="synopsis"),
             tf.SparseTensorSpec(shape=[None, None], dtype=tf.string), # token
-            tf.SparseTensorSpec(shape=[None, None], dtype=tf.string), # keywords
+            #tf.SparseTensorSpec(shape=[None, None], dtype=tf.string), # keywords
         ),
     }
 

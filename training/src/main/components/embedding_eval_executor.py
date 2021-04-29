@@ -209,7 +209,7 @@ TITLES_QUERY_token_keyword = """
         TitleDetails_longsynopsis, content_ordinal_id)
     
     SELECT TitleDetails_title, TitleType, TitleDetails_longsynopsis, content_ordinal_id, tokens,
-        strip_str_array(SPLIT(CONCAT(TitleType, ",", TitleTags), ",")) AS keywords
+        strip_str_array(SPLIT(CONCAT("movie", ",", TitleTags), ",")) AS keywords
     FROM preproc
 """
 
@@ -313,7 +313,7 @@ class Executor(base_executor.BaseExecutor):
         raw_user_data = client.query(USERS_QUERY).result().to_dataframe()
 
         ### Create embeddings
-        unscored_titles = client.query(TITLES_QUERY_tokens) \
+        unscored_titles = client.query(TITLES_QUERY_keywords) \
                                 .result() \
                                 .to_dataframe() \
                                 .drop_duplicates(subset=['TitleDetails_title']) \
@@ -324,6 +324,7 @@ class Executor(base_executor.BaseExecutor):
         if True: # using tokens
             input_data = {"synopsis": unscored_titles['TitleDetails_longsynopsis'].values[:, None], 
               "tokens": tf.ragged.constant(unscored_titles["tokens"].values).to_sparse(),
+             #"kewords": tf.ragged.constant(unscored_titles["keywords"].values).to_sparse(),
              }
             dataset = tf.data.Dataset.from_tensor_slices(input_data).batch(50)
 

@@ -47,16 +47,16 @@ def compute_tags(transformed_tags, num_labels):
 def compute_tokens(tokens, max_token_length):
     """Convert a sparse tensor to RaggedTensor."""
     tokens = tf.sparse.reorder(tokens)
-     # Ragged tensor is taking care of a lot of caveats
-     # 1) With values unmapped to the vocab_list, the default value is set -1
-     # when re-reading again during training, the out of vocab will be removed
-     # 2) If we have more tokens at inference time, setting the shape will
-     # remove any extra tokens, still making sure the maximum number of token
-     # during training is preserved
-    out = tf.RaggedTensor.from_value_rowids(values=tokens.values, \
-                                           value_rowids=tokens.indices[:, 0])
+    # Ragged tensor is taking care of a lot of caveats
+    # 1) With values unmapped to the vocab_list, the default value is set -1
+    # when re-reading again during training, the out of vocab will be removed
+    # 2) If we have more tokens at inference time, setting the shape will
+    # remove any extra tokens, still making sure the maximum number of token
+    # during training is preserved
+    index = tokens.values > -1
+    out = tf.RaggedTensor.from_value_rowids(values=tokens.values[index], \
+                                           value_rowids=tokens.indices[index, 0])
     out = out.to_tensor(default_value=-1, shape=(None, max_token_length))
-    out = tf.sort(out, axis=1, direction="DESCENDING") # making sure -1 are at the end
     return out
 
 def preprocessing_fn(inputs, custom_config):

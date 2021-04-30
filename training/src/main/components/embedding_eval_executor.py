@@ -299,15 +299,6 @@ class Executor(base_executor.BaseExecutor):
         model = tf.saved_model.load(model_path)
         
         ### Load User Data
-        """
-        user_data = artifact_utils.get_single_instance(
-            input_dict['user_data'])
-        user_data_path = path_utils.serving_model_path(user_data.uri)
-        
-        ### Run evaluation, return metrics (dict of metric name to number)
-        metrics = exec_properties['run_fn'](embeddings,
-                                            user_data)
-        """
         print("Loading data")
         client = bigquery.Client()
         raw_user_data = client.query(USERS_QUERY).result().to_dataframe()

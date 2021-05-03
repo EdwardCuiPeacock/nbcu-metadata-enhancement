@@ -34,13 +34,13 @@ except ImportError:
 OUTPUT_TABLE = "res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.model_results"
 GOOGLE_CLOUD_PROJECT = "res-nbcupea-dev-ds-sandbox-001"
 BQ_DATASET = 'metadata_enhancement'
-BQ_TABLE = 'synopsis_dylan_150tag_with_tokens_and_keywords'#'meta_synopsis_100tag_with_token_edc_dev'
+BQ_TABLE = 'merlin_data_with_lang_type_keywords'#'synopsis_dylan_150tag_with_tokens_and_keywords'
 DATA_SOURCE_TABLE = f"{GOOGLE_CLOUD_PROJECT}.{BQ_DATASET}.{BQ_TABLE}"
 
 TOKEN_LIMIT = 256
 TEST_LIMIT = None
 
-enable_cache = True
+enable_cache = False
 USE_AI_PLATFORM = True
 
 IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/edc-dev-pipeline'
@@ -83,13 +83,14 @@ num_labels = int(client.query(query_labels).to_dataframe()["labels_count"].value
 ############## Finding out the padding necessary for node2vec tokens ################
 client = bigquery.Client()
 query_tokens = f"""
-    SELECT MAX(tokens_length) AS tokens_length,
+    SELECT 
+        --MAX(tokens_length) AS tokens_length,
         MAX(keyword_length) AS keywords_length
     FROM `{DATA_SOURCE_TABLE}`
 """
 token_counter = client.query(query_tokens).to_dataframe()
 # buffer space for raggedtensor to dense tensor
-N2V_TOKEN_LENGTH = int(token_counter["tokens_length"].values)
+# N2V_TOKEN_LENGTH = int(token_counter["tokens_length"].values)
 N2V_KEYWORD_LENGTH = int(token_counter["keywords_length"].values)
 ## TRAINING ARGS
 USE_STEPS = False

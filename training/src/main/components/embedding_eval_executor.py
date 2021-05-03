@@ -133,7 +133,8 @@ TITLES_QUERY_keywords = """
             TitleType, 
             cid.content_ordinal_id,
             STRING_AGG(DISTINCT TitleDetails_longsynopsis, ' ') as TitleDetails_longsynopsis,
-            STRING_AGG(DISTINCT TitleTags, ',') as TitleTags,
+            STRING_AGG(DISTINCT TitleTags, ',') AS TitleTags,
+            STRING_AGG(DISTINCT TitleSubgenres, ',') AS TitleSubgenres
         FROM `res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.ContentMetadataView` cmv
         LEFT JOIN `res-nbcupea-dev-ds-sandbox-001.recsystem.ContentOrdinalId` cid
             ON cmv.TitleDetails_title = cid.program_title
@@ -142,11 +143,11 @@ TITLES_QUERY_keywords = """
             AND cid.content_ordinal_id IS NOT NULL
         GROUP BY 
             TitleDetails_title, 
-            TitleType, 
+            TitleType,
             cid.content_ordinal_id
         )
     SELECT TitleDetails_title, TitleType, content_ordinal_id, TitleDetails_longsynopsis, 
-        strip_str_array(SPLIT(TitleTags, ",")) AS tokens
+        strip_str_array(SPLIT(COALESCE(NULLIF(ARRAY_TO_STRING([TitleTags,TitleSubgenres], ","), ""), "movie"), ",")) AS tokens,
     FROM titles_data
 """
 
@@ -308,11 +309,7 @@ class Executor(base_executor.BaseExecutor):
                                 .result() \
                                 .to_dataframe() \
                                 .drop_duplicates(subset=['TitleDetails_title']) \
-                                .reset_index()
-        # Fill empty keywords with ["movie"]
-        index = unscored_titles.loc[unscored_titles["tokens"].apply(len)<1, "tokens"].index
-        for i in index:
-            unscored_titles.loc[i, "tokens"] = [["movie"]]
+                                .reset_index()        
         print("Start making predictions on synopsis")
         tnow = time.time()
         res = []

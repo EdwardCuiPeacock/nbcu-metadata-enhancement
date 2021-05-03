@@ -34,7 +34,7 @@ except ImportError:
 OUTPUT_TABLE = "res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.model_results"
 GOOGLE_CLOUD_PROJECT = "res-nbcupea-dev-ds-sandbox-001"
 BQ_DATASET = 'metadata_enhancement'
-BQ_TABLE = 'merlin_data_with_lang_type_keywords'#'synopsis_dylan_150tag_with_tokens_and_keywords'
+BQ_TABLE = 'test_titles_synopsis_keywords_all_labels'#merlin_data_with_lang_type_keywords, 'synopsis_dylan_150tag_with_tokens_and_keywords'
 DATA_SOURCE_TABLE = f"{GOOGLE_CLOUD_PROJECT}.{BQ_DATASET}.{BQ_TABLE}"
 
 TOKEN_LIMIT = 256
@@ -46,7 +46,7 @@ USE_AI_PLATFORM = True
 IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/edc-dev-pipeline'
 
 # BQ data 
-with open(os.path.join("main/queries/ingest_query_additional.sql"), "r") as fid:
+with open(os.path.join("main/queries/ingest_query.sql"), "r") as fid:
     query_str = fid.read() # read everything    
 # Apply / parse any templated fields
 query = jinja2.Template(query_str).render(

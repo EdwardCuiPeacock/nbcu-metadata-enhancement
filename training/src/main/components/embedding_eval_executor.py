@@ -295,6 +295,7 @@ class Executor(base_executor.BaseExecutor):
         model = artifact_utils.get_single_instance(
             input_dict['model'])
         model_path = path_utils.serving_model_path(model.uri)
+        print("Model path: ", model_path)
 
         # model = tf.keras.models.load_model(model_path)
         model = tf.saved_model.load(model_path)

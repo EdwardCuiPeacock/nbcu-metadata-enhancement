@@ -60,34 +60,6 @@ def _input_fn(
     return dataset
 
 
-def build_bert_tagger_old(num_labels, seq_length):
-    # TODO: think about alternative architecture
-    preprocessor = hub.load(TFHUB_HANDLE_PREPROCESSOR)
-    text_input = tf.keras.layers.Input(shape=(), dtype=tf.string, name="synopsis")
-    tokenize = hub.KerasLayer(preprocessor.tokenize, name="tokenize")
-    tokenized_inputs = [tokenize(text_input)]
-    preprocessing_layer = hub.KerasLayer(
-        preprocessor.bert_pack_inputs,
-        arguments=dict(seq_length=seq_length),
-        name="preprocessing",
-    )
-    # preprocessing_layer = hub.KerasLayer(TFHUB_HANDLE_PREPROCESSOR, name='preprocessing')
-    encoder_inputs = preprocessing_layer(tokenized_inputs)
-    # TODO: try freezing the BERT encoder layer
-    encoder = hub.KerasLayer(TFHUB_HANDLE_ENCODER, trainable=False, name="BERT_encoder")
-    outputs = encoder(encoder_inputs)
-    net = outputs["pooled_output"]
-    # Outputs
-    hidden1 = tf.keras.layers.Dense(512, activation="relu")(net)
-    drop1 = tf.keras.layers.Dropout(0.2)(hidden1)
-    hidden2 = tf.keras.layers.Dense(256, activation="relu")(drop1)
-    drop2 = tf.keras.layers.Dropout(0.2)(hidden2)
-    output = tf.keras.layers.Dense(num_labels, activation="sigmoid")(drop2)
-    model = tf.keras.Model(text_input, output)
-    print(model.summary())
-    return model
-
-
 def build_bert_tagger(num_labels, seq_length):
     model = TaggerModel(TFHUB_HANDLE_PREPROCESSOR, TFHUB_HANDLE_ENCODER, 
         TOKEN_EMBEDDINGS, num_labels, seq_length)
@@ -115,7 +87,7 @@ def get_compiled_model(num_labels, seq_length):
         def focal_loss(y_true, y_pred):
             y_true = tf.cast(y_true, tf.float32)
             y_pred = tf.cast(y_pred, tf.float32)
-            return tfa.losses.sigmoid_focal_crossentropy(y_true, y_pred, alpha=0.25, gamma=2.0)
+            return tfa.losses.sigmoid_focal_crossentropy(y_true, y_pred, alpha=0.75, gamma=3.0)
 
         model.compile(
             optimizer="adam",

@@ -166,7 +166,7 @@ TITLES_QUERY_token_keyword = """
         cid.content_ordinal_id,
     FROM `res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.ContentMetadataView` cmv
     LEFT JOIN `res-nbcupea-dev-ds-sandbox-001.recsystem.ContentOrdinalId` cid
-        ON cmv.TitleDetails_title = cid.program_title
+        ON LOWER(cmv.TitleDetails_title) = LOWER(cid.program_title)
     WHERE 
         TitleDetails_longsynopsis IS NOT NULL
         AND cid.content_ordinal_id IS NOT NULL
@@ -198,7 +198,8 @@ TITLES_QUERY_token_keyword = """
         END AS tokens,
     FROM titles_data a
     LEFT JOIN tags_data b
-    ON a.TitleDetails_title=b.TitleDetails_title),
+    ON LOWER(a.TitleDetails_title)=LOWER(b.TitleDetails_title)
+    ),
     
     preproc AS(SELECT TitleDetails_title, TitleType, TitleTags, TitleDetails_longsynopsis, 
         content_ordinal_id, ARRAY_AGG(DISTINCT tk) AS tokens, 
@@ -209,7 +210,7 @@ TITLES_QUERY_token_keyword = """
         TitleDetails_longsynopsis, content_ordinal_id)
     
     SELECT TitleDetails_title, TitleType, TitleDetails_longsynopsis, content_ordinal_id, tokens,
-        strip_str_array(SPLIT(CONCAT(TitleType, ",", TitleTags), ",")) AS keywords
+        strip_str_array(SPLIT(ARRAY_TO_STRING([TitleType,  TitleTags], ","), ",")) AS keywords
     FROM preproc
 """
 
@@ -217,7 +218,7 @@ date_start = "2021-2-01"
 date_end = "2021-4-01"
 
 PREV_WINDOW = 10
-TEST_WINDOW = 10
+TEST_WINDOW = 5
 DATA_LENGTH = PREV_WINDOW + TEST_WINDOW
 NUM_SAMPLES = 50000
 
@@ -299,15 +300,6 @@ class Executor(base_executor.BaseExecutor):
         model = tf.saved_model.load(model_path)
         
         ### Load User Data
-        """
-        user_data = artifact_utils.get_single_instance(
-            input_dict['user_data'])
-        user_data_path = path_utils.serving_model_path(user_data.uri)
-        
-        ### Run evaluation, return metrics (dict of metric name to number)
-        metrics = exec_properties['run_fn'](embeddings,
-                                            user_data)
-        """
         print("Loading data")
         client = bigquery.Client()
         raw_user_data = client.query(USERS_QUERY).result().to_dataframe()
@@ -321,33 +313,27 @@ class Executor(base_executor.BaseExecutor):
         print("Start making predictions on synopsis")
         tnow = time.time()
         res = []
-        if True: # using tokens
-            input_data = {
-                "synopsis": unscored_titles['TitleDetails_longsynopsis'].values[:, None], 
-                "tokens": tf.ragged.constant(unscored_titles["tokens"].values).to_sparse(),
-                "keywords": tf.ragged.constant(unscored_titles["keywords"].values).to_sparse(),
-             }
-            dataset = tf.data.Dataset.from_tensor_slices(input_data).batch(50)
+        input_data = {
+            "synopsis": unscored_titles['TitleDetails_longsynopsis'].values[:, None], 
+            "tokens": tf.ragged.constant(unscored_titles["tokens"].values).to_sparse(),
+            "keywords": tf.ragged.constant(unscored_titles["keywords"].values).to_sparse(),
+            }
+        dataset = tf.data.Dataset.from_tensor_slices(input_data).batch(50)
 
-            for batch in dataset:
-                transformed_features = model.tft_layer(batch)
-                transformed_features["synopsis"] = transformed_features["synopsis"][:, None]
-                y = model(transformed_features)
-                res.append(y)
-        else:
-            input_data = unscored_titles[['TitleDetails_longsynopsis']]
-            dataset = tf.data.Dataset.from_tensor_slices(
-                    tf.cast(input_data['TitleDetails_longsynopsis'].values.tolist(), tf.string)
-                    ).batch(50)
-            for element in dataset:
-                y = model(element)
-                res.append(y)
-
+        for batch in dataset:
+            transformed_features = model.tft_layer(batch)
+            transformed_features["synopsis"] = transformed_features["synopsis"][:, None]
+            y = model(transformed_features)
+            res.append(y)
+        
         used_time = time.time() - tnow
         print(f"Successfully made predictions on synopsis: {used_time:.2f} s")
         
         ######## TODO: Look at this block ####################
         f = tf.concat(res, axis=0).numpy()
+        del res
+        del dataset
+        del model
         preds = pd.DataFrame(f)
         preds['pred'] = preds.iloc[:,:].values.tolist()
         preds['pred'] = preds['pred'].apply(np.asarray)

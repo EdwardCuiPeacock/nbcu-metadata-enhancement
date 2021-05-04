@@ -12,10 +12,10 @@ import pandas as pd
 import numpy as np
 
 # Pipeline name will be used to identify this pipeline.
-PIPELINE_NAME = "metadata_dev_edc_base_0_0_4" # TODO: change this
+PIPELINE_NAME = "metadata_dev_edc_base_0_0_5" # TODO: change this
 
 ###IMPORTANT CHANGE THIS ALWAYS
-MODEL_NAME = "ncr_meta_edc_dev_0_0_4_bin_multilabel" # TODO: change this, this is an entry on metadata_enhacement.model_results
+MODEL_NAME = f"ncr_{PIPELINE_NAME}_bin_multilabel" # TODO: change this, this is an entry on metadata_enhacement.model_results
 
 GCS_BUCKET_NAME = "metadata-bucket-base" # TODO: HOLD
 

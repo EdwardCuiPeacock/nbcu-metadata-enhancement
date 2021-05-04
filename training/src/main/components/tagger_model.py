@@ -39,7 +39,8 @@ class TaggerModel(tf.keras.Model):
         self.output_layer = Dense(num_labels, activation="sigmoid")
 
     def call(self, inputs, training=False):
-        text_input, tokens = inputs["synopsis"], inputs["tokens"]
+        text_input = inputs["synopsis"]
+        tokens = inputs["tokens"]
         keywords = inputs["keywords"]
         # Squeeze the extra dim
         text_input = tf.squeeze(text_input)
@@ -70,7 +71,10 @@ class TaggerModel(tf.keras.Model):
         #     output = self.drop2(output, training=training)
         output = self.output_layer(output)
 
-        return output
+        if training:
+            return output
+        else:
+            return Concatenate(axis=1)([output, t_embed, k_embed])
 
     def model(self, inputs):
         return tf.keras.Model(inputs, self.call(inputs))

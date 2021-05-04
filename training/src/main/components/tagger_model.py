@@ -63,7 +63,7 @@ class TaggerModel(tf.keras.Model):
         # Concatenate
         output = Concatenate(axis=1)([synopsis_net, t_embed]) # k_embed
         # Pass through the dense layers
-        # output = self.hidden1(output)
+        output = self.hidden1(output)
         # if training:
         #     output = self.drop1(output, training=training)
         # output = self.hidden2(output)

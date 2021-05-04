@@ -50,7 +50,7 @@ import sys
 
 from main.pipelines import configs
 
-TITLES_QUERY_old = """
+TITLES_QUERY = """
     SELECT 
         DISTINCT
         TitleDetails_title, 

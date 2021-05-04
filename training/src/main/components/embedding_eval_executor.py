@@ -137,7 +137,7 @@ TITLES_QUERY_keywords = """
             STRING_AGG(DISTINCT TitleSubgenres, ',') AS TitleSubgenres
         FROM `res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.ContentMetadataView` cmv
         LEFT JOIN `res-nbcupea-dev-ds-sandbox-001.recsystem.ContentOrdinalId` cid
-            ON cmv.TitleDetails_title = cid.program_title
+            ON LOWER(cmv.TitleDetails_title) = LOWER(cid.program_title)
         WHERE 
             TitleDetails_longsynopsis IS NOT NULL
             AND cid.content_ordinal_id IS NOT NULL
@@ -340,6 +340,9 @@ class Executor(base_executor.BaseExecutor):
         
         ######## TODO: Look at this block ####################
         f = tf.concat(res, axis=0).numpy()
+        del res
+        del dataset
+        del model
         preds = pd.DataFrame(f)
         preds['pred'] = preds.iloc[:,:].values.tolist()
         preds['pred'] = preds['pred'].apply(np.asarray)
@@ -391,10 +394,12 @@ class Executor(base_executor.BaseExecutor):
         avg_emb_mat = np.stack(avg_emb.values)
         preds_emb_mat = np.stack(preds["pred"].values)
         # L2 Normalize
-        avg_emb_norm = avg_emb_mat / np.sqrt(np.sum(avg_emb_mat**2, axis=1, keepdims=True))
-        preds_emb_norm = preds_emb_mat / np.sqrt(np.sum(preds_emb_mat**2, axis=1, keepdims=True))
+        avg_emb_mat = avg_emb_mat / np.sqrt(np.sum(avg_emb_mat**2, axis=1, keepdims=True))
+        preds_emb_mat = preds_emb_mat / np.sqrt(np.sum(preds_emb_mat**2, axis=1, keepdims=True))
         # Cosine similarity Scoring
-        user_content_mat = avg_emb_norm @ preds_emb_norm.T
+        user_content_mat = avg_emb_mat @ preds_emb_mat.T
+        del avg_emb_mat
+        del preds_emb_mat
         print("cosine similarity")
         print("mean:", np.nanmean(user_content_mat.ravel()))
         print("std:", np.nanstd(user_content_mat.ravel()))

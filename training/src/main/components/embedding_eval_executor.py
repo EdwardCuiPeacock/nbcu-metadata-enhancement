@@ -306,7 +306,6 @@ class Executor(base_executor.BaseExecutor):
 
         ### Create embeddings
         unscored_titles = client.query(TITLES_QUERY_token_keyword) \
-                                .result() \
                                 .to_dataframe() \
                                 .drop_duplicates(subset=['TitleDetails_title']) \
                                 .reset_index()

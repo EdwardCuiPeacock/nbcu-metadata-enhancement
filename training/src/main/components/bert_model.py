@@ -16,10 +16,12 @@ from tensorflow.keras.metrics import Precision, Recall
 from main.components.tagger_model import TaggerModel
 
 # TODO: Add these in config instead of hard-coding
-TFHUB_HANDLE_PREPROCESSOR = "https://tfhub.dev/tensorflow/bert_en_uncased_preprocess/3"
+#TFHUB_HANDLE_PREPROCESSOR = "https://tfhub.dev/tensorflow/bert_en_uncased_preprocess/3"
+TFHUB_HANDLE_PREPROCESSOR = "https://tfhub.dev/tensorflow/bert_multi_cased_preprocess/3"
 #TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-512_A-8/1"
 #TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-256_A-4/2"
-TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-8_H-768_A-12/2"
+#TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-8_H-768_A-12/2"
+TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/bert_multi_cased_L-12_H-768_A-12/4"
 TOKEN_EMBEDDINGS = "gs://edc-dev/kubeflowpipelines-default/tfx_pipeline_output/node2vec_sports_syn_0_1_1/Trainer/model/19130/serving_model_dir"
 
 def _gzip_reader_fn(filenames):
@@ -88,7 +90,7 @@ def get_compiled_model(num_labels, seq_length):
         def focal_loss(y_true, y_pred):
             y_true = tf.cast(y_true, tf.float32)
             y_pred = tf.cast(y_pred, tf.float32)
-            return tfa.losses.sigmoid_focal_crossentropy(y_true, y_pred, alpha=0.75, gamma=3.0)
+            return tfa.losses.sigmoid_focal_crossentropy(y_true, y_pred, alpha=0.75, gamma=4.0)
         print(f"larger bert: {TFHUB_HANDLE_ENCODER}")
         print("alpha=0.75, gamma=3.0")
         model.compile(

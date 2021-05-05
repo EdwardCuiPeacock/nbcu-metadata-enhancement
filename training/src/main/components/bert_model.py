@@ -108,7 +108,7 @@ def _get_serve_tf_examples_fn(model, tf_transform_output):
         reshaped_text = tf.reshape(raw_text, [-1, 1])
         transformed_features = model.tft_layer(
             {"synopsis": reshaped_text, 
-            "titles": titles, 
+             "titles": titles,
             #'keywords': keywords
             })
 

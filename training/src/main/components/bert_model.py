@@ -87,7 +87,7 @@ def get_compiled_model(num_labels, seq_length):
         def focal_loss(y_true, y_pred):
             y_true = tf.cast(y_true, tf.float32)
             y_pred = tf.cast(y_pred, tf.float32)
-            return tfa.losses.sigmoid_focal_crossentropy(y_true, y_pred, alpha=0.70, gamma=3.0)
+            return tfa.losses.sigmoid_focal_crossentropy(y_true, y_pred, alpha=0.8, gamma=3.0)
 
         model.compile(
             optimizer="adam",

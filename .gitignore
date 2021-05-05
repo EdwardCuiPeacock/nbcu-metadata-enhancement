@@ -17,3 +17,9 @@ htmlcov/
 # Application specific
 *.tar.gz
 training/notebooks/~$Experiment_logs.xlsx
+*.npz
+*.csv
+*.pkl
+*.pickle
+*.png
+*.html

@@ -40,14 +40,14 @@ class TaggerModel(tf.keras.Model):
             bias_initializer=tf.keras.initializers.Constant(-2.0))
 
     def call(self, inputs, training=False):
-        text_input, tokens = inputs["synopsis"], inputs["tokens"]
-        # keywords = inputs["keywords"]
+        text_input = inputs["synopsis"]
+        titles = inputs["titles"]
         # Squeeze the extra dim
         text_input = tf.squeeze(text_input)
         #print("text input: ", text_input.shape)
         #print(text_input)
         # Convert tokens to ragged tensor
-        tokens = tf.ragged.boolean_mask(tokens, tokens > -1)
+        titles = tf.ragged.boolean_mask(titles, titles > -1)
         # keywords = tf.ragged.boolean_mask(keywords, keywords > -1)
         # Synopsis
         tokenized_inputs = [self.tokenize(text_input)]
@@ -55,21 +55,20 @@ class TaggerModel(tf.keras.Model):
         synopsis_outputs = self.encoder(encoder_inputs)
         synopsis_net = synopsis_outputs["pooled_output"]
         # Tokens
-        t_embed = self.token_embed(tokens)
-        # k_embed = self.embed_pool(k_embed)
+        t_embed = self.token_embed(titles)
         # Pool the embed
         t_embed = self.embed_pool(t_embed)
         # k_embed = self.token_embed(keywords)
         # Concatenate
-        output = Concatenate(axis=1)([synopsis_net, t_embed]) # k_embed
+        # output = Concatenate(axis=1)([synopsis_net, t_embed]) # k_embed
         # Pass through the dense layers
-        output = self.hidden1(output)
+        # output = self.hidden1(output)
         # if training:
         #     output = self.drop1(output, training=training)
         # output = self.hidden2(output)
         # if training:
         #     output = self.drop2(output, training=training)
-        output = self.output_layer(output)
+        output = self.output_layer(synopsis_net)
 
         #return output
 

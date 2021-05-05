@@ -12,7 +12,7 @@ feature {
   }
 }
 feature {
-  name: "tokens"
+  name: "titles"
   value_count {
     min: 1
   }

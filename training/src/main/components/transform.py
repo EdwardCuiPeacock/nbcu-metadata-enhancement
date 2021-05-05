@@ -44,7 +44,7 @@ def compute_tags(transformed_tags, num_labels):
     return tf.cast(tags_multi_binarized, tf.int64)
 
 
-def compute_tokens(tokens, max_token_length):
+def compute_tokens(tokens, max_length):
     """Convert a sparse tensor to RaggedTensor."""
     tokens = tf.sparse.reorder(tokens)
     # Ragged tensor is taking care of a lot of caveats
@@ -55,7 +55,7 @@ def compute_tokens(tokens, max_token_length):
     # during training is preserved
     out = tf.RaggedTensor.from_value_rowids(values=tokens.values, \
                                            value_rowids=tokens.indices[:, 0])
-    out = out.to_tensor(default_value=-1, shape=(None, max_token_length))
+    out = out.to_tensor(default_value=-1, shape=(None, max_length))
     return out
 
 def preprocessing_fn(inputs, custom_config):
@@ -63,7 +63,7 @@ def preprocessing_fn(inputs, custom_config):
     outputs = {}
     text = tf.squeeze(inputs[FEATURE], axis=1)
     labels = inputs[LABEL]
-    tokens = inputs[TOKENS]
+    titles = inputs["titles"]
     #keywords = inputs[KEYWORDS]    
 
     num_labels = custom_config.get('num_labels')
@@ -72,12 +72,9 @@ def preprocessing_fn(inputs, custom_config):
     labels = tft.compute_and_apply_vocabulary(
        labels, vocab_filename=LABEL, num_oov_buckets=1
     )
-    # labels = tft.apply_vocabulary(labels, 
-    #     deferred_vocab_filename_tensor=tf.constant("gs://metadata-bucket-base/tfx-metadata-dev-pipeline-output/metadata_dev_edc_base_0_0_3/Transform/transform_graph/20890/transform_fn/assets/tags"),
-    #     num_oov_buckets=1,
-    #     )
+    
     vocab_file = tf.constant(custom_config["token_vocab_list"])
-    tokens = tft.apply_vocabulary(tokens, 
+    titles = tft.apply_vocabulary(titles, 
        deferred_vocab_filename_tensor=vocab_file,
        num_oov_buckets=0)
 
@@ -87,7 +84,7 @@ def preprocessing_fn(inputs, custom_config):
 
     outputs[FEATURE] = text
     outputs[_transformed_name(LABEL)] = compute_tags(labels, num_labels)
-    outputs[TOKENS] = compute_tokens(tokens, custom_config["max_token_length"])
+    outputs["titles"] = compute_tokens("titles", custom_config["max_title_length"])
     #outputs[KEYWORDS] = compute_tokens(keywords, custom_config["max_keyword_length"])
     
     return outputs

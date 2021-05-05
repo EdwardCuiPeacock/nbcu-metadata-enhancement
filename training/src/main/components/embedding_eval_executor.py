@@ -214,6 +214,25 @@ TITLES_QUERY_token_keyword = """
     FROM preproc
 """
 
+TITLES_QUERY_titles = """
+    SELECT
+        TitleDetails_title, 
+        TitleType, 
+        STRING_AGG(DISTINCT TitleDetails_longsynopsis, ' ') as TitleDetails_longsynopsis, 
+        cid.content_ordinal_id,
+        ARRAY_AGG(DISTINCT COALESCE(InSeasonSeries_Id, TitleId)) as InSeasonSeries_Id
+    FROM `res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.ContentMetadataView` cmv
+    LEFT JOIN `res-nbcupea-dev-ds-sandbox-001.recsystem.ContentOrdinalId` cid
+        ON LOWER(cmv.TitleDetails_title) = LOWER(cid.program_title)
+    WHERE 
+        TitleDetails_longsynopsis IS NOT NULL
+        AND cid.content_ordinal_id IS NOT NULL
+    GROUP BY 
+        TitleDetails_title, 
+        TitleType, 
+        cid.content_ordinal_id
+"""
+
 date_start = "2021-2-01"
 date_end = "2021-4-01"
 
@@ -301,7 +320,7 @@ class Executor(base_executor.BaseExecutor):
         raw_user_data = client.query(USERS_QUERY).result().to_dataframe()
 
         ### Create embeddings
-        unscored_titles = client.query(TITLES_QUERY_tokens) \
+        unscored_titles = client.query(TITLES_QUERY_titles) \
                                 .result() \
                                 .to_dataframe() \
                                 .drop_duplicates(subset=['TitleDetails_title']) \
@@ -311,7 +330,7 @@ class Executor(base_executor.BaseExecutor):
         res = []
     
         input_data = {"synopsis": unscored_titles['TitleDetails_longsynopsis'].values[:, None], 
-            "tokens": tf.ragged.constant(unscored_titles["tokens"].values).to_sparse(),
+            "titles": tf.ragged.constant(unscored_titles["InSeasonSeries_Id"].values).to_sparse(),
             #"kewords": tf.ragged.constant(unscored_titles["keywords"].values).to_sparse(),
             }
         dataset = tf.data.Dataset.from_tensor_slices(input_data).batch(50)

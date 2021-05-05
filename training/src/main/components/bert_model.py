@@ -103,12 +103,12 @@ def _get_serve_tf_examples_fn(model, tf_transform_output):
     model.tft_layer = tf_transform_output.transform_features_layer()
 
     @tf.function
-    def serve_tf_examples_fn(raw_text, tokens): # keywords
+    def serve_tf_examples_fn(raw_text, titles): # keywords
         """Returns the output to be used in the serving signature."""
         reshaped_text = tf.reshape(raw_text, [-1, 1])
         transformed_features = model.tft_layer(
             {"synopsis": reshaped_text, 
-            "tokens": tokens, 
+            "titles": titles, 
             #'keywords': keywords
             })
 
@@ -136,7 +136,6 @@ def run_fn(fn_args):
     num_epochs = fn_args.custom_config["epochs"]
     batch_size = fn_args.custom_config["batch_size"]
     seq_length = fn_args.custom_config["seq_length"]
-    max_token_length = fn_args.custom_config["max_token_length"]
     print(f"Num labels: {num_labels}")
 
     model = get_compiled_model(num_labels, seq_length)
@@ -179,7 +178,7 @@ def run_fn(fn_args):
             model, tf_transform_output
         ).get_concrete_function(
             tf.TensorSpec(shape=[None], dtype=tf.string, name="synopsis"),
-            tf.SparseTensorSpec(shape=[None, None], dtype=tf.string), # token
+            tf.SparseTensorSpec(shape=[None, None], dtype=tf.string), # titles
             #tf.SparseTensorSpec(shape=[None, None], dtype=tf.string), # keywords
         ),
     }

@@ -56,7 +56,7 @@ class TaggerModel(tf.keras.Model):
             return output
         else:
             # Title
-            title = inputs["title"]
+            title = inputs["title"] + 1 # offset by 1
             t_embed = self.title_embed(title)
             return Concatenate(axis=1)([output, t_embed])
 

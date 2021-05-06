@@ -366,10 +366,10 @@ class Executor(base_executor.BaseExecutor):
         preds['content_ordinal_id'] = unscored_titles['content_ordinal_id']
         preds = preds[['pred','content_ordinal_id']]
         
-        user_data = pd.merge(raw_user_data, 
+        user_data = pd.merge(raw_user_data,
                              preds,
-                             how="inner", 
-                             left_on="content_id", 
+                             how="inner",
+                             left_on="content_id",
                              right_on="content_ordinal_id") \
                              .drop(columns=['content_ordinal_id'])
         

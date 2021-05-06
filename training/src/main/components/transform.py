@@ -8,39 +8,42 @@ entirely
 import tensorflow_transform as tft
 import tensorflow as tf
 
-FEATURE = 'synopsis'
-LABEL = 'tags'
-TOKENS = 'tokens'
-KEYWORDS = 'keywords'
+FEATURE = "synopsis"
+LABEL = "tags"
+TOKENS = "tokens"
+KEYWORDS = "keywords"
+
 
 def _transformed_name(key):
-    return key + '_xf'
+    return key + "_xf"
 
-def compute_tags(transformed_tags, num_labels): 
+
+def compute_tags(transformed_tags, num_labels):
     """
-    Function for turning tags from sparse tensor to multilabel binarized 
-    data. The final result is that tags is a binary matrix with shape (none, NUM_TAGS) 
+    Function for turning tags from sparse tensor to multilabel binarized
+    data. The final result is that tags is a binary matrix with shape (none, NUM_TAGS)
     indicating the presence of a tag in an example
-    Args: 
+    Args:
         transformed_tags: sparse tensor with transformed tags
-        Looks like: 
+        Looks like:
             [[1, 3, 2, 6, x, x, x],
              [2, 3, 0, x, x, x, x],
              [3, 0, 5, 2, 4, 1, 6]]
-    Returns: 
+    Returns:
         Binarized tags, tensor with shape (none, NUM_TAGS)
-        Looks like 
+        Looks like
             [[0, 1, 1, 1, 0, 0, 0],
              [1, 0, 1, 1, 0, 0, 0],
              [1, 1, 1, 1, 1, 1, 1]]
         Given vocab size of 7
     """
-    tags_multi_binarized = tf.sparse.to_indicator(transformed_tags, 
-                                                  vocab_size=num_labels)
-    #tags_multi_binarized = tf.cast(tags_multi_binarized, tf.float32)
+    tags_multi_binarized = tf.sparse.to_indicator(
+        transformed_tags, vocab_size=num_labels
+    )
+    # tags_multi_binarized = tf.cast(tags_multi_binarized, tf.float32)
     # Normalize the tags by their sum
-    #tags_normalized = tags_multi_binarized / tf.reduce_sum(tags_multi_binarized, axis=1, keepdims=True)
-    #return tags_normalized 
+    # tags_normalized = tags_multi_binarized / tf.reduce_sum(tags_multi_binarized, axis=1, keepdims=True)
+    # return tags_normalized
     return tf.cast(tags_multi_binarized, tf.int64)
 
 
@@ -53,10 +56,12 @@ def compute_tokens(tokens, max_length):
     # 2) If we have more tokens at inference time, setting the shape will
     # remove any extra tokens, still making sure the maximum number of token
     # during training is preserved
-    out = tf.RaggedTensor.from_value_rowids(values=tokens.values, \
-                                           value_rowids=tokens.indices[:, 0])
+    out = tf.RaggedTensor.from_value_rowids(
+        values=tokens.values, value_rowids=tokens.indices[:, 0]
+    )
     out = out.to_tensor(default_value=-1, shape=(None, max_length))
     return out
+
 
 def preprocessing_fn(inputs, custom_config):
     """Preprocess input columns into transformed columns."""
@@ -64,19 +69,22 @@ def preprocessing_fn(inputs, custom_config):
     text = tf.squeeze(inputs[FEATURE], axis=1)
     labels = inputs[LABEL]
     title = inputs["title"]
-    #keywords = inputs[KEYWORDS]    
+    # keywords = inputs[KEYWORDS]
 
-    num_labels = custom_config.get('num_labels')
-    
+    num_labels = custom_config.get("num_labels")
+
     # Create and apply a full vocabulary for the labels (subgenres)
     labels = tft.compute_and_apply_vocabulary(
-       labels, vocab_filename=LABEL, num_oov_buckets=1
+        labels, vocab_filename=LABEL, num_oov_buckets=1
     )
-    
-    vocab_file = tf.constant(custom_config["ttitle_vocab_list"])
-    title = tft.apply_vocabulary(title, 
-       deferred_vocab_filename_tensor=vocab_file,
-       num_oov_buckets=0, default_value=-1)
+
+    vocab_file = tf.constant(custom_config["title_vocab_list"])
+    title = tft.apply_vocabulary(
+        title,
+        deferred_vocab_filename_tensor=vocab_file,
+        num_oov_buckets=0,
+        default_value=-1,
+    )
 
     # keywords = tft.apply_vocabulary(keywords,
     #     deferred_vocab_filename_tensor=vocab_file,
@@ -84,8 +92,7 @@ def preprocessing_fn(inputs, custom_config):
 
     outputs[FEATURE] = text
     outputs[_transformed_name(LABEL)] = compute_tags(labels, num_labels)
-    outputs["title"] = title + 1 # offset by 1, as index 0 is the default
-    #outputs[KEYWORDS] = compute_tokens(keywords, custom_config["max_keyword_length"])
-    
-    return outputs
+    outputs["title"] = title + 1  # offset by 1, as index 0 is the default
+    # outputs[KEYWORDS] = compute_tokens(keywords, custom_config["max_keyword_length"])
 
+    return outputs

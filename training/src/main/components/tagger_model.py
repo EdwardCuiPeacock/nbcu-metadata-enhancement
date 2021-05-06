@@ -33,22 +33,25 @@ class TaggerModel(tf.keras.Model):
         self.hidden2 = Dense(256, activation="relu")
         self.drop2 = Dropout(0.2)
         # Output layer
-        self.output_layer = Dense(num_labels, activation="sigmoid", 
-            bias_initializer=tf.keras.initializers.Constant(-2.0))
+        self.output_layer = Dense(
+            num_labels,
+            activation="sigmoid",
+            bias_initializer=tf.keras.initializers.Constant(-2.0),
+        )
 
     def call(self, inputs, training=False):
         text_input = inputs["synopsis"]
         # Squeeze the extra dim
         text_input = tf.squeeze(text_input)
-        #print("text input: ", text_input.shape)
-        #print(text_input)
+        # print("text input: ", text_input.shape)
+        # print(text_input)
         # Synopsis
         tokenized_inputs = [self.tokenize(text_input)]
         encoder_inputs = self.preprocessing_layer(tokenized_inputs)
         synopsis_outputs = self.encoder(encoder_inputs)
         synopsis_net = synopsis_outputs["pooled_output"]
         output = self.output_layer(synopsis_net)
-        
+
         if training:
             return output
         else:
@@ -56,7 +59,6 @@ class TaggerModel(tf.keras.Model):
             title = inputs["title"]
             t_embed = self.title_embed(title)
             return Concatenate(axis=1)([output, t_embed])
-            
 
     def model(self, inputs):
         return tf.keras.Model(inputs, self.call(inputs))

@@ -61,8 +61,6 @@ class TaggerModel(tf.keras.Model):
             # Title
             t_embed = self.title_embed(inputs["title"])
             t_embed = self.embed_pool(t_embed)
-            print("tembed shape")
-            print(t_embed.shape)
             return Concatenate(axis=1)([output, t_embed])
 
     def model(self, inputs):

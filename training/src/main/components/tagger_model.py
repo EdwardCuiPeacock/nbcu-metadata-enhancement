@@ -57,7 +57,7 @@ class TaggerModel(tf.keras.Model):
         else:
             # Title
             print("title shape")
-            print(title.shape)
+            print(inputs["title"].shape)
             title = tf.squeeze(inputs["title"])
             print("title shape")
             print(title.shape)

@@ -59,18 +59,18 @@ class TaggerModel(tf.keras.Model):
         t_embed = self.embed_pool(t_embed)
         output = Concatenate(axis=1)([synopsis_net, t_embed])
         output = self.output_layer(output)
-        return output
+        #return output
         ######################################################################
-        
+
         ######################################################################
         #output = self.output_layer(synopsis_net)
-        # if training:
-        #     return output
-        # else:
-        #     # Title
-        #     t_embed = self.title_embed(inputs["title"])
-        #     t_embed = self.embed_pool(t_embed)
-        #     return Concatenate(axis=1)([output, t_embed])
+        if training:
+            return output
+        else:
+            # Title
+            #t_embed = self.title_embed(inputs["title"])
+            #t_embed = self.embed_pool(t_embed)
+            return Concatenate(axis=1)([output, t_embed])
         ######################################################################
 
     def model(self, inputs):

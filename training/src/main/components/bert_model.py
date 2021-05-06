@@ -60,34 +60,6 @@ def _input_fn(
     return dataset
 
 
-def build_bert_tagger_old(num_labels, seq_length):
-    # TODO: think about alternative architecture
-    preprocessor = hub.load(TFHUB_HANDLE_PREPROCESSOR)
-    text_input = tf.keras.layers.Input(shape=(), dtype=tf.string, name="synopsis")
-    tokenize = hub.KerasLayer(preprocessor.tokenize, name="tokenize")
-    tokenized_inputs = [tokenize(text_input)]
-    preprocessing_layer = hub.KerasLayer(
-        preprocessor.bert_pack_inputs,
-        arguments=dict(seq_length=seq_length),
-        name="preprocessing",
-    )
-    # preprocessing_layer = hub.KerasLayer(TFHUB_HANDLE_PREPROCESSOR, name='preprocessing')
-    encoder_inputs = preprocessing_layer(tokenized_inputs)
-    # TODO: try freezing the BERT encoder layer
-    encoder = hub.KerasLayer(TFHUB_HANDLE_ENCODER, trainable=False, name="BERT_encoder")
-    outputs = encoder(encoder_inputs)
-    net = outputs["pooled_output"]
-    # Outputs
-    hidden1 = tf.keras.layers.Dense(512, activation="relu")(net)
-    drop1 = tf.keras.layers.Dropout(0.2)(hidden1)
-    hidden2 = tf.keras.layers.Dense(256, activation="relu")(drop1)
-    drop2 = tf.keras.layers.Dropout(0.2)(hidden2)
-    output = tf.keras.layers.Dense(num_labels, activation="sigmoid")(drop2)
-    model = tf.keras.Model(text_input, output)
-    print(model.summary())
-    return model
-
-
 def build_bert_tagger(num_labels, seq_length):
     model = TaggerModel(TFHUB_HANDLE_PREPROCESSOR, TFHUB_HANDLE_ENCODER, 
         TOKEN_EMBEDDINGS, num_labels, seq_length)
@@ -119,7 +91,7 @@ def get_compiled_model(num_labels, seq_length):
 
         model.compile(
             optimizer="adam",
-            loss=focal_loss,
+            loss="binary_crossentropy",
             metrics=metrics,
         )
     return model
@@ -131,12 +103,12 @@ def _get_serve_tf_examples_fn(model, tf_transform_output):
     model.tft_layer = tf_transform_output.transform_features_layer()
 
     @tf.function
-    def serve_tf_examples_fn(raw_text, tokens): # keywords
+    def serve_tf_examples_fn(raw_text): # tokens, keywords
         """Returns the output to be used in the serving signature."""
         reshaped_text = tf.reshape(raw_text, [-1, 1])
         transformed_features = model.tft_layer(
             {"synopsis": reshaped_text, 
-            "tokens": tokens, 
+            #"tokens": tokens, 
             #'keywords': keywords
             })
 
@@ -207,7 +179,7 @@ def run_fn(fn_args):
             model, tf_transform_output
         ).get_concrete_function(
             tf.TensorSpec(shape=[None], dtype=tf.string, name="synopsis"),
-            tf.SparseTensorSpec(shape=[None, None], dtype=tf.string), # token
+            #tf.SparseTensorSpec(shape=[None, None], dtype=tf.string), # token
             #tf.SparseTensorSpec(shape=[None, None], dtype=tf.string), # keywords
         ),
     }

@@ -50,7 +50,7 @@ import sys
 
 from main.pipelines import configs
 
-TITLES_QUERY_old = """
+TITLES_QUERY = """
     SELECT 
         DISTINCT
         TitleDetails_title, 
@@ -59,7 +59,7 @@ TITLES_QUERY_old = """
         cid.content_ordinal_id,
     FROM `res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.ContentMetadataView` cmv
     LEFT JOIN `res-nbcupea-dev-ds-sandbox-001.recsystem.ContentOrdinalId` cid
-        ON cmv.TitleDetails_title = cid.program_title
+        ON LOWER(cmv.TitleDetails_title) = LOWER(cid.program_title)
     WHERE 
         TitleDetails_longsynopsis IS NOT NULL
         AND cid.content_ordinal_id IS NOT NULL
@@ -308,8 +308,7 @@ class Executor(base_executor.BaseExecutor):
                                 .reset_index()        
         print("Start making predictions on synopsis")
         tnow = time.time()
-        res = []
-    
+        res = []    
         input_data = {"synopsis": unscored_titles['TitleDetails_longsynopsis'].values[:, None], 
             "tokens": tf.ragged.constant(unscored_titles["tokens"].values).to_sparse(),
             #"kewords": tf.ragged.constant(unscored_titles["keywords"].values).to_sparse(),

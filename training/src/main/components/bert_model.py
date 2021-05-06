@@ -139,7 +139,6 @@ def run_fn(fn_args):
     num_epochs = fn_args.custom_config["epochs"]
     batch_size = fn_args.custom_config["batch_size"]
     seq_length = fn_args.custom_config["seq_length"]
-    max_token_length = fn_args.custom_config["max_token_length"]
     print(f"Num labels: {num_labels}")
 
     model = get_compiled_model(num_labels, seq_length)

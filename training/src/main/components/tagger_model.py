@@ -27,6 +27,9 @@ class TaggerModel(tf.keras.Model):
         self.title_embed = tf.keras.models.load_model(title_embed_url).get_layer(
             "Embedding"
         )
+        self.embed_pool = Lambda(
+            lambda x: K.mean(x, axis=1, keepdims=False), name="embed_avg_pooling"
+        )
         # Hidden layers
         self.hidden1 = Dense(512, activation="relu")
         self.drop1 = Dropout(0.2)
@@ -56,12 +59,8 @@ class TaggerModel(tf.keras.Model):
             return output
         else:
             # Title
-            print("title shape")
-            print(inputs["title"].shape)
-            title = tf.squeeze(inputs["title"])
-            print("title shape")
-            print(title.shape)
-            t_embed = self.title_embed(title)
+            t_embed = self.title_embed(inputs["title"])
+            t_embed = self.embed_pool(t_embed)
             print("tembed shape")
             print(t_embed.shape)
             return Concatenate(axis=1)([output, t_embed])

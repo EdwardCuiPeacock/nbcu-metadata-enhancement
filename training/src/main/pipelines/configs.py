@@ -81,16 +81,16 @@ num_labels = int(client.query(query_labels).to_dataframe()["labels_count"].value
 
 
 ############## Finding out the padding necessary for node2vec tokens ################
-client = bigquery.Client()
-query_tokens = f"""
-    SELECT 
-        MAX(tokens_length) AS tokens_length,
-        -- MAX(keyword_length) AS keywords_length
-    FROM `{DATA_SOURCE_TABLE}`
-"""
-token_counter = client.query(query_tokens).to_dataframe()
-# buffer space for raggedtensor to dense tensor
-N2V_TOKEN_LENGTH = int(token_counter["tokens_length"].values)
+# client = bigquery.Client()
+# query_tokens = f"""
+#     SELECT 
+#         MAX(tokens_length) AS tokens_length,
+#         -- MAX(keyword_length) AS keywords_length
+#     FROM `{DATA_SOURCE_TABLE}`
+# """
+# token_counter = client.query(query_tokens).to_dataframe()
+# # buffer space for raggedtensor to dense tensor
+# N2V_TOKEN_LENGTH = int(token_counter["tokens_length"].values)
 # N2V_KEYWORD_LENGTH = int(token_counter["keywords_length"].values)
 ## TRAINING ARGS
 USE_STEPS = False
@@ -109,8 +109,8 @@ custom_config = {
     'batch_size': BATCH_SIZE,
     'use_steps': USE_STEPS,
     'seq_length': TOKEN_LIMIT,
-    'token_vocab_list': "gs://edc-dev/kubeflowpipelines-default/tfx_pipeline_output/node2vec_sports_syn_0_1_0/Transform/transform_graph/18561/transform_fn/assets/node_vocab_txt",
-    'max_token_length': N2V_TOKEN_LENGTH,
+    #'token_vocab_list': "gs://edc-dev/kubeflowpipelines-default/tfx_pipeline_output/node2vec_sports_syn_0_1_0/Transform/transform_graph/18561/transform_fn/assets/node_vocab_txt",
+    #'max_token_length': N2V_TOKEN_LENGTH,
     #'max_keyword_length': N2V_KEYWORD_LENGTH,
 }
 

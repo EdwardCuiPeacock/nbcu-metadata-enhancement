@@ -92,7 +92,9 @@ def preprocessing_fn(inputs, custom_config):
 
     outputs[FEATURE] = text
     outputs[_transformed_name(LABEL)] = compute_tags(labels, num_labels)
-    outputs["title"] = tf.sparse.to_dense(title) + 1  # offset by 1, as index 0 is the default
+    title = tf.sparse.to_dense(title) + 1 # offset by 1, as index 0 is the default
+    title.set_shape((None,))
+    outputs["title"] =  title
     # outputs[KEYWORDS] = compute_tokens(keywords, custom_config["max_keyword_length"])
 
     return outputs

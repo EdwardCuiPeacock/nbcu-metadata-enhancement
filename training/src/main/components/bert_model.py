@@ -107,12 +107,13 @@ def _get_serve_tf_examples_fn(model, tf_transform_output):
     model.tft_layer = tf_transform_output.transform_features_layer()
 
     @tf.function
-    def serve_tf_examples_fn(raw_text, title):
+    def serve_tf_examples_fn(raw_text, raw_title):
         """Returns the output to be used in the serving signature."""
         reshaped_text = tf.reshape(raw_text, [-1, 1])
+        reshaped_title = tf.reshape(raw_title, [-1, 1])
         transformed_features = model.tft_layer(
             {"synopsis": reshaped_text, 
-             "title": title,
+             "title": reshaped_title,
             })
 
         outputs = model(transformed_features)

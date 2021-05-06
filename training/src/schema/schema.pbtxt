@@ -12,7 +12,7 @@ feature {
   }
 }
 feature {
-  name: "titles"
+  name: "title"
   value_count {
     min: 1
   }

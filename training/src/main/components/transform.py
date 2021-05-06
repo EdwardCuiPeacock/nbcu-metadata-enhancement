@@ -63,7 +63,7 @@ def preprocessing_fn(inputs, custom_config):
     outputs = {}
     text = tf.squeeze(inputs[FEATURE], axis=1)
     labels = inputs[LABEL]
-    titles = inputs["titles"]
+    title = inputs["title"]
     #keywords = inputs[KEYWORDS]    
 
     num_labels = custom_config.get('num_labels')
@@ -73,10 +73,10 @@ def preprocessing_fn(inputs, custom_config):
        labels, vocab_filename=LABEL, num_oov_buckets=1
     )
     
-    vocab_file = tf.constant(custom_config["token_vocab_list"])
-    titles = tft.apply_vocabulary(titles, 
+    vocab_file = tf.constant(custom_config["ttitle_vocab_list"])
+    title = tft.apply_vocabulary(title, 
        deferred_vocab_filename_tensor=vocab_file,
-       num_oov_buckets=0)
+       num_oov_buckets=0, default_value=-1)
 
     # keywords = tft.apply_vocabulary(keywords,
     #     deferred_vocab_filename_tensor=vocab_file,
@@ -84,7 +84,7 @@ def preprocessing_fn(inputs, custom_config):
 
     outputs[FEATURE] = text
     outputs[_transformed_name(LABEL)] = compute_tags(labels, num_labels)
-    outputs["titles"] = compute_tokens(titles, custom_config["max_title_length"])
+    outputs["title"] = title + 1 # offset by 1, as index 0 is the default
     #outputs[KEYWORDS] = compute_tokens(keywords, custom_config["max_keyword_length"])
     
     return outputs

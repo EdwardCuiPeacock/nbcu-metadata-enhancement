@@ -18,11 +18,11 @@ from main.components.tagger_model import TaggerModel
 # TODO: Add these in config instead of hard-coding
 TFHUB_HANDLE_PREPROCESSOR = "https://tfhub.dev/tensorflow/bert_en_uncased_preprocess/3"
 #TFHUB_HANDLE_PREPROCESSOR = "https://tfhub.dev/tensorflow/bert_multi_cased_preprocess/3"
-#TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-512_A-8/1"
 #TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-256_A-4/2"
-TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-8_H-768_A-12/2"
+TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-512_A-8/1"
+#TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-8_H-768_A-12/2"
 #TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/bert_multi_cased_L-12_H-768_A-12/4"
-TOKEN_EMBEDDINGS = "gs://edc-dev/kubeflowpipelines-default/tfx_pipeline_output/node2vec_sports_syn_0_1_1/Trainer/model/19130/serving_model_dir"
+TITLE_EMBEDDINGS = "gs://edc-dev/content_title_embeddings_model"
 
 def _gzip_reader_fn(filenames):
     """Small utility returning a record reader that can read gzip'ed fies"""
@@ -65,7 +65,7 @@ def _input_fn(
 
 def build_bert_tagger(num_labels, seq_length):
     model = TaggerModel(TFHUB_HANDLE_PREPROCESSOR, TFHUB_HANDLE_ENCODER, 
-        TOKEN_EMBEDDINGS, num_labels, seq_length)
+        TITLE_EMBEDDINGS, num_labels, seq_length)
     return model
 
 
@@ -107,13 +107,12 @@ def _get_serve_tf_examples_fn(model, tf_transform_output):
     model.tft_layer = tf_transform_output.transform_features_layer()
 
     @tf.function
-    def serve_tf_examples_fn(raw_text, titles): # keywords
+    def serve_tf_examples_fn(raw_text, title):
         """Returns the output to be used in the serving signature."""
         reshaped_text = tf.reshape(raw_text, [-1, 1])
         transformed_features = model.tft_layer(
             {"synopsis": reshaped_text, 
-             "titles": titles,
-            #'keywords': keywords
+             "title": title,
             })
 
         outputs = model(transformed_features)
@@ -158,7 +157,6 @@ def run_fn(fn_args):
             steps_per_epoch=fn_args.train_steps // num_epochs,
             verbose=1,
         )
-
     else:
         train_dataset = _input_fn(
             file_pattern=fn_args.train_files,
@@ -182,7 +180,7 @@ def run_fn(fn_args):
             model, tf_transform_output
         ).get_concrete_function(
             tf.TensorSpec(shape=[None], dtype=tf.string, name="synopsis"),
-            tf.SparseTensorSpec(shape=[None, None], dtype=tf.string), # titles
+            tf.TensorSpec(shape=[None], dtype=tf.string, name="title"), # titles
             #tf.SparseTensorSpec(shape=[None, None], dtype=tf.string), # keywords
         ),
     }

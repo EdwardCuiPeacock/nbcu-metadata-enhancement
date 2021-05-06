@@ -9,7 +9,7 @@ from tensorflow.keras.layers import Dense, Lambda, Dropout, Concatenate, Reshape
 
 class TaggerModel(tf.keras.Model):
     def __init__(
-        self, preprocessor_url, encoder_url, token_embed_url, num_labels, seq_length
+        self, preprocessor_url, encoder_url, title_embed_url, num_labels, seq_length
     ):
         super(TaggerModel, self).__init__()
         # Preprocessing unit
@@ -23,58 +23,38 @@ class TaggerModel(tf.keras.Model):
         self.encoder = hub.KerasLayer(encoder_url, trainable=False, name="BERT_encoder")
         self.tokenize = hub.KerasLayer(self.preprocessor.tokenize, name="tokenize")
 
-        # Token embedding
-        self.token_embed = tf.keras.models.load_model(token_embed_url).get_layer(
+        # Title embedding
+        self.title_embed = tf.keras.models.load_model(title_embed_url).get_layer(
             "Embedding"
         )
-        # Outputs zeros if the ragged row is empty []
-        self.embed_pool = Lambda(
-            lambda x: K.mean(x, axis=1, keepdims=False), name="embed_avg_pooling"
-        )
-        # Outputs
+        # Hidden layers
         self.hidden1 = Dense(512, activation="relu")
         self.drop1 = Dropout(0.2)
         self.hidden2 = Dense(256, activation="relu")
         self.drop2 = Dropout(0.2)
+        # Output layer
         self.output_layer = Dense(num_labels, activation="sigmoid", 
             bias_initializer=tf.keras.initializers.Constant(-2.0))
 
     def call(self, inputs, training=False):
         text_input = inputs["synopsis"]
-        titles = inputs["titles"]
         # Squeeze the extra dim
         text_input = tf.squeeze(text_input)
         #print("text input: ", text_input.shape)
         #print(text_input)
-        # Convert tokens to ragged tensor
-        titles = tf.ragged.boolean_mask(titles, titles > -1)
-        # keywords = tf.ragged.boolean_mask(keywords, keywords > -1)
         # Synopsis
         tokenized_inputs = [self.tokenize(text_input)]
         encoder_inputs = self.preprocessing_layer(tokenized_inputs)
         synopsis_outputs = self.encoder(encoder_inputs)
         synopsis_net = synopsis_outputs["pooled_output"]
-        # Tokens
-        t_embed = self.token_embed(titles)
-        # Pool the embed
-        t_embed = self.embed_pool(t_embed)
-        # k_embed = self.token_embed(keywords)
-        # Concatenate
-        # output = Concatenate(axis=1)([synopsis_net, t_embed]) # k_embed
-        # Pass through the dense layers
-        # output = self.hidden1(output)
-        # if training:
-        #     output = self.drop1(output, training=training)
-        # output = self.hidden2(output)
-        # if training:
-        #     output = self.drop2(output, training=training)
         output = self.output_layer(synopsis_net)
-
-        #return output
-
+        
         if training:
             return output
         else:
+            # Title
+            title = inputs["title"]
+            t_embed = self.title_embed(title)
             return Concatenate(axis=1)([output, t_embed])
             
 

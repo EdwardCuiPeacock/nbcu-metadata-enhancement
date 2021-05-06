@@ -215,24 +215,34 @@ TITLES_QUERY_token_keyword = """
 """
 
 TITLES_QUERY_titles = """
-    SELECT
-        TitleDetails_title, 
-        TitleType, 
-        STRING_AGG(DISTINCT TitleDetails_longsynopsis, ' ') as TitleDetails_longsynopsis, 
-        cid.content_ordinal_id,
-        ARRAY_AGG(DISTINCT COALESCE(InSeasonSeries_Id, TitleId)) as InSeasonSeries_Id
-    FROM `res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.ContentMetadataView` cmv
-    LEFT JOIN `res-nbcupea-dev-ds-sandbox-001.recsystem.ContentOrdinalId` cid
-        ON LOWER(cmv.TitleDetails_title) = LOWER(cid.program_title)
-    WHERE 
-        TitleDetails_longsynopsis IS NOT NULL
-        AND cid.content_ordinal_id IS NOT NULL
-    GROUP BY 
-        TitleDetails_title, 
-        TitleType, 
-        cid.content_ordinal_id
+    CREATE TEMP FUNCTION strip_str_array(val ANY TYPE) AS ((
+      SELECT ARRAY_AGG(DISTINCT TRIM(t))
+      FROM UNNEST(val) t
+      WHERE t != ""
+    ));
+    
+    WITH titles_data AS (
+        SELECT DISTINCT
+            TitleDetails_title, 
+            TitleType, 
+            cid.content_ordinal_id,
+            STRING_AGG(DISTINCT TitleDetails_longsynopsis, ' ') as TitleDetails_longsynopsis,
+            STRING_AGG(DISTINCT TitleTags, ',') AS TitleTags,
+            STRING_AGG(DISTINCT TitleSubgenres, ',') AS TitleSubgenres
+        FROM `res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.ContentMetadataView` cmv
+        LEFT JOIN `res-nbcupea-dev-ds-sandbox-001.recsystem.ContentOrdinalId` cid
+            ON LOWER(cmv.TitleDetails_title) = LOWER(cid.program_title)
+        WHERE 
+            TitleDetails_longsynopsis IS NOT NULL
+            AND cid.content_ordinal_id IS NOT NULL
+        GROUP BY 
+            TitleDetails_title, 
+            TitleType,
+            cid.content_ordinal_id
+        )
+    SELECT TitleDetails_title, LOWER(TitleDetails_title) AS title, TitleType, content_ordinal_id, TitleDetails_longsynopsis, 
+    FROM titles_data
 """
-
 date_start = "2021-2-01"
 date_end = "2021-4-01"
 
@@ -330,7 +340,7 @@ class Executor(base_executor.BaseExecutor):
         res = []
     
         input_data = {"synopsis": unscored_titles['TitleDetails_longsynopsis'].values[:, None], 
-            "titles": tf.ragged.constant(unscored_titles["InSeasonSeries_Id"].values).to_sparse(),
+            "title": unscored_titles["title"].values,
             #"kewords": tf.ragged.constant(unscored_titles["keywords"].values).to_sparse(),
             }
         dataset = tf.data.Dataset.from_tensor_slices(input_data).batch(50)
@@ -346,6 +356,7 @@ class Executor(base_executor.BaseExecutor):
         
         ######## TODO: Look at this block ####################
         f = tf.concat(res, axis=0).numpy()
+        print(f"predicted shape: {f.shape}")
         del res
         del dataset
         del model

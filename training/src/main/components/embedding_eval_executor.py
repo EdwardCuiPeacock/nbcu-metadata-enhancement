@@ -340,7 +340,7 @@ class Executor(base_executor.BaseExecutor):
         res = []
     
         input_data = {"synopsis": unscored_titles['TitleDetails_longsynopsis'].values[:, None], 
-            "title": unscored_titles["title"].values,
+            "title": unscored_titles["title"].values[:, None],
             #"kewords": tf.ragged.constant(unscored_titles["keywords"].values).to_sparse(),
             }
         dataset = tf.data.Dataset.from_tensor_slices(input_data).batch(50)

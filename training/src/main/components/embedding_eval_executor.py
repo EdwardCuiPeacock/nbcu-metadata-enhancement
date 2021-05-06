@@ -278,6 +278,31 @@ USERS_QUERY = ("""
 def ntail(g, n):
     return g._selected_obj[g.cumcount() >= n]
 
+
+def batch_cosine(X, Y, batch_x=100, batch_y=100):
+    """Compute cosine similarity between rows of X and Y with reduced memory trace."""
+    X = X / np.sqrt(np.sum(X**2, axis=1, keepdims=True))
+    Y = Y / np.sqrt(np.sum(Y**2, axis=1, keepdims=True))
+    # X @ Y.T
+    num_x = X.shape[0] // batch_x + 1 * (X.shape[0] % batch_x > 0)
+    num_y = Y.shape[0] // batch_y + 1 * (Y.shape[0] % batch_y > 0)
+    # initialize the block
+    res_block = [[[] for jj in range(num_y)] for ii in range(num_x)]
+    for i in range(num_x):
+        start_x = i * batch_x
+        end_x = min((i+1) * batch_x, X.shape[0])
+        xx = X[start_x:end_x, :]
+        for j in range(num_y):
+            start_y = j * batch_y
+            end_y = min((j+1) * batch_y, Y.shape[0])
+            yy = Y[start_y:end_y, :]
+            res_block[i][j] = xx @ yy.T
+
+    out = np.block(res_block)
+    
+    return out
+
+
 class Executor(base_executor.BaseExecutor):
     """Executor for Evaluator Component for Metadata."""
 
@@ -411,10 +436,11 @@ class Executor(base_executor.BaseExecutor):
         avg_emb_mat = np.stack(avg_emb.values)
         preds_emb_mat = np.stack(preds["pred"].values)
         # L2 Normalize
-        avg_emb_mat = avg_emb_mat / np.sqrt(np.sum(avg_emb_mat**2, axis=1, keepdims=True))
-        preds_emb_mat = preds_emb_mat / np.sqrt(np.sum(preds_emb_mat**2, axis=1, keepdims=True))
-        # Cosine similarity Scoring
-        user_content_mat = avg_emb_mat @ preds_emb_mat.T
+        user_content_mat = batch_cosine(avg_emb_mat, preds_emb_mat)
+        # avg_emb_mat = avg_emb_mat / np.sqrt(np.sum(avg_emb_mat**2, axis=1, keepdims=True))
+        # preds_emb_mat = preds_emb_mat / np.sqrt(np.sum(preds_emb_mat**2, axis=1, keepdims=True))
+        # # Cosine similarity Scoring
+        # user_content_mat = avg_emb_mat @ preds_emb_mat.T
         del avg_emb_mat
         del preds_emb_mat
         print("cosine similarity")

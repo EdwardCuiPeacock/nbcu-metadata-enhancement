@@ -1,0 +1,3330 @@
+
+
+Wed May  5 14:16:29 2021
+Command line: TestDisk
+
+TestDisk 7.0, Data Recovery Utility, April 2015
+Christophe GRENIER <grenier@cgsecurity.org>
+http://www.cgsecurity.org
+OS: Linux, kernel 4.19.0-16-cloud-amd64 (#1 SMP Debian 4.19.181-1 (2021-03-19)) x86_64
+Compiler: GCC 8.2
+ext2fs lib: 1.44.5, ntfs lib: libntfs-3g, reiserfs lib: none, ewf lib: none, curses lib: ncurses 6.1
+Warning: can't get size for Disk /dev/mapper/control - 0 B - 0 sectors, sector size=512
+Hard disk list
+Disk /dev/sda - 107 GB / 100 GiB - CHS 13054 255 63, sector size=512 - Google PersistentDisk
+Disk /dev/sdb - 107 GB / 100 GiB - CHS 13054 255 63, sector size=512 - Google PersistentDisk
+
+Partition table type (auto): None
+Disk /dev/sdb - 107 GB / 100 GiB - Google PersistentDisk
+Partition table type: None
+
+Interface Advanced
+
+recover_EXT2: s_block_group_nr=0/800, s_mnt_count=10/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26214400
+recover_EXT2: part_size 209715200
+   P ext4                     0   0  1 13054  42 44  209715200
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 100 GiB
+search_superblock
+
+recover_EXT2: s_block_group_nr=0/800, s_mnt_count=10/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26214400
+recover_EXT2: part_size 209715200
+Ext2 superblock found at sector 2 (block=0, blocksize=4096)
+
+block_group_nr 1
+
+recover_EXT2: "e2fsck -b 32768 -B 4096 device" may be needed
+recover_EXT2: s_block_group_nr=1/800, s_mnt_count=0/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26214400
+recover_EXT2: part_size 209715200
+Ext2 superblock found at sector 262144 (block=32768, blocksize=4096)
+
+block_group_nr 3
+
+recover_EXT2: "e2fsck -b 98304 -B 4096 device" may be needed
+recover_EXT2: s_block_group_nr=3/800, s_mnt_count=0/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26214400
+recover_EXT2: part_size 209715200
+Ext2 superblock found at sector 786432 (block=98304, blocksize=4096)
+
+block_group_nr 5
+
+recover_EXT2: "e2fsck -b 163840 -B 4096 device" may be needed
+recover_EXT2: s_block_group_nr=5/800, s_mnt_count=0/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26214400
+recover_EXT2: part_size 209715200
+Ext2 superblock found at sector 1310720 (block=163840, blocksize=4096)
+
+block_group_nr 7
+
+recover_EXT2: "e2fsck -b 229376 -B 4096 device" may be needed
+recover_EXT2: s_block_group_nr=7/800, s_mnt_count=0/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26214400
+recover_EXT2: part_size 209715200
+Ext2 superblock found at sector 1835008 (block=229376, blocksize=4096)
+
+block_group_nr 9
+
+recover_EXT2: "e2fsck -b 294912 -B 4096 device" may be needed
+recover_EXT2: s_block_group_nr=9/800, s_mnt_count=0/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26214400
+recover_EXT2: part_size 209715200
+Ext2 superblock found at sector 2359296 (block=294912, blocksize=4096)
+
+block_group_nr 25
+
+recover_EXT2: "e2fsck -b 819200 -B 4096 device" may be needed
+recover_EXT2: s_block_group_nr=25/800, s_mnt_count=0/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26214400
+recover_EXT2: part_size 209715200
+Ext2 superblock found at sector 6553600 (block=819200, blocksize=4096)
+
+block_group_nr 27
+
+recover_EXT2: "e2fsck -b 884736 -B 4096 device" may be needed
+recover_EXT2: s_block_group_nr=27/800, s_mnt_count=0/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26214400
+recover_EXT2: part_size 209715200
+Ext2 superblock found at sector 7077888 (block=884736, blocksize=4096)
+
+block_group_nr 49
+
+recover_EXT2: "e2fsck -b 1605632 -B 4096 device" may be needed
+recover_EXT2: s_block_group_nr=49/800, s_mnt_count=0/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26214400
+recover_EXT2: part_size 209715200
+Ext2 superblock found at sector 12845056 (block=1605632, blocksize=4096)
+
+block_group_nr 81
+
+recover_EXT2: "e2fsck -b 2654208 -B 4096 device" may be needed
+recover_EXT2: s_block_group_nr=81/800, s_mnt_count=0/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26214400
+recover_EXT2: part_size 209715200
+Ext2 superblock found at sector 21233664 (block=2654208, blocksize=4096)
+  ext4                     0   0  1 13054  42 44  209715200
+superblock 0, blocksize=4096 []
+superblock 32768, blocksize=4096 []
+superblock 98304, blocksize=4096 []
+superblock 163840, blocksize=4096 []
+superblock 229376, blocksize=4096 []
+superblock 294912, blocksize=4096 []
+superblock 819200, blocksize=4096 []
+superblock 884736, blocksize=4096 []
+superblock 1605632, blocksize=4096 []
+superblock 2654208, blocksize=4096 []
+
+To repair the filesystem using alternate superblock, run
+fsck.ext4 -p -b superblock -B blocksize device
+
+
+dir_partition inode=2
+   P ext4                     0   0  1 13054  42 44  209715200
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 100 GiB
+Directory /
+       2 drwxr-xr-x  1001   1002      4096 29-Apr-2021 14:12 .
+       2 drwxr-xr-x  1001   1002      4096 29-Apr-2021 14:12 ..
+ 4456449 drwxr-xr-x  1001   1002      4096 11-Mar-2021 15:13 tutorials
+ 1310721 drwxr-xr-x  1001   1002      4096 11-Mar-2021 15:13 src
+ 2621441 drwxr-xr-x  1001   1002      4096 23-Apr-2021 15:34 .jupyter
+ 1441793 drwxr-xr-x  1001   1002      4096 23-Apr-2021 14:36 .ipython
+ 2097153 drwxr-xr-x  1001   1002      4096 23-Apr-2021 14:36 .config
+ 4587521 drwxr-xr-x  1001   1002      4096 23-Apr-2021 14:33 .docker
+ 2359297 drwxr-xr-x  1001   1002      4096 24-Apr-2021 01:12 .cache
+  786433 drwxr-xr-x  1001   1002      4096 23-Apr-2021 15:34 .local
+ 1966081 drwx------  1001   1002      4096 23-Apr-2021 15:38 .ssh
+  262145 drwxrwsr-x  1001   1002      4096 24-Apr-2021 01:12 .conda
+      23 -rw-r--r--  1001   1002        57 23-Apr-2021 15:36 .bash_profile
+ 3407873 drwx------  1001   1002      4096 24-Apr-2021 01:12 .mozilla
+ 2228225 drwxr--r--  1001   1002      4096 26-Apr-2021 20:43 .skaffold
+ 4980737 drwxr-xr-x  1001   1002      4096 23-Apr-2021 15:30 .ipynb_checkpoints
+ 2752513 drwxr-xr-x  1001   1002      4096 23-Apr-2021 14:36 .keras
+ 1048577 drwx------  1001   1002      4096 23-Apr-2021 14:41 .nv
+X1704027 drwxr-xr-x  1001   1002      4096  5-May-2021 13:57 notebooks
+      24 -rw-r--r--  1001   1002        60 29-Apr-2021 13:37 .gitconfig
+X     19 -rw-r--r--  1001   1002 167434806 23-Apr-2021 15:29 cur.tar.gz
+ 1572865 drwxr-xr-x  1001   1002      4096 23-Apr-2021 15:14 home
+      18 -rw-------  1001   1002      2967 30-Apr-2021 18:01 .bash_history
+      20 -rw-r--r--  1001   1002    155943 12-Mar-2021 17:29 Data Exploration.ipynb
+ 6029313 drwxr-xr-x  1001   1002      4096 13-Apr-2021 23:02 Exploration
+ 2490369 drwxr-xr-x  1001   1002      4096 24-Mar-2021 14:02 Project 01 Casting Crew Graph Embeddings
+ 5111809 drwxr-xr-x  1001   1002      4096  2-Apr-2021 20:23 deployed_notebook
+ 3145729 drwxr-xr-x  1001   1002      4096 15-Mar-2021 18:46 imported
+ 3014657 drwxr-xr-x  1001   1002      4096  5-May-2021 14:14 nbcu-metadata-enhancement
+ 1835009 drwxr-xr-x  1001   1002      4096 15-Apr-2021 22:23 node2vec_pipeline
+ 2883585 drwxr-xr-x  1001   1002      4096 14-Apr-2021 14:00 stellargraph-datasets
+  917505 drwxr-xr-x  1001   1002      4096 21-Apr-2021 14:35 test_meta_model
+      21 -rw-r--r--  1001   1002       800 21-Apr-2021 13:39 test_meta_model.h5
+ 5242881 drwxr-xr-x  1001   1002      4096 15-Mar-2021 17:12 tfx
+
+dir_partition inode=1704027
+   P ext4                     0   0  1 13054  42 44  209715200
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 100 GiB
+Directory /notebooks
+ 1704027 drwxr-xr-x  1001   1002      4096  5-May-2021 13:57 .
+ 3014715 drwxr-xr-x  1001   1002      4096 29-Apr-2021 14:13 ..
+ 1704028 drwxr-xr-x  1001   1002      4096 16-Apr-2021 18:51 Presentation
+ 1704032 -rw-r--r--  1001   1002       400 16-Apr-2021 18:51 README.md
+X1704033 -rw-r--r--  1001   1002   8080786  4-May-2021 20:14 temp.json
+ 1704034 drwxr-xr-x  1001   1002      4096 16-Apr-2021 18:51 Initial_Experiments
+ 1704040 -rw-r--r--  1001   1002     22027 16-Apr-2021 18:51 data_analysis.md
+ 1703967 -rw-r--r--  1001   1002     22228  5-May-2021 13:57 Experiment_logs.xlsx
+ 1704033 -rw-r--r--  1001   1002   8080786  4-May-2021 20:14 Generate_Schema.ipynb
+ 1704041 -rwxr-xr-x  1001   1002     41818  5-May-2021 13:51 Run TFX Pipeline.ipynb
+ 1704043 -rw-r--r--  1001   1002     71550 16-Apr-2021 18:51 Serving_Experiments.ipynb
+X1704042 -rwxr-xr-x  1001   1002         0  4-May-2021 20:24 .~Run TFX Pipeline.ipynb
+X1704087 -rw-r--r--  1001   1002         0  4-May-2021 20:14 explore_emd_02_predicted_values.pkl
+X     11 -rw-r--r--  1001   1002         0  4-May-2021 20:14 Explore model embeddings 02 Multilabel Classification vs. Softmax Regression.ipynb
+X1704047 -rw-r--r--  1001   1002         0  4-May-2021 20:14 Explore Embedding model script.ipynb
+ 1704048 -rw-r--r--  1001   1002    914231 16-Apr-2021 18:51 Interactive_TFX.ipynb
+ 1704049 drwxr-xr-x  1001   1002      4096  4-May-2021 19:07 .ipynb_checkpoints
+X1704055 -rw-r--r--  1001   1002         0  4-May-2021 20:14 Generate_Schema.ipynb
+X1704056 -rw-r--r--  1001   1002         0  4-May-2021 20:14 Explore model embeddings 01 multi-label sigmoid binary classification.ipynb
+X1704057 -rw-r--r--  1001   1002         0  4-May-2021 20:14 predicted_values.pkl
+ 1704058 -rw-r--r--  1001   1002    170138 16-Apr-2021 18:51 Generate_Test_Data.ipynb
+X1704059 -rw-r--r--  1001   1002     22228  4-May-2021 20:04 Experiment_logs.xlsx
+X     12 -rw-r--r--  1001   1002         0  4-May-2021 20:14 explore_emd_02_predicted_values_backup.pkl
+X1705082 -rw-r--r--  1001   1002         0  4-May-2021 20:14 explore_emd_02_c2c_predicted_values.pkl
+X1705116 -rw-r--r--  1001   1002         0  4-May-2021 20:14 explore_emd_02_c2c_predicted_values-tsne.pkl
+X1705119 -rw-r--r--  1001   1002         0  4-May-2021 20:14 embed_02_examples_kl_tsne_space.png
+X1705118 -rw-r--r--  1001   1002         0  4-May-2021 20:14 embed_02_examples_kl_tsne_space.html
+X1705120 -rw-r--r--  1001   1002         0  4-May-2021 20:14 embed_02_examples_cosine_tsne_space.png
+X1705121 -rw-r--r--  1001   1002         0  4-May-2021 20:14 embed_02_examples_cosine_tsne_space.html
+X1705122 -rw-r--r--  1001   1002         0  4-May-2021 20:14 explore_emd_02_c2c_predicted_values-bary.pkl
+X1705123 -rw-r--r--  1001   1002         0  4-May-2021 20:14 embed_02_examples_cosine_barycentric_space.png
+X1705125 -rw-r--r--  1001   1002         0  4-May-2021 20:14 embed_02_examples_cosine_barycentric_space.html
+X1703967 -rw-r--r--  1001   1002     22228  5-May-2021 13:57 tmp_model
+X1705104 -rw-r--r--  1001   1002         0  4-May-2021 20:14 New Token model.ipynb
+X1705590 -rw-r--r--  1001   1002         0  4-May-2021 20:14 inferenced_results.npz
+X1706025 -rw-r--r--  1001   1002         0  4-May-2021 20:14 Explore model embeddings 03 Multilabel Classification vs. Softmax Regression Transformation.ipynb
+X1706037 -rw-r--r--  1001   1002         0  4-May-2021 20:14 temp_f_eval.npz
+X1706023 -rw-r--r--  1001   1002         0  4-May-2021 20:14 Evaluator Manual Run.ipynb
+X1706030 -rw-r--r--  1001   1002         0  4-May-2021 20:14 explore_emd_02_predicted_values_backup-Copy1.pkl
+X1706038 -rw-r--r--  1001   1002         0  4-May-2021 20:14 raw_user_data.pkl
+X1705127 -rw-r--r--  1001   1002         0  4-May-2021 20:14 Explore model embeddings 04 Synopsis and Keywords.ipynb
+X1706029 -rw-r--r--  1001   1002         0  4-May-2021 20:14 explore_emd_04_train_predicted_values.pkl
+X1706031 -rw-r--r--  1001   1002         0  4-May-2021 20:14 explore_emd_04_titles_predicted_values.pkl
+X1706032 -rw-r--r--  1001   1002         0  4-May-2021 20:14 explore_emd_04_c2c_predicted_values-tsne.pkl
+X1706033 -rw-r--r--  1001   1002         0  4-May-2021 20:14 embed_04_examples_cosine_tsne_space.html
+X1706034 -rw-r--r--  1001   1002         0  4-May-2021 20:14 embed_04_examples_cosine_tsne_space.png
+X1706039 -rw-r--r--  1001   1002         0  4-May-2021 20:14 unscored_titles.pkl
+X1706035 -rw-r--r--  1001   1002         0  4-May-2021 20:14 Explore Additional Data Source.ipynb
+X1706040 -rw-r--r--  1001   1002         0  4-May-2021 20:14 Explore model embeddings 05 Synopsis Only Focal Loss Model.ipynb
+X1706042 -rw-r--r--  1001   1002         0  4-May-2021 20:14 explore_emd_05_titles_predicted_values.pkl
+X1706043 -rw-r--r--  1001   1002         0  4-May-2021 20:14 recs_c2c_synopsis_only_with_focal_loss.csv
+X1706049 -rw-r--r--  1001   1002         0  4-May-2021 20:14 explore_emd_06_titles_predicted_values.pkl
+X1706047 -rw-r--r--  1001   1002         0  4-May-2021 20:14 Explore Additional Data Source-Copy1.ipynb
+X1706045 -rw-r--r--  1001   1002         0  4-May-2021 20:14 Explore model embeddings 06 Synopsis And Synopsis Tokens Focal Loss Model.ipynb
+X1706050 -rwxr-xr-x  1001   1002         0  4-May-2021 20:04 .~Run TFX Pipeline.ipynb
+Directory /
+       2 drwxr-xr-x  1001   1002      4096  5-May-2021 14:17 .
+       2 drwxr-xr-x  1001   1002      4096  5-May-2021 14:17 ..
+ 4456449 drwxr-xr-x  1001   1002      4096 11-Mar-2021 15:13 tutorials
+ 1310721 drwxr-xr-x  1001   1002      4096 11-Mar-2021 15:13 src
+ 2621441 drwxr-xr-x  1001   1002      4096 23-Apr-2021 15:34 .jupyter
+ 1441793 drwxr-xr-x  1001   1002      4096 23-Apr-2021 14:36 .ipython
+ 2097153 drwxr-xr-x  1001   1002      4096 23-Apr-2021 14:36 .config
+ 4587521 drwxr-xr-x  1001   1002      4096 23-Apr-2021 14:33 .docker
+ 2359297 drwxr-xr-x  1001   1002      4096 24-Apr-2021 01:12 .cache
+  786433 drwxr-xr-x  1001   1002      4096 23-Apr-2021 15:34 .local
+ 1966081 drwx------  1001   1002      4096 23-Apr-2021 15:38 .ssh
+  262145 drwxrwsr-x  1001   1002      4096 24-Apr-2021 01:12 .conda
+      23 -rw-r--r--  1001   1002        57 23-Apr-2021 15:36 .bash_profile
+ 3407873 drwx------  1001   1002      4096 24-Apr-2021 01:12 .mozilla
+ 2228225 drwxr--r--  1001   1002      4096 26-Apr-2021 20:43 .skaffold
+ 4980737 drwxr-xr-x  1001   1002      4096 23-Apr-2021 15:30 .ipynb_checkpoints
+ 2752513 drwxr-xr-x  1001   1002      4096 23-Apr-2021 14:36 .keras
+ 1048577 drwx------  1001   1002      4096 23-Apr-2021 14:41 .nv
+ 3932161 drwxr-xr-x     0      0      4096  5-May-2021 14:17 notebooks
+      24 -rw-r--r--  1001   1002        60 29-Apr-2021 13:37 .gitconfig
+X     19 -rw-r--r--  1001   1002 167434806 23-Apr-2021 15:29 cur.tar.gz
+ 1572865 drwxr-xr-x  1001   1002      4096 23-Apr-2021 15:14 home
+      18 -rw-------  1001   1002      2967 30-Apr-2021 18:01 .bash_history
+      20 -rw-r--r--  1001   1002    155943 12-Mar-2021 17:29 Data Exploration.ipynb
+ 6029313 drwxr-xr-x  1001   1002      4096 13-Apr-2021 23:02 Exploration
+ 2490369 drwxr-xr-x  1001   1002      4096 24-Mar-2021 14:02 Project 01 Casting Crew Graph Embeddings
+ 5111809 drwxr-xr-x  1001   1002      4096  2-Apr-2021 20:23 deployed_notebook
+ 3145729 drwxr-xr-x  1001   1002      4096 15-Mar-2021 18:46 imported
+ 3014657 drwxr-xr-x  1001   1002      4096  5-May-2021 14:14 nbcu-metadata-enhancement
+ 1835009 drwxr-xr-x  1001   1002      4096 15-Apr-2021 22:23 node2vec_pipeline
+ 2883585 drwxr-xr-x  1001   1002      4096 14-Apr-2021 14:00 stellargraph-datasets
+  917505 drwxr-xr-x  1001   1002      4096 21-Apr-2021 14:35 test_meta_model
+      21 -rw-r--r--  1001   1002       800 21-Apr-2021 13:39 test_meta_model.h5
+ 5242881 drwxr-xr-x  1001   1002      4096 15-Mar-2021 17:12 tfx
+Partition table type (auto): EFI GPT
+Disk /dev/sda - 107 GB / 100 GiB - Google PersistentDisk
+Partition table type: EFI GPT
+
+Analyse Disk /dev/sda - 107 GB / 100 GiB - CHS 13054 255 63
+hdr_size=92
+hdr_lba_self=1
+hdr_lba_alt=209715199 (expected 209715199)
+hdr_lba_start=2048
+hdr_lba_end=209713152
+hdr_lba_table=2
+hdr_entries=128
+hdr_entsz=128
+Current partition structure:
+ 1 P Unknown                   262144  209713152  209451009
+14 P Unknown                     2048       8191       6144
+15 P EFI System                  8192     262143     253952
+
+search_part()
+Disk /dev/sda - 107 GB / 100 GiB - CHS 13054 255 63
+FAT16 at 0/130/3
+check_FAT: Unusual number of reserved sectors 4 (FAT), should be 1.
+FAT1 : 4-251
+FAT2 : 252-499
+start_rootdir : 500
+Data : 532-253951
+sectors : 253952
+cluster_size : 4
+no_of_cluster : 63355 (2 - 63356)
+fat_length 248 calculated 248
+heads/cylinder 64 (FAT) != 255 (HD)
+sect/track 32 (FAT) != 63 (HD)
+
+FAT16 at 0/130/3
+     MS Data                     8192     262143     253952 [NO NAME]
+     FAT16, blocksize=2048, 130 MB / 124 MiB
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                   262144  209713151  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+
+Results
+   P MS Data                     8192     262143     253952 [NO NAME]
+     FAT16, blocksize=2048, 130 MB / 124 MiB
+   P MS Data                   262144  209713151  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+
+Hint for advanced users. dmsetup may be used if you prefer to avoid to rewrite the partition table for the moment:
+echo "0 253952 linear /dev/sda 8192" | dmsetup create test0
+echo "0 209451008 linear /dev/sda 262144" | dmsetup create test1
+
+interface_write()
+ 1 P MS Data                     8192     262143     253952 [NO NAME]
+ 2 P MS Data                   262144  209713151  209451008
+
+search_part()
+Disk /dev/sda - 107 GB / 100 GiB - CHS 13054 255 63
+FAT16 at 0/130/3
+check_FAT: Unusual number of reserved sectors 4 (FAT), should be 1.
+FAT1 : 4-251
+FAT2 : 252-499
+start_rootdir : 500
+Data : 532-253951
+sectors : 253952
+cluster_size : 4
+no_of_cluster : 63355 (2 - 63356)
+fat_length 248 calculated 248
+heads/cylinder 64 (FAT) != 255 (HD)
+sect/track 32 (FAT) != 63 (HD)
+
+FAT16 at 0/130/3
+     MS Data                     8192     262143     253952 [NO NAME]
+     FAT16, blocksize=2048, 130 MB / 124 MiB
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                   262144  209713151  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=6/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                   524286  209975293  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=524286, size=209451008, end=209975293, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=6/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  1048574  210499581  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=1048574, size=209451008, end=210499581, disk end=209715200)
+
+LVM magic value at 74/253/30
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=6/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  1572862  211023869  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=1572862, size=209451008, end=211023869, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=6/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  2097150  211548157  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=2097150, size=209451008, end=211548157, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=6/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  2621438  212072445  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=2621438, size=209451008, end=212072445, disk end=209715200)
+FAT32 at 306/85/62
+Bad root_cluster
+FAT12 at 306/85/63
+FAT1 : 1-9
+FAT2 : 10-18
+start_rootdir : 19
+Data : 33-2879
+sectors : 2880
+cluster_size : 1
+no_of_cluster : 2847 (2 - 2848)
+fat_length 9 calculated 9
+FAT differs, FAT sectors=0-9/9
+heads/cylinder 2 (FAT) != 255 (HD)
+sect/track 18 (FAT) != 63 (HD)
+
+FAT12 at 306/85/63
+     MS Data                  4921307    4924186       2880 [NO NAME]
+     FAT12, blocksize=512, 1474 KB / 1440 KiB
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=6/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  6815742  216266749  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=6815742, size=209451008, end=216266749, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=6/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  7340030  216791037  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=7340030, size=209451008, end=216791037, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8913328  218364335  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8913328, size=209451008, end=218364335, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8913576  218364583  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8913576, size=209451008, end=218364583, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8914040  218365047  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8914040, size=209451008, end=218365047, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8914288  218365295  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8914288, size=209451008, end=218365295, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8914352  218365359  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8914352, size=209451008, end=218365359, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8914512  218365519  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8914512, size=209451008, end=218365519, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8916080  218367087  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8916080, size=209451008, end=218367087, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8916304  218367311  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8916304, size=209451008, end=218367311, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8916648  218367655  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8916648, size=209451008, end=218367655, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8916768  218367775  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8916768, size=209451008, end=218367775, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8916888  218367895  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8916888, size=209451008, end=218367895, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8917008  218368015  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8917008, size=209451008, end=218368015, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8917128  218368135  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8917128, size=209451008, end=218368135, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8917256  218368263  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8917256, size=209451008, end=218368263, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8917376  218368383  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8917376, size=209451008, end=218368383, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8917504  218368511  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8917504, size=209451008, end=218368511, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8917624  218368631  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8917624, size=209451008, end=218368631, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8917736  218368743  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8917736, size=209451008, end=218368743, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8917816  218368823  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8917816, size=209451008, end=218368823, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8917944  218368951  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8917944, size=209451008, end=218368951, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8918008  218369015  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8918008, size=209451008, end=218369015, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8918208  218369215  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8918208, size=209451008, end=218369215, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8918472  218369479  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8918472, size=209451008, end=218369479, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8918512  218369519  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8918512, size=209451008, end=218369519, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8918632  218369639  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8918632, size=209451008, end=218369639, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8918800  218369807  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8918800, size=209451008, end=218369807, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8918864  218369871  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8918864, size=209451008, end=218369871, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8919176  218370183  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8919176, size=209451008, end=218370183, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8919304  218370311  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8919304, size=209451008, end=218370311, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8919432  218370439  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8919432, size=209451008, end=218370439, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8919800  218370807  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8919800, size=209451008, end=218370807, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8920424  218371431  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8920424, size=209451008, end=218371431, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8920552  218371559  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8920552, size=209451008, end=218371559, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8920680  218371687  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8920680, size=209451008, end=218371687, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8920976  218371983  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8920976, size=209451008, end=218371983, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8921472  218372479  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8921472, size=209451008, end=218372479, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8921600  218372607  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8921600, size=209451008, end=218372607, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8921728  218372735  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8921728, size=209451008, end=218372735, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8922008  218373015  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8922008, size=209451008, end=218373015, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8922680  218373687  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8922680, size=209451008, end=218373687, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8922808  218373815  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8922808, size=209451008, end=218373815, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8922936  218373943  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8922936, size=209451008, end=218373943, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8923232  218374239  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8923232, size=209451008, end=218374239, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8923840  218374847  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8923840, size=209451008, end=218374847, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8923968  218374975  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8923968, size=209451008, end=218374975, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8924096  218375103  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8924096, size=209451008, end=218375103, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8924384  218375391  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8924384, size=209451008, end=218375391, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8924936  218375943  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8924936, size=209451008, end=218375943, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8925064  218376071  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8925064, size=209451008, end=218376071, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8925192  218376199  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8925192, size=209451008, end=218376199, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8925480  218376487  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8925480, size=209451008, end=218376487, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8926048  218377055  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8926048, size=209451008, end=218377055, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8926176  218377183  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8926176, size=209451008, end=218377183, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8926304  218377311  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8926304, size=209451008, end=218377311, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8926592  218377599  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8926592, size=209451008, end=218377599, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8927080  218378087  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8927080, size=209451008, end=218378087, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8927208  218378215  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8927208, size=209451008, end=218378215, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8927336  218378343  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8927336, size=209451008, end=218378343, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8927632  218378639  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8927632, size=209451008, end=218378639, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8928152  218379159  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8928152, size=209451008, end=218379159, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8928280  218379287  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8928280, size=209451008, end=218379287, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8928408  218379415  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8928408, size=209451008, end=218379415, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8928704  218379711  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8928704, size=209451008, end=218379711, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8929776  218380783  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8929776, size=209451008, end=218380783, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8929904  218380911  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8929904, size=209451008, end=218380911, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8930032  218381039  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8930032, size=209451008, end=218381039, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8930192  218381199  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8930192, size=209451008, end=218381199, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8930600  218381607  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8930600, size=209451008, end=218381607, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8930728  218381735  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8930728, size=209451008, end=218381735, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8930856  218381863  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8930856, size=209451008, end=218381863, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8931128  218382135  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8931128, size=209451008, end=218382135, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8932768  218383775  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8932768, size=209451008, end=218383775, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8932896  218383903  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8932896, size=209451008, end=218383903, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8933024  218384031  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8933024, size=209451008, end=218384031, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8933272  218384279  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8933272, size=209451008, end=218384279, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8933400  218384407  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8933400, size=209451008, end=218384407, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8933872  218384879  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8933872, size=209451008, end=218384879, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8934000  218385007  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8934000, size=209451008, end=218385007, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8934128  218385135  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8934128, size=209451008, end=218385135, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8934464  218385471  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8934464, size=209451008, end=218385471, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8934744  218385751  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8934744, size=209451008, end=218385751, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8934808  218385815  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8934808, size=209451008, end=218385815, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8934992  218385999  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8934992, size=209451008, end=218385999, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8935176  218386183  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8935176, size=209451008, end=218386183, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8935288  218386295  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8935288, size=209451008, end=218386295, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8935360  218386367  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8935360, size=209451008, end=218386367, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8935488  218386495  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8935488, size=209451008, end=218386495, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8935648  218386655  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8935648, size=209451008, end=218386655, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8935704  218386711  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8935704, size=209451008, end=218386711, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8935832  218386839  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8935832, size=209451008, end=218386839, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8935944  218386951  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8935944, size=209451008, end=218386951, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8936024  218387031  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8936024, size=209451008, end=218387031, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8936160  218387167  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8936160, size=209451008, end=218387167, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8936208  218387215  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8936208, size=209451008, end=218387215, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8936344  218387351  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8936344, size=209451008, end=218387351, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8936456  218387463  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8936456, size=209451008, end=218387463, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8936520  218387527  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8936520, size=209451008, end=218387527, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8936656  218387663  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8936656, size=209451008, end=218387663, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8936712  218387719  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8936712, size=209451008, end=218387719, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8936840  218387847  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8936840, size=209451008, end=218387847, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8936952  218387959  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8936952, size=209451008, end=218387959, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8937016  218388023  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8937016, size=209451008, end=218388023, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8937152  218388159  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8937152, size=209451008, end=218388159, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8937200  218388207  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8937200, size=209451008, end=218388207, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8937336  218388343  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8937336, size=209451008, end=218388343, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8937448  218388455  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8937448, size=209451008, end=218388455, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8937512  218388519  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8937512, size=209451008, end=218388519, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8937648  218388655  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8937648, size=209451008, end=218388655, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8937696  218388703  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8937696, size=209451008, end=218388703, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8937832  218388839  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8937832, size=209451008, end=218388839, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8937944  218388951  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8937944, size=209451008, end=218388951, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8938008  218389015  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8938008, size=209451008, end=218389015, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8938144  218389151  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8938144, size=209451008, end=218389151, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8938192  218389199  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8938192, size=209451008, end=218389199, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8938328  218389335  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8938328, size=209451008, end=218389335, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8938440  218389447  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8938440, size=209451008, end=218389447, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8938504  218389511  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8938504, size=209451008, end=218389511, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8938632  218389639  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8938632, size=209451008, end=218389639, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8938680  218389687  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8938680, size=209451008, end=218389687, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8938816  218389823  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8938816, size=209451008, end=218389823, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8938936  218389943  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8938936, size=209451008, end=218389943, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8939000  218390007  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8939000, size=209451008, end=218390007, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8939136  218390143  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8939136, size=209451008, end=218390143, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8939184  218390191  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8939184, size=209451008, end=218390191, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8939320  218390327  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8939320, size=209451008, end=218390327, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8939432  218390439  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8939432, size=209451008, end=218390439, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8939504  218390511  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8939504, size=209451008, end=218390511, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8939648  218390655  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8939648, size=209451008, end=218390655, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8939696  218390703  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8939696, size=209451008, end=218390703, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8939832  218390839  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8939832, size=209451008, end=218390839, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8939952  218390959  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8939952, size=209451008, end=218390959, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8940072  218391079  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8940072, size=209451008, end=218391079, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8940192  218391199  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8940192, size=209451008, end=218391199, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8940304  218391311  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8940304, size=209451008, end=218391311, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8940376  218391383  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8940376, size=209451008, end=218391383, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8940504  218391511  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8940504, size=209451008, end=218391511, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8940568  218391575  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8940568, size=209451008, end=218391575, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8940704  218391711  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8940704, size=209451008, end=218391711, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8940824  218391831  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8940824, size=209451008, end=218391831, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8940944  218391951  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8940944, size=209451008, end=218391951, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8941136  218392143  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8941136, size=209451008, end=218392143, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8941416  218392423  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8941416, size=209451008, end=218392423, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8941456  218392463  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8941456, size=209451008, end=218392463, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8941640  218392647  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8941640, size=209451008, end=218392647, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8941832  218392839  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8941832, size=209451008, end=218392839, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8941896  218392903  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8941896, size=209451008, end=218392903, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8942128  218393135  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8942128, size=209451008, end=218393135, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8942200  218393207  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8942200, size=209451008, end=218393207, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8942528  218393535  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8942528, size=209451008, end=218393535, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8942808  218393815  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8942808, size=209451008, end=218393815, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8942936  218393943  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8942936, size=209451008, end=218393943, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8943816  218394823  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8943816, size=209451008, end=218394823, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8943944  218394951  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8943944, size=209451008, end=218394951, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8944072  218395079  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8944072, size=209451008, end=218395079, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8944336  218395343  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8944336, size=209451008, end=218395343, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8944624  218395631  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8944624, size=209451008, end=218395631, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8944688  218395695  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8944688, size=209451008, end=218395695, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8944784  218395791  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8944784, size=209451008, end=218395791, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8944960  218395967  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8944960, size=209451008, end=218395967, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8945080  218396087  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8945080, size=209451008, end=218396087, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8945200  218396207  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8945200, size=209451008, end=218396207, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8945320  218396327  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8945320, size=209451008, end=218396327, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8945504  218396511  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8945504, size=209451008, end=218396511, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8945784  218396791  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8945784, size=209451008, end=218396791, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8945824  218396831  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8945824, size=209451008, end=218396831, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8945928  218396935  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8945928, size=209451008, end=218396935, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8946112  218397119  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8946112, size=209451008, end=218397119, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8946168  218397175  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8946168, size=209451008, end=218397175, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8946392  218397399  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8946392, size=209451008, end=218397399, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8946472  218397479  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8946472, size=209451008, end=218397479, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8946816  218397823  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8946816, size=209451008, end=218397823, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8946976  218397983  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8946976, size=209451008, end=218397983, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8947080  218398087  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8947080, size=209451008, end=218398087, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8951048  218402055  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8951048, size=209451008, end=218402055, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8951192  218402199  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8951192, size=209451008, end=218402199, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8951280  218402287  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8951280, size=209451008, end=218402287, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8952440  218403447  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8952440, size=209451008, end=218403447, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8952688  218403695  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8952688, size=209451008, end=218403695, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8953824  218404831  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8953824, size=209451008, end=218404831, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8954040  218405047  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8954040, size=209451008, end=218405047, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8954176  218405183  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8954176, size=209451008, end=218405183, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8954288  218405295  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8954288, size=209451008, end=218405295, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8954432  218405439  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8954432, size=209451008, end=218405439, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8954544  218405551  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+Buffer can't store more than 200 lines.
+This partition ends after the disk limits. (start=8954544, size=209451008, end=218405551, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8954664  218405671  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8954664, size=209451008, end=218405671, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8954776  218405783  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8954776, size=209451008, end=218405783, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8954896  218405903  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8954896, size=209451008, end=218405903, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8955000  218406007  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8955000, size=209451008, end=218406007, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8955320  218406327  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8955320, size=209451008, end=218406327, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8955432  218406439  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8955432, size=209451008, end=218406439, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8955552  218406559  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8955552, size=209451008, end=218406559, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8955656  218406663  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8955656, size=209451008, end=218406663, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8955848  218406855  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8955848, size=209451008, end=218406855, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8955960  218406967  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8955960, size=209451008, end=218406967, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8956080  218407087  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8956080, size=209451008, end=218407087, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8956192  218407199  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8956192, size=209451008, end=218407199, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8956320  218407327  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8956320, size=209451008, end=218407327, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8956432  218407439  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8956432, size=209451008, end=218407439, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8956544  218407551  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8956544, size=209451008, end=218407551, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8956656  218407663  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8956656, size=209451008, end=218407663, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8956808  218407815  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8956808, size=209451008, end=218407815, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8956920  218407927  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8956920, size=209451008, end=218407927, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8957040  218408047  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8957040, size=209451008, end=218408047, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8957152  218408159  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8957152, size=209451008, end=218408159, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8957448  218408455  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8957448, size=209451008, end=218408455, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8957568  218408575  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8957568, size=209451008, end=218408575, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8958456  218409463  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8958456, size=209451008, end=218409463, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8958792  218409799  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8958792, size=209451008, end=218409799, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8958944  218409951  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8958944, size=209451008, end=218409951, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8958992  218409999  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8958992, size=209451008, end=218409999, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8959080  218410087  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8959080, size=209451008, end=218410087, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8960000  218411007  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8960000, size=209451008, end=218411007, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8961368  218412375  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8961368, size=209451008, end=218412375, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8961792  218412799  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8961792, size=209451008, end=218412799, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8962040  218413047  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8962040, size=209451008, end=218413047, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8962816  218413823  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8962816, size=209451008, end=218413823, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8964000  218415007  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8964000, size=209451008, end=218415007, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8965000  218416007  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8965000, size=209451008, end=218416007, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8965152  218416159  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8965152, size=209451008, end=218416159, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8965480  218416487  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8965480, size=209451008, end=218416487, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8966800  218417807  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8966800, size=209451008, end=218417807, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8968056  218419063  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8968056, size=209451008, end=218419063, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8968488  218419495  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8968488, size=209451008, end=218419495, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8969120  218420127  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8969120, size=209451008, end=218420127, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8969608  218420615  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8969608, size=209451008, end=218420615, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8970848  218421855  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8970848, size=209451008, end=218421855, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8971000  218422007  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8971000, size=209451008, end=218422007, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8971280  218422287  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8971280, size=209451008, end=218422287, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8971392  218422399  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8971392, size=209451008, end=218422399, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8972536  218423543  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8972536, size=209451008, end=218423543, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8972680  218423687  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8972680, size=209451008, end=218423687, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8972912  218423919  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8972912, size=209451008, end=218423919, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8973144  218424151  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8973144, size=209451008, end=218424151, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8973256  218424263  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8973256, size=209451008, end=218424263, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8973480  218424487  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8973480, size=209451008, end=218424487, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8973624  218424631  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8973624, size=209451008, end=218424631, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8973768  218424775  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8973768, size=209451008, end=218424775, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8973928  218424935  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8973928, size=209451008, end=218424935, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8974128  218425135  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8974128, size=209451008, end=218425135, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8974280  218425287  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8974280, size=209451008, end=218425287, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8974504  218425511  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8974504, size=209451008, end=218425511, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8974664  218425671  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8974664, size=209451008, end=218425671, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8974800  218425807  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8974800, size=209451008, end=218425807, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8975032  218426039  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8975032, size=209451008, end=218426039, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8975264  218426271  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8975264, size=209451008, end=218426271, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8975432  218426439  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8975432, size=209451008, end=218426439, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8975552  218426559  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8975552, size=209451008, end=218426559, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8975688  218426695  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8975688, size=209451008, end=218426695, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8975832  218426839  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8975832, size=209451008, end=218426839, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8976032  218427039  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8976032, size=209451008, end=218427039, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8976176  218427183  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8976176, size=209451008, end=218427183, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8976312  218427319  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8976312, size=209451008, end=218427319, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8976816  218427823  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8976816, size=209451008, end=218427823, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8977416  218428423  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8977416, size=209451008, end=218428423, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8978080  218429087  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8978080, size=209451008, end=218429087, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8978536  218429543  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8978536, size=209451008, end=218429543, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8979440  218430447  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8979440, size=209451008, end=218430447, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8980088  218431095  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8980088, size=209451008, end=218431095, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8980368  218431375  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8980368, size=209451008, end=218431375, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8981032  218432039  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8981032, size=209451008, end=218432039, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8981984  218432991  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8981984, size=209451008, end=218432991, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8982448  218433455  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8982448, size=209451008, end=218433455, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8983424  218434431  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8983424, size=209451008, end=218434431, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8983712  218434719  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8983712, size=209451008, end=218434719, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8985624  218436631  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8985624, size=209451008, end=218436631, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8986224  218437231  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8986224, size=209451008, end=218437231, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8987368  218438375  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8987368, size=209451008, end=218438375, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8987512  218438519  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8987512, size=209451008, end=218438519, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8987560  218438567  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8987560, size=209451008, end=218438567, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8989072  218440079  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8989072, size=209451008, end=218440079, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8990592  218441599  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8990592, size=209451008, end=218441599, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8990672  218441679  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8990672, size=209451008, end=218441679, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8991512  218442519  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8991512, size=209451008, end=218442519, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8992576  218443583  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8992576, size=209451008, end=218443583, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8994112  218445119  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8994112, size=209451008, end=218445119, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8994936  218445943  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8994936, size=209451008, end=218445943, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8995104  218446111  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8995104, size=209451008, end=218446111, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8995672  218446679  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8995672, size=209451008, end=218446679, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8997440  218448447  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8997440, size=209451008, end=218448447, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8998256  218449263  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8998256, size=209451008, end=218449263, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  8999688  218450695  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=8999688, size=209451008, end=218450695, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9000152  218451159  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9000152, size=209451008, end=218451159, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9000400  218451407  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9000400, size=209451008, end=218451407, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9000504  218451511  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9000504, size=209451008, end=218451511, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9002120  218453127  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9002120, size=209451008, end=218453127, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9003728  218454735  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9003728, size=209451008, end=218454735, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9003928  218454935  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9003928, size=209451008, end=218454935, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9004272  218455279  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9004272, size=209451008, end=218455279, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9005256  218456263  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9005256, size=209451008, end=218456263, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9005584  218456591  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9005584, size=209451008, end=218456591, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9007176  218458183  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9007176, size=209451008, end=218458183, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9008176  218459183  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9008176, size=209451008, end=218459183, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9009000  218460007  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9009000, size=209451008, end=218460007, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9009856  218460863  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9009856, size=209451008, end=218460863, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9010936  218461943  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9010936, size=209451008, end=218461943, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9011984  218462991  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9011984, size=209451008, end=218462991, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9012528  218463535  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9012528, size=209451008, end=218463535, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9014240  218465247  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9014240, size=209451008, end=218465247, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9014376  218465383  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9014376, size=209451008, end=218465383, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9015944  218466951  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9015944, size=209451008, end=218466951, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9016056  218467063  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9016056, size=209451008, end=218467063, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9017752  218468759  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9017752, size=209451008, end=218468759, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9018832  218469839  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9018832, size=209451008, end=218469839, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9019408  218470415  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9019408, size=209451008, end=218470415, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9020056  218471063  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9020056, size=209451008, end=218471063, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9021352  218472359  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9021352, size=209451008, end=218472359, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9023008  218474015  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9023008, size=209451008, end=218474015, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9023488  218474495  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9023488, size=209451008, end=218474495, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9023952  218474959  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9023952, size=209451008, end=218474959, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9024944  218475951  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9024944, size=209451008, end=218475951, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9026408  218477415  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9026408, size=209451008, end=218477415, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9027528  218478535  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9027528, size=209451008, end=218478535, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9027880  218478887  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9027880, size=209451008, end=218478887, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9028016  218479023  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9028016, size=209451008, end=218479023, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9028248  218479255  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9028248, size=209451008, end=218479255, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9031624  218482631  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9031624, size=209451008, end=218482631, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9032624  218483631  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9032624, size=209451008, end=218483631, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9032872  218483879  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9032872, size=209451008, end=218483879, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9034704  218485711  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9034704, size=209451008, end=218485711, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9034832  218485839  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9034832, size=209451008, end=218485839, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9035360  218486367  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9035360, size=209451008, end=218486367, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9035480  218486487  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9035480, size=209451008, end=218486487, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9035616  218486623  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9035616, size=209451008, end=218486623, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9035944  218486951  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9035944, size=209451008, end=218486951, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9036072  218487079  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9036072, size=209451008, end=218487079, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9036488  218487495  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9036488, size=209451008, end=218487495, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9037224  218488231  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9037224, size=209451008, end=218488231, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9037344  218488351  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9037344, size=209451008, end=218488351, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9037480  218488487  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9037480, size=209451008, end=218488487, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9037688  218488695  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9037688, size=209451008, end=218488695, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9038296  218489303  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9038296, size=209451008, end=218489303, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9038416  218489423  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9038416, size=209451008, end=218489423, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9038552  218489559  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9038552, size=209451008, end=218489559, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9038680  218489687  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9038680, size=209451008, end=218489687, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9038776  218489783  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9038776, size=209451008, end=218489783, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9038920  218489927  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9038920, size=209451008, end=218489927, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9039120  218490127  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9039120, size=209451008, end=218490127, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9039248  218490255  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9039248, size=209451008, end=218490255, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9039392  218490399  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9039392, size=209451008, end=218490399, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9039520  218490527  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9039520, size=209451008, end=218490527, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9039672  218490679  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9039672, size=209451008, end=218490679, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9039800  218490807  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9039800, size=209451008, end=218490807, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9039936  218490943  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9039936, size=209451008, end=218490943, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9040064  218491071  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9040064, size=209451008, end=218491071, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9040200  218491207  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9040200, size=209451008, end=218491207, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9041424  218492431  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9041424, size=209451008, end=218492431, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9041560  218492567  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9041560, size=209451008, end=218492567, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9041744  218492751  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9041744, size=209451008, end=218492751, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9042024  218493031  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9042024, size=209451008, end=218493031, disk end=209715200)
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=15/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                  9042624  218493631  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=9042624, size=209451008, end=218493631, disk end=209715200)
+FAT32 at 572/239/54
+Bad root_cluster
+FAT12 at 572/239/55
+FAT1 : 1-9
+FAT2 : 10-18
+start_rootdir : 19
+Data : 33-2879
+sectors : 2880
+cluster_size : 1
+no_of_cluster : 2847 (2 - 2848)
+fat_length 9 calculated 9
+FAT differs, FAT sectors=0-9/9
+heads/cylinder 2 (FAT) != 255 (HD)
+sect/track 18 (FAT) != 63 (HD)
+
+FAT12 at 572/239/55
+     MS Data                  9204291    9207170       2880 [NO NAME]
+     FAT12, blocksize=512, 1474 KB / 1440 KiB
+FAT32 at 572/240/15
+Bad root_cluster
+FAT12 at 572/240/16
+FAT1 : 1-9
+FAT2 : 10-18
+start_rootdir : 19
+Data : 33-2879
+sectors : 2880
+cluster_size : 1
+no_of_cluster : 2847 (2 - 2848)
+fat_length 9 calculated 9
+FAT differs, FAT sectors=0-9/9
+heads/cylinder 2 (FAT) != 255 (HD)
+sect/track 18 (FAT) != 63 (HD)
+
+FAT12 at 572/240/16
+     MS Data                  9204315    9207194       2880 [NO NAME]
+     FAT12, blocksize=512, 1474 KB / 1440 KiB
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=6/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                 13107198  222558205  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=13107198, size=209451008, end=222558205, disk end=209715200)
+
+LVM magic value at 1090/225/33
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=6/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                 21495806  230946813  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=21495806, size=209451008, end=230946813, disk end=209715200)
+
+LVM magic value at 1354/157/20
+
+LVM magic value at 1354/171/44
+
+LVM magic value at 1357/77/6
+
+LVM magic value at 1886/229/48
+
+LVM magic value at 1886/244/9
+
+LVM magic value at 1887/67/26
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=6/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                 33030142  242481149  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=33030142, size=209451008, end=242481149, disk end=209715200)
+
+LVM magic value at 2833/19/51
+
+LVM magic value at 2833/49/8
+
+LVM magic value at 3275/100/27
+
+recover_EXT2: s_block_group_nr=0/798, s_mnt_count=6/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26181376
+recover_EXT2: part_size 209451008
+     MS Data                 63963134  273414141  209451008
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+This partition ends after the disk limits. (start=63963134, size=209451008, end=273414141, disk end=209715200)
+
+LVM magic value at 4108/181/6
+
+LVM magic value at 4108/187/12
+
+LVM magic value at 4171/131/41
+
+LVM magic value at 4281/123/12
+
+LVM magic value at 4281/157/39
+
+LVM magic value at 4322/242/25
+
+LVM magic value at 4833/167/41
+
+LVM magic value at 4834/57/21
+SIGINT detected! TestDisk has been killed.

@@ -79,10 +79,9 @@ def preprocessing_fn(inputs, custom_config):
     )
 
     vocab_file = tf.constant(custom_config["title_vocab_list"])
-    title = tft.apply_vocabulary(
+    title_out = tft.apply_vocabulary(
         title,
         deferred_vocab_filename_tensor=vocab_file,
-        num_oov_buckets=0,
         default_value=-1,
     )
 
@@ -92,9 +91,9 @@ def preprocessing_fn(inputs, custom_config):
 
     outputs[FEATURE] = text
     outputs[_transformed_name(LABEL)] = compute_tags(labels, num_labels)
-    title = tf.sparse.to_dense(title) + 1 # offset by 1, as index 0 is the default
-    title.set_shape((None,1))
-    outputs["title"] =  title
+    title_out = tf.sparse.to_dense(title_out) + 1 # offset by 1, as index 0 is the default
+    title_out.set_shape((None,1))
+    outputs["title"] = title_out
     # outputs[KEYWORDS] = compute_tokens(keywords, custom_config["max_keyword_length"])
 
     return outputs

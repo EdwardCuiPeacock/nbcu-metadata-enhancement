@@ -78,7 +78,7 @@ TITLES_QUERY_tokens = """
         cid.content_ordinal_id,
     FROM `res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.ContentMetadataView` cmv
     LEFT JOIN `res-nbcupea-dev-ds-sandbox-001.recsystem.ContentOrdinalId` cid
-        ON cmv.TitleDetails_title = cid.program_title
+        ON LOWER(cmv.TitleDetails_title) = LOWER(cid.program_title)
     WHERE 
         TitleDetails_longsynopsis IS NOT NULL
         AND cid.content_ordinal_id IS NOT NULL
@@ -286,11 +286,6 @@ class Executor(base_executor.BaseExecutor):
         #install(exec_properties['packages'])
 
         ### Load embeddings
-        """
-        embeddings = artifact_utils.get_single_instance(
-            input_dict['embeddings'])
-        embeddings_path = path_utils.serving_model_path(embeddings.uri)
-        """
         print("Loading saved model")
         model = artifact_utils.get_single_instance(
             input_dict['model'])
@@ -306,34 +301,25 @@ class Executor(base_executor.BaseExecutor):
         raw_user_data = client.query(USERS_QUERY).result().to_dataframe()
 
         ### Create embeddings
-        unscored_titles = client.query(TITLES_QUERY_keywords) \
+        unscored_titles = client.query(TITLES_QUERY_tokens) \
                                 .result() \
                                 .to_dataframe() \
                                 .drop_duplicates(subset=['TitleDetails_title']) \
                                 .reset_index()        
         print("Start making predictions on synopsis")
         tnow = time.time()
-        res = []
-        if True: # using tokens
-            input_data = {"synopsis": unscored_titles['TitleDetails_longsynopsis'].values[:, None], 
-             #"tokens": tf.ragged.constant(unscored_titles["tokens"].values).to_sparse(),
-             #"kewords": tf.ragged.constant(unscored_titles["keywords"].values).to_sparse(),
-             }
-            dataset = tf.data.Dataset.from_tensor_slices(input_data).batch(50)
+        res = []    
+        input_data = {"synopsis": unscored_titles['TitleDetails_longsynopsis'].values[:, None], 
+            "tokens": tf.ragged.constant(unscored_titles["tokens"].values).to_sparse(),
+            #"kewords": tf.ragged.constant(unscored_titles["keywords"].values).to_sparse(),
+            }
+        dataset = tf.data.Dataset.from_tensor_slices(input_data).batch(50)
 
-            for batch in dataset:
-                transformed_features = model.tft_layer(batch)
-                transformed_features["synopsis"] = transformed_features["synopsis"][:, None]
-                y = model(transformed_features)
-                res.append(y)
-        else:
-            input_data = unscored_titles[['TitleDetails_longsynopsis']]
-            dataset = tf.data.Dataset.from_tensor_slices(
-                    tf.cast(input_data['TitleDetails_longsynopsis'].values.tolist(), tf.string)
-                    ).batch(50)
-            for element in dataset:
-                y = model(element)
-                res.append(y)
+        for batch in dataset:
+            transformed_features = model.tft_layer(batch)
+            transformed_features["synopsis"] = transformed_features["synopsis"][:, None]
+            y = model(transformed_features)
+            res.append(y)
 
         used_time = time.time() - tnow
         print(f"Successfully made predictions on synopsis: {used_time:.2f} s")

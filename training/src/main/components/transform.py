@@ -92,7 +92,7 @@ def preprocessing_fn(inputs, custom_config):
 
     outputs[FEATURE] = text
     outputs[_transformed_name(LABEL)] = compute_tags(labels, num_labels)
-    outputs["title"] = title + 1  # offset by 1, as index 0 is the default
+    outputs["title"] = title.to_tensor() + 1  # offset by 1, as index 0 is the default
     # outputs[KEYWORDS] = compute_tokens(keywords, custom_config["max_keyword_length"])
 
     return outputs

@@ -215,20 +215,12 @@ TITLES_QUERY_token_keyword = """
 """
 
 TITLES_QUERY_titles = """
-    CREATE TEMP FUNCTION strip_str_array(val ANY TYPE) AS ((
-      SELECT ARRAY_AGG(DISTINCT TRIM(t))
-      FROM UNNEST(val) t
-      WHERE t != ""
-    ));
-    
     WITH titles_data AS (
         SELECT DISTINCT
             TitleDetails_title, 
             TitleType, 
             cid.content_ordinal_id,
             STRING_AGG(DISTINCT TitleDetails_longsynopsis, ' ') as TitleDetails_longsynopsis,
-            STRING_AGG(DISTINCT TitleTags, ',') AS TitleTags,
-            STRING_AGG(DISTINCT TitleSubgenres, ',') AS TitleSubgenres
         FROM `res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.ContentMetadataView` cmv
         LEFT JOIN `res-nbcupea-dev-ds-sandbox-001.recsystem.ContentOrdinalId` cid
             ON LOWER(cmv.TitleDetails_title) = LOWER(cid.program_title)

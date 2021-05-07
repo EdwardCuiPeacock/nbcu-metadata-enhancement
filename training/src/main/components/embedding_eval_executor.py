@@ -348,6 +348,7 @@ class Executor(base_executor.BaseExecutor):
         
         ######## TODO: Look at this block ####################
         f = tf.concat(res, axis=0).numpy()
+        print(f"predicted shape: {f.shape}")
         del res
         del dataset
         del model

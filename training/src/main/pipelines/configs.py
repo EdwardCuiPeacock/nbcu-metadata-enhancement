@@ -111,7 +111,7 @@ custom_config = {
     'batch_size': BATCH_SIZE,
     'use_steps': USE_STEPS,
     'seq_length': TOKEN_LIMIT,
-    'title_vocab_list': "gs://edc-dev/content_titles_vocab",
+    'title_vocab_list': "gs://edc-dev/content_titles_vocab2",
     #'max_token_length': N2V_TOKEN_LENGTH,
     #'max_keyword_length': N2V_KEYWORD_LENGTH,
     #'max_title_length': N2V_TITLE_LENGTH

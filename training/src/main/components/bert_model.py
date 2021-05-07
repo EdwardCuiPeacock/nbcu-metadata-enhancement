@@ -22,7 +22,7 @@ TFHUB_HANDLE_PREPROCESSOR = "https://tfhub.dev/tensorflow/bert_en_uncased_prepro
 TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-512_A-8/1"
 #TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-8_H-768_A-12/2"
 #TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/bert_multi_cased_L-12_H-768_A-12/4"
-TITLE_EMBEDDINGS = "gs://edc-dev/content_title_embeddings_model"
+TITLE_EMBEDDINGS = "gs://edc-dev/content_title_embeddings_model_2"
 
 def _gzip_reader_fn(filenames):
     """Small utility returning a record reader that can read gzip'ed fies"""

@@ -12,7 +12,7 @@ import pandas as pd
 import numpy as np
 
 # Pipeline name will be used to identify this pipeline.
-PIPELINE_NAME = "metadata_dev_edc_base_0_0_5" # TODO: change this
+PIPELINE_NAME = "metadata_dev_edc_base_0_0_6" # TODO: change this
 
 ###IMPORTANT CHANGE THIS ALWAYS
 MODEL_NAME = f"ncr_{PIPELINE_NAME}_bin_multilabel" # TODO: change this, this is an entry on metadata_enhacement.model_results
@@ -34,13 +34,13 @@ except ImportError:
 OUTPUT_TABLE = "res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.model_results"
 GOOGLE_CLOUD_PROJECT = "res-nbcupea-dev-ds-sandbox-001"
 BQ_DATASET = 'metadata_enhancement'
-BQ_TABLE = 'synopsis_dylan_150tag_with_tokens_and_keywords' #'synopsis_dylan_150tag_with_tokens_and_keywords'#merlin_data_with_lang_type_keywords, 'synopsis_dylan_150tag_with_tokens_and_keywords'
+BQ_TABLE = 'synopsis_151_clustered_tags' #'synopsis_dylan_150tag_with_tokens_and_keywords'#merlin_data_with_lang_type_keywords, 'synopsis_dylan_150tag_with_tokens_and_keywords'
 DATA_SOURCE_TABLE = f"{GOOGLE_CLOUD_PROJECT}.{BQ_DATASET}.{BQ_TABLE}"
 
 TOKEN_LIMIT = 256
 TEST_LIMIT = None
 
-enable_cache = True
+enable_cache = False
 USE_AI_PLATFORM = True
 
 IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/edc-dev-pipeline'

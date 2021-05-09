@@ -33,7 +33,7 @@ class TaggerModel(tf.keras.Model):
         #     lambda x: K.mean(x, axis=1, keepdims=False), name="embed_avg_pooling"
         # )
         # Hidden layers
-        self.hidden1 = Dense(256, activation="relu")
+        self.hidden1 = Dense(256, activation="elu")
         self.drop1 = Dropout(0.1)
         # self.hidden2 = Dense(256, activation="relu")
         # self.drop2 = Dropout(0.2)

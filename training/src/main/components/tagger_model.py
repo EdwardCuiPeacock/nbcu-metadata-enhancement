@@ -13,33 +13,35 @@ class TaggerModel(tf.keras.Model):
     ):
         super(TaggerModel, self).__init__()
         # Preprocessing unit
-        self.preprocessor = hub.load(preprocessor_url)
-        self.preprocessing_layer = hub.KerasLayer(
-            self.preprocessor.bert_pack_inputs,
-            arguments=dict(seq_length=seq_length),
-            name="preprocessing",
-        )
+        # self.preprocessor = hub.load(preprocessor_url)
+        # self.preprocessing_layer = hub.KerasLayer(
+        #     self.preprocessor.bert_pack_inputs,
+        #     arguments=dict(seq_length=seq_length),
+        #     name="preprocessing",
+        # )
         # Encoder
-        self.encoder = hub.KerasLayer(encoder_url, trainable=False, name="BERT_encoder")
-        self.tokenize = hub.KerasLayer(self.preprocessor.tokenize, name="tokenize")
+        # self.encoder = hub.KerasLayer(encoder_url, trainable=False, name="BERT_encoder")
+        # self.tokenize = hub.KerasLayer(self.preprocessor.tokenize, name="tokenize")
+        self.encoder = hub.KerasLayer("https://tfhub.dev/google/universal-sentence-encoder-multilingual/3", name="universal_text_encoder")
+        self.encoder2 = hub.KerasLayer("https://tfhub.dev/google/nnlm-en-dim128/2", name="nnlm")
 
         # Title embedding
-        self.title_embed = tf.keras.models.load_model(title_embed_url).get_layer(
-            "Embedding"
-        )
-        self.embed_pool = Lambda(
-            lambda x: K.mean(x, axis=1, keepdims=False), name="embed_avg_pooling"
-        )
+        # self.title_embed = tf.keras.models.load_model(title_embed_url).get_layer(
+        #     "Embedding"
+        # )
+        # self.embed_pool = Lambda(
+        #     lambda x: K.mean(x, axis=1, keepdims=False), name="embed_avg_pooling"
+        # )
         # Hidden layers
-        self.hidden1 = Dense(512, activation="relu")
-        self.drop1 = Dropout(0.2)
-        self.hidden2 = Dense(256, activation="relu")
-        self.drop2 = Dropout(0.2)
+        self.hidden1 = Dense(256, activation="relu")
+        self.drop1 = Dropout(0.1)
+        # self.hidden2 = Dense(256, activation="relu")
+        # self.drop2 = Dropout(0.2)
         # Output layer
         self.output_layer = Dense(
             num_labels,
             activation="sigmoid",
-            bias_initializer=tf.keras.initializers.Constant(-2.0),
+            bias_initializer=tf.keras.initializers.Constant(-2.0), # for focal loss
         )
 
     def call(self, inputs, training=False):
@@ -49,28 +51,33 @@ class TaggerModel(tf.keras.Model):
         # print("text input: ", text_input.shape)
         # print(text_input)
         # Synopsis
-        tokenized_inputs = [self.tokenize(text_input)]
-        encoder_inputs = self.preprocessing_layer(tokenized_inputs)
-        synopsis_outputs = self.encoder(encoder_inputs)
-        synopsis_net = synopsis_outputs["pooled_output"]
+        # tokenized_inputs = [self.tokenize(text_input)]
+        # encoder_inputs = self.preprocessing_layer(tokenized_inputs)
+        synopsis_net = self.encoder(text_input)
+        synopsis_net2 = self.encoder2(text_input)
+        output = Concatenate(axis=1)([synopsis_net, synopsis_net2])
+        #synopsis_net = synopsis_net["pooled_output"]
+        output = self.hidden1(output)
+        if training:
+            output = self.drop1(output)
         
         ######################################################################
         # t_embed = self.title_embed(inputs["title"])
         # t_embed = self.embed_pool(t_embed)
         # output = Concatenate(axis=1)([synopsis_net, t_embed])
-        # output = self.output_layer(output)
-        # return output
+        output = self.output_layer(output)
+        return output
         ######################################################################
 
         ######################################################################
-        output = self.output_layer(synopsis_net)
-        if training:
-            return output
-        else:
-            # Title
-            t_embed = self.title_embed(inputs["title"])
-            t_embed = self.embed_pool(t_embed)
-            return Concatenate(axis=1)([output, t_embed])
+        # output = self.output_layer(synopsis_net)
+        # if training:
+        #     return output
+        # else:
+        #     # Title
+        #     t_embed = self.title_embed(inputs["title"])
+        #     t_embed = self.embed_pool(t_embed)
+        #     return Concatenate(axis=1)([output, t_embed])
         ######################################################################
 
     def model(self, inputs):

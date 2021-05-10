@@ -22,7 +22,7 @@ class TaggerModel(tf.keras.Model):
         # Encoder
         # self.encoder = hub.KerasLayer(encoder_url, trainable=False, name="BERT_encoder")
         # self.tokenize = hub.KerasLayer(self.preprocessor.tokenize, name="tokenize")
-        #self.encoder = hub.KerasLayer("https://tfhub.dev/google/universal-sentence-encoder-multilingual/3", trainable=False, name="universal_text_encoder")
+        self.encoder = hub.KerasLayer("https://tfhub.dev/google/universal-sentence-encoder-multilingual/2", trainable=False, name="universal_text_encoder")
         self.encoder2 = hub.KerasLayer("https://tfhub.dev/google/nnlm-en-dim128/2", trainable=False, name="nnlm")
 
         # Title embedding
@@ -53,11 +53,11 @@ class TaggerModel(tf.keras.Model):
         # Synopsis
         # tokenized_inputs = [self.tokenize(text_input)]
         # encoder_inputs = self.preprocessing_layer(tokenized_inputs)
-        #synopsis_net = self.encoder(text_input)
+        synopsis_net = self.encoder(text_input)
         synopsis_net2 = self.encoder2(text_input)
-        #output = Concatenate(axis=1)([synopsis_net, synopsis_net2])
+        output = Concatenate(axis=1)([synopsis_net, synopsis_net2])
         #synopsis_net = synopsis_net["pooled_output"]
-        output = self.hidden1(synopsis_net2)
+        output = self.hidden1(output)
         if training:
             output = self.drop1(output)
         

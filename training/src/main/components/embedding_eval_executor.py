@@ -270,6 +270,12 @@ USERS_QUERY = ("""
 def ntail(g, n):
     return g._selected_obj[g.cumcount() >= n]
 
+def cosine_sim(P):
+    # Pairwise cosine within itself
+    P = P / np.sqrt(np.sum(P**2, axis=1, keepdims=True))
+    cos_sim_c2c = P @ P.T
+    cos_sim_c2c = np.nan_to_num(cos_sim_c2c, nan=-1)
+    return cos_sim_c2c
 
 def batch_cosine(X, Y, batch_x=100, batch_y=100):
     """Compute cosine similarity between rows of X and Y with reduced memory trace."""
@@ -369,13 +375,44 @@ class Executor(base_executor.BaseExecutor):
 
         used_time = time.time() - tnow
         print(f"Successfully made predictions on synopsis: {used_time:.2f} s")
-        
-        ######## TODO: Look at this block ####################
+
         f = tf.concat(res, axis=0).numpy()
         print(f"predicted shape: {f.shape}")
         del res
         del dataset
         del model
+        # ########### Make content content recommendations ##############
+        similarity = cosine_sim(f)
+        
+        # Slice out top 15 recommendations
+        topn=10
+        score = list(np.sort(similarity, axis=1)[:, ::-1][:, 1:(topn+1)])
+        sim_c2c_argsort = np.argsort(similarity, axis=1)[:, ::-1][:, 1:]
+        titles = list(np.take(unscored_titles["TitleDetails_title"].values, sim_c2c_argsort[:, :topn]))
+        titles_type = list(np.take(unscored_titles["TitleType"].values, sim_c2c_argsort[:, :topn]))
+        content_id = list(np.take(unscored_titles["content_ordinal_id"].values, sim_c2c_argsort[:, :topn]))
+        dict_list = [{"title": tt, "type": ttype, "content_ordinal_id": cid, "score": sc} \
+                    for tt, ttype, cid, sc in zip(titles, titles_type, content_id, score)]
+        unscored_titles[f"top{topn}"] = dict_list
+
+        def query_shows_c2c(unscored_titles, show_name):
+            pdf = unscored_titles.loc[unscored_titles["TitleDetails_title"]==show_name, :]
+            pdf_res = pd.DataFrame(pdf[f"top{topn}"].values[0])[["title", "score"]]
+            return pdf_res
+        
+        print("Content to content recommendations")
+        important_titles = ["The Office", "30 Rock", "Punky Brewster", "Parks and Recreation", "WWE Monday Night RAW", 
+            "Yellowstone", "Saturday Night Live", "Law & Order: Special Victims Unit", 
+            "Law & Order: Organized Crime", "Mr. Mercedes", "Modern Family", "Brave New World", 
+            "The Office: Superfan Episodes", "Chrisley Knows Best", "Mr. Mayor", "This Is Us",	
+            "Happy Feet Two", "Zombie Tidal Wave"]
+        for ti in important_titles:
+            pdf_res = query_shows_c2c(unscored_titles, ti)
+            print(ti)
+            print(pdf_res.to_string())
+
+        #################################################################
+        ######## TODO: Look at this block ####################
         preds = pd.DataFrame(f)
         preds['pred'] = preds.iloc[:,:].values.tolist()
         preds['pred'] = preds['pred'].apply(np.asarray)

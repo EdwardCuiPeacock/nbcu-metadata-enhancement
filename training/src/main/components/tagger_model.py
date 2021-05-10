@@ -23,7 +23,7 @@ class TaggerModel(tf.keras.Model):
         # self.encoder = hub.KerasLayer(encoder_url, trainable=False, name="BERT_encoder")
         # self.tokenize = hub.KerasLayer(self.preprocessor.tokenize, name="tokenize")
         #self.encoder = hub.KerasLayer("https://tfhub.dev/google/universal-sentence-encoder-multilingual/2", trainable=False, name="universal_text_encoder")
-        self.encoder = hub.KerasLayer("https://tfhub.dev/google/universal-sentence-encoder/4", trainable=False, name="universal_text_encoder")
+        self.encoder = hub.KerasLayer("https://tfhub.dev/google/universal-sentence-encoder/3", trainable=False, name="universal_text_encoder")
         self.encoder2 = hub.KerasLayer("https://tfhub.dev/google/nnlm-en-dim128/2", trainable=False, name="nnlm")
 
         # Title embedding

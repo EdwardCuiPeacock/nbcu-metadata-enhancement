@@ -408,7 +408,7 @@ class Executor(base_executor.BaseExecutor):
             "Happy Feet Two", "Zombie Tidal Wave"]
         for ti in important_titles:
             pdf_res = query_shows_c2c(unscored_titles, ti)
-            print(ti)
+            print("Query:", ti)
             print(pdf_res.to_string())
 
         del similarity

@@ -411,8 +411,10 @@ class Executor(base_executor.BaseExecutor):
             print(ti)
             print(pdf_res.to_string())
 
+        del similarity
+
         #################################################################
-        ######## TODO: Look at this block ####################
+        ######## TODO: Look at this block ###############################
         preds = pd.DataFrame(f)
         preds['pred'] = preds.iloc[:,:].values.tolist()
         preds['pred'] = preds['pred'].apply(np.asarray)

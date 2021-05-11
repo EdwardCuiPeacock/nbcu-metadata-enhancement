@@ -53,7 +53,7 @@ class TaggerModel(tf.keras.Model):
         # Synopsis
         # tokenized_inputs = [self.tokenize(text_input)]
         # encoder_inputs = self.preprocessing_layer(tokenized_inputs)
-        synopsis_net = self.encoder(text_input)#["outputs"]
+        synopsis_net = self.encoder(text_input)["outputs"]
         synopsis_net2 = self.encoder2(text_input)
         output = Concatenate(axis=1)([synopsis_net, synopsis_net2])
         #synopsis_net = synopsis_net["pooled_output"]

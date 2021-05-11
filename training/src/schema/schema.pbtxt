@@ -12,7 +12,7 @@ feature {
   }
 }
 feature {
-  name: "title"
+  name: "keywords"
   type: BYTES
   presence {
     min_fraction: 1.0

@@ -34,7 +34,7 @@ except ImportError:
 OUTPUT_TABLE = "res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.model_results"
 GOOGLE_CLOUD_PROJECT = "res-nbcupea-dev-ds-sandbox-001"
 BQ_DATASET = 'metadata_enhancement'
-BQ_TABLE = 'synopsis_167_clustered_tags' #'synopsis_dylan_150tag_with_tokens_and_keywords'#merlin_data_with_lang_type_keywords, 'synopsis_dylan_150tag_with_tokens_and_keywords'
+BQ_TABLE = 'synopsis_genres_167_clustered_tags' #'synopsis_dylan_150tag_with_tokens_and_keywords'#merlin_data_with_lang_type_keywords, 'synopsis_dylan_150tag_with_tokens_and_keywords'
 DATA_SOURCE_TABLE = f"{GOOGLE_CLOUD_PROJECT}.{BQ_DATASET}.{BQ_TABLE}"
 
 TOKEN_LIMIT = 256
@@ -111,7 +111,7 @@ custom_config = {
     'batch_size': BATCH_SIZE,
     'use_steps': USE_STEPS,
     'seq_length': TOKEN_LIMIT,
-    'title_vocab_list': "gs://edc-dev/content_titles_vocab2",
+    #'title_vocab_list': "gs://edc-dev/content_titles_vocab2",
     #'max_token_length': N2V_TOKEN_LENGTH,
     #'max_keyword_length': N2V_KEYWORD_LENGTH,
     #'max_title_length': N2V_TITLE_LENGTH

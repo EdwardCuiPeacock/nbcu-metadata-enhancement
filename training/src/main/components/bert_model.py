@@ -15,15 +15,6 @@ from tensorflow.keras.metrics import Precision, Recall
 
 from main.components.tagger_model import TaggerModel
 
-# TODO: Add these in config instead of hard-coding
-TFHUB_HANDLE_PREPROCESSOR = "https://tfhub.dev/tensorflow/bert_en_uncased_preprocess/3"
-#TFHUB_HANDLE_PREPROCESSOR = "https://tfhub.dev/tensorflow/bert_multi_cased_preprocess/3"
-#TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-256_A-4/2"
-TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-512_A-8/1"
-#TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-8_H-768_A-12/2"
-#TFHUB_HANDLE_ENCODER = "https://tfhub.dev/tensorflow/bert_multi_cased_L-12_H-768_A-12/4"
-TITLE_EMBEDDINGS = "gs://edc-dev/content_title_embeddings_model_2"
-
 def _gzip_reader_fn(filenames):
     """Small utility returning a record reader that can read gzip'ed fies"""
     return tf.data.TFRecordDataset(filenames, compression_type="GZIP")
@@ -62,18 +53,11 @@ def _input_fn(
 
     return dataset
 
-
-def build_bert_tagger(num_labels, seq_length):
-    model = TaggerModel(TFHUB_HANDLE_PREPROCESSOR, TFHUB_HANDLE_ENCODER, 
-        TITLE_EMBEDDINGS, num_labels, seq_length)
-    return model
-
-
 def get_compiled_model(num_labels, seq_length):
     # TODO: figure out more about optimizer
     strategy = tf.distribute.MirroredStrategy()
     with strategy.scope():
-        model = build_bert_tagger(num_labels, seq_length)
+        model = TaggerModel(num_labels, seq_length)
         metrics = [
             "accuracy",
             #"kullback_leibler_divergence",
@@ -91,7 +75,7 @@ def get_compiled_model(num_labels, seq_length):
             y_true = tf.cast(y_true, tf.float32)
             y_pred = tf.cast(y_pred, tf.float32)
             return tfa.losses.sigmoid_focal_crossentropy(y_true, y_pred, alpha=0.5, gamma=3.0)
-        print(f"larger bert: {TFHUB_HANDLE_ENCODER}")
+
         print("alpha=0.75, gamma=3.0")
         model.compile(
             optimizer="adam",
@@ -107,13 +91,13 @@ def _get_serve_tf_examples_fn(model, tf_transform_output):
     model.tft_layer = tf_transform_output.transform_features_layer()
 
     @tf.function
-    def serve_tf_examples_fn(raw_text, raw_title):
+    def serve_tf_examples_fn(raw_text, raw_keywords):
         """Returns the output to be used in the serving signature."""
         reshaped_text = tf.reshape(raw_text, [-1, 1])
-        reshaped_title = tf.reshape(raw_title, [-1, 1])
+        reshaped_keywords = tf.reshape(raw_keywords, [-1, 1])
         transformed_features = model.tft_layer(
             {"synopsis": reshaped_text, 
-             "title": reshaped_title,
+             "keywords": reshaped_keywords,
             })
 
         outputs = model(transformed_features)
@@ -181,7 +165,7 @@ def run_fn(fn_args):
             model, tf_transform_output
         ).get_concrete_function(
             tf.TensorSpec(shape=[None], dtype=tf.string, name="synopsis"),
-            tf.TensorSpec(shape=[None], dtype=tf.string, name="title"), # titles
+            tf.TensorSpec(shape=[None], dtype=tf.string, name="keywords"), # titles
             #tf.SparseTensorSpec(shape=[None, None], dtype=tf.string), # keywords
         ),
     }

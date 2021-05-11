@@ -120,35 +120,17 @@ TITLES_QUERY_tokens = """
     GROUP BY TitleDetails_title, TitleType, TitleDetails_longsynopsis, content_ordinal_id
 """
 
-TITLES_QUERY_keywords = """
-    CREATE TEMP FUNCTION strip_str_array(val ANY TYPE) AS ((
-      SELECT ARRAY_AGG(DISTINCT TRIM(t))
-      FROM UNNEST(val) t
-      WHERE t != ""
-    ));
-    
-    WITH titles_data AS (
-        SELECT DISTINCT
-            TitleDetails_title, 
-            TitleType, 
-            cid.content_ordinal_id,
-            STRING_AGG(DISTINCT TitleDetails_longsynopsis, ' ') as TitleDetails_longsynopsis,
-            STRING_AGG(DISTINCT TitleTags, ',') AS TitleTags,
-            STRING_AGG(DISTINCT TitleSubgenres, ',') AS TitleSubgenres
-        FROM `res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.ContentMetadataView` cmv
-        LEFT JOIN `res-nbcupea-dev-ds-sandbox-001.recsystem.ContentOrdinalId` cid
-            ON LOWER(cmv.TitleDetails_title) = LOWER(cid.program_title)
-        WHERE 
-            TitleDetails_longsynopsis IS NOT NULL
-            AND cid.content_ordinal_id IS NOT NULL
-        GROUP BY 
-            TitleDetails_title, 
-            TitleType,
-            cid.content_ordinal_id
-        )
-    SELECT TitleDetails_title, TitleType, content_ordinal_id, TitleDetails_longsynopsis, 
-        strip_str_array(SPLIT(COALESCE(NULLIF(ARRAY_TO_STRING([TitleTags,TitleSubgenres], ","), ""), "movie"), ",")) AS tokens,
-    FROM titles_data
+TITLES_QUERY_vd = """
+    WITH cid AS (
+    SELECT DISTINCT program_title, content_ordinal_id
+    FROM `res-nbcupea-dev-ds-sandbox-001.recsystem.ContentOrdinalId`
+    )
+
+    SELECT a.program_title, a.program_type, a.program_longsynopsis, a.program_language, a.tags AS keywords, 
+        b.content_ordinal_id
+    FROM `metadata_enhancement.synopsis_cmv_167_clustered_tags` a
+    JOIN cid b
+    ON LOWER(a.program_title) = LOWER(b.program_title)
 """
 
 TITLES_QUERY_token_keyword = """
@@ -356,13 +338,13 @@ class Executor(base_executor.BaseExecutor):
         unscored_titles = client.query(TITLES_QUERY_titles) \
                                 .result() \
                                 .to_dataframe() \
-                                .drop_duplicates(subset=['TitleDetails_title']) \
+                                .drop_duplicates(subset=['program_title']) \
                                 .reset_index()        
         print("Start making predictions on synopsis")
         tnow = time.time()
         res = []
     
-        input_data = {"synopsis": unscored_titles['TitleDetails_longsynopsis'].values[:, None], 
+        input_data = {"synopsis": unscored_titles['program_longsynopsis'].values[:, None], 
             "title": unscored_titles["title"].values[:, None],
             }
         dataset = tf.data.Dataset.from_tensor_slices(input_data).batch(50)
@@ -388,15 +370,15 @@ class Executor(base_executor.BaseExecutor):
         topn=10
         score = list(np.sort(similarity, axis=1)[:, ::-1][:, 1:(topn+1)])
         sim_c2c_argsort = np.argsort(similarity, axis=1)[:, ::-1][:, 1:]
-        titles = list(np.take(unscored_titles["TitleDetails_title"].values, sim_c2c_argsort[:, :topn]))
-        titles_type = list(np.take(unscored_titles["TitleType"].values, sim_c2c_argsort[:, :topn]))
+        titles = list(np.take(unscored_titles["program_title"].values, sim_c2c_argsort[:, :topn]))
+        titles_type = list(np.take(unscored_titles["program_type"].values, sim_c2c_argsort[:, :topn]))
         content_id = list(np.take(unscored_titles["content_ordinal_id"].values, sim_c2c_argsort[:, :topn]))
         dict_list = [{"title": tt, "type": ttype, "content_ordinal_id": cid, "score": sc} \
                     for tt, ttype, cid, sc in zip(titles, titles_type, content_id, score)]
         unscored_titles[f"top{topn}"] = dict_list
 
         def query_shows_c2c(unscored_titles, show_name):
-            pdf = unscored_titles.loc[unscored_titles["TitleDetails_title"]==show_name, :]
+            pdf = unscored_titles.loc[unscored_titles["program_title"]==show_name, :]
             pdf_res = pd.DataFrame(pdf[f"top{topn}"].values[0])[["title", "score"]]
             return pdf_res
         

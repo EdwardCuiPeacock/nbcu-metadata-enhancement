@@ -8,11 +8,6 @@ entirely
 import tensorflow_transform as tft
 import tensorflow as tf
 
-FEATURE = "synopsis"
-LABEL = "tags"
-TOKENS = "tokens"
-KEYWORDS = "keywords"
-
 
 def _transformed_name(key):
     return key + "_xf"
@@ -66,32 +61,19 @@ def compute_tokens(tokens, max_length):
 def preprocessing_fn(inputs, custom_config):
     """Preprocess input columns into transformed columns."""
     outputs = {}
-    text = tf.squeeze(inputs[FEATURE], axis=1)
-    labels = inputs[LABEL]
-    title = inputs["title"]
-    # keywords = inputs[KEYWORDS]
+    text = tf.squeeze(inputs["synopsis"], axis=1)
+    labels = inputs["tags"]
+    keywords = inputs["keywords"]
 
     num_labels = custom_config.get("num_labels")
 
     # Create and apply a full vocabulary for the labels (subgenres)
     labels = tft.compute_and_apply_vocabulary(
-        labels, vocab_filename=LABEL, num_oov_buckets=1
+        labels, vocab_filename="tags", num_oov_buckets=1
     )
 
-    vocab_file = tf.constant(custom_config["title_vocab_list"])
-    title_out = tft.apply_vocabulary(
-        title,
-        deferred_vocab_filename_tensor=vocab_file,
-        default_value=-1,
-    )
-
-    # keywords = tft.apply_vocabulary(keywords,
-    #     deferred_vocab_filename_tensor=vocab_file,
-    #     num_oov_buckets=0)
-
-    outputs[FEATURE] = text
-    outputs[_transformed_name(LABEL)] = compute_tags(labels, num_labels)
-    outputs["title"] = title_out + 1 # offset 1
-    # outputs[KEYWORDS] = compute_tokens(keywords, custom_config["max_keyword_length"])
+    outputs["synopsis"] = text
+    outputs["keywords"] = keywords
+    outputs[_transformed_name("tags")] = compute_tags(labels, num_labels)
 
     return outputs

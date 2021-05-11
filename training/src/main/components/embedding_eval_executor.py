@@ -144,10 +144,13 @@ TITLES_QUERY_vd = """
             TitleType,
             cid.content_ordinal_id
         )
-    SELECT TitleDetails_title, TitleType, content_ordinal_id,  tags AS keywords,
+    SELECT TitleDetails_title, TitleType, content_ordinal_id,  
         ARRAY_TO_STRING(ARRAY(
         SELECT * 
-            FROM UNNEST(SPLIT(TitleDetails_longsynopsis, " ")) LIMIT 256), " ") as TitleDetails_longsynopsis,
+            FROM UNNEST(SPLIT(tags, ",")) LIMIT 256), " ") as keywords,
+        ARRAY_TO_STRING(ARRAY(
+        SELECT * 
+            FROM UNNEST(SPLIT(TitleDetails_longsynopsis, " ")) LIMIT 256), " ") as TitleDetails_longsynopsis
     FROM titles_data
 """
 

@@ -335,7 +335,7 @@ class Executor(base_executor.BaseExecutor):
         raw_user_data = client.query(USERS_QUERY).result().to_dataframe()
 
         ### Create embeddings
-        unscored_titles = client.query(TITLES_QUERY_titles) \
+        unscored_titles = client.query(TITLES_QUERY_vd) \
                                 .result() \
                                 .to_dataframe() \
                                 .drop_duplicates(subset=['program_title']) \

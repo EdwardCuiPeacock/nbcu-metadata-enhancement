@@ -9,7 +9,7 @@ from tensorflow.keras.layers import Dense, Lambda, Dropout, Concatenate, Reshape
 
 class TaggerModel(tf.keras.Model):
     def __init__(
-        self, num_labels, seq_length, mode="concat_before"
+        self, num_labels, seq_length, mode="concat_after"
     ):
         super(TaggerModel, self).__init__()
         self.mode = mode
@@ -57,7 +57,7 @@ class TaggerModel(tf.keras.Model):
                 return Concatenate(axis=1)([output, keyword_net2])
         else:
             raise(NotImplementedError(f"Unrecognized mode: {self.mode}"))
-    
-      
+
+
     def model(self, inputs):
         return tf.keras.Model(inputs, self.call(inputs))

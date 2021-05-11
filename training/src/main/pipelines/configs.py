@@ -151,7 +151,7 @@ GCP_AI_PLATFORM_TRAINING_ARGS = {
      "masterType": "n1-highmem-16",
      "masterConfig": {
          "imageUri": IMAGE,
-         "acceleratorConfig": {"count": 4, "type": "NVIDIA_TESLA_T4"}, #90ms per step with 4 GPUs
+         "acceleratorConfig": {"count": 2, "type": "NVIDIA_TESLA_T4"}, #90ms per step with 4 GPUs
      },
      "scaleTier": "CUSTOM",
  }

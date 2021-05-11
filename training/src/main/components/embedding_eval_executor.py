@@ -345,7 +345,7 @@ class Executor(base_executor.BaseExecutor):
         res = []
     
         input_data = {"synopsis": unscored_titles['program_longsynopsis'].values[:, None], 
-            "title": unscored_titles["title"].values[:, None],
+            "title": unscored_titles["program_title"].values[:, None],
             }
         dataset = tf.data.Dataset.from_tensor_slices(input_data).batch(50)
 

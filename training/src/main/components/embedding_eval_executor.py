@@ -126,7 +126,11 @@ TITLES_QUERY_vd = """
         FROM `res-nbcupea-dev-ds-sandbox-001.recsystem.ContentOrdinalId`
     )
 
-    SELECT a.program_title, a.program_type, a.program_longsynopsis, a.program_language, 
+    SELECT a.program_title, a.program_type, 
+        ARRAY_TO_STRING(ARRAY(
+        SELECT * 
+            FROM UNNEST(SPLIT(program_longsynopsis, " ")) LIMIT 256), " ") as program_longsynopsis,
+        a.program_language, 
         STRING_AGG(DISTINCT t, " ") AS keywords, b.content_ordinal_id
     FROM `metadata_enhancement.synopsis_cmv_167_clustered_tags` a,
     UNNEST(a.tags) t

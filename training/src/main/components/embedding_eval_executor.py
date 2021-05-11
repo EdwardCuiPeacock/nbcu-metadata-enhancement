@@ -121,17 +121,24 @@ TITLES_QUERY_tokens = """
 """
 
 TITLES_QUERY_vd = """
+    CREATE TEMP FUNCTION strip_str_array(val ANY TYPE) AS ((
+      SELECT STRING_AGG(DISTINCT TRIM(t), " ")
+      FROM UNNEST(val) t
+      WHERE t NOT IN ("", "und")
+      LIMIT 256
+    ));
+
     WITH content_id AS (
         SELECT DISTINCT program_title, content_ordinal_id
         FROM `res-nbcupea-dev-ds-sandbox-001.recsystem.ContentOrdinalId`
     ),
-    
-     titles_data AS (
+
+        titles_data AS (
         SELECT DISTINCT
             TitleDetails_title, 
             TitleType, 
             cid.content_ordinal_id,
-            STRING_AGG(ARRAY_TO_STRING([TitleGenre, TitleSubgenres, TitleTags, LANGUAGE], ","), ",") AS tags,
+            STRING_AGG(DISTINCT ARRAY_TO_STRING([TitleGenre, TitleSubgenres, TitleTags, LANGUAGE], ","), ",") AS tags,
             STRING_AGG(DISTINCT TitleDetails_longsynopsis, ' ') as TitleDetails_longsynopsis,
         FROM `res-nbcupea-dev-ds-sandbox-001.metadata_enhancement.ContentMetadataView` cmv
         LEFT JOIN content_id AS cid
@@ -145,12 +152,10 @@ TITLES_QUERY_vd = """
             cid.content_ordinal_id
         )
     SELECT TitleDetails_title, TitleType, content_ordinal_id,  
+        strip_str_array(SPLIT(tags, ",")) AS keywords,
         ARRAY_TO_STRING(ARRAY(
-        SELECT * 
-            FROM UNNEST(SPLIT(tags, ",")) LIMIT 256), " ") as keywords,
-        ARRAY_TO_STRING(ARRAY(
-        SELECT * 
-            FROM UNNEST(SPLIT(TitleDetails_longsynopsis, " ")) LIMIT 256), " ") as TitleDetails_longsynopsis
+            SELECT * 
+                FROM UNNEST(SPLIT(TitleDetails_longsynopsis, " ")) LIMIT 256), " ") as TitleDetails_longsynopsis
     FROM titles_data
 """
 

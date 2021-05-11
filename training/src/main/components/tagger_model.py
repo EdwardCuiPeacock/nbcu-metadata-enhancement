@@ -9,7 +9,7 @@ from tensorflow.keras.layers import Dense, Lambda, Dropout, Concatenate, Reshape
 
 class TaggerModel(tf.keras.Model):
     def __init__(
-        self, num_labels, seq_length, mode="concat_after"
+        self, num_labels, seq_length, mode="concat_before"
     ):
         super(TaggerModel, self).__init__()
         self.mode = mode

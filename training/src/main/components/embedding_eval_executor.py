@@ -125,7 +125,11 @@ TITLES_QUERY_vd = """
       SELECT STRING_AGG(DISTINCT TRIM(t), " ")
       FROM UNNEST(val) t
       WHERE t NOT IN ("", "und")
-      LIMIT 256
+    ));
+    CREATE TEMP FUNCTION limit_token_length(val ANY TYPE) AS ((
+        SELECT ARRAY_TO_STRING(ARRAY(
+            SELECT * 
+                FROM UNNEST(SPLIT(val, " ")) LIMIT 256), " ") as val
     ));
 
     WITH content_id AS (
@@ -133,7 +137,7 @@ TITLES_QUERY_vd = """
         FROM `res-nbcupea-dev-ds-sandbox-001.recsystem.ContentOrdinalId`
     ),
 
-        titles_data AS (
+    titles_data AS (
         SELECT DISTINCT
             TitleDetails_title, 
             TitleType, 
@@ -152,10 +156,8 @@ TITLES_QUERY_vd = """
             cid.content_ordinal_id
         )
     SELECT TitleDetails_title, TitleType, content_ordinal_id,  
-        strip_str_array(SPLIT(tags, ",")) AS keywords,
-        ARRAY_TO_STRING(ARRAY(
-            SELECT * 
-                FROM UNNEST(SPLIT(TitleDetails_longsynopsis, " ")) LIMIT 256), " ") as TitleDetails_longsynopsis
+        limit_token_length(strip_str_array(SPLIT(tags, ","))) AS keywords,
+        limit_token_length(TitleDetails_longsynopsis) AS TitleDetails_longsynopsis 
     FROM titles_data
 """
 

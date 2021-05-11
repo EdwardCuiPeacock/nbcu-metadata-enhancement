@@ -122,15 +122,18 @@ TITLES_QUERY_tokens = """
 
 TITLES_QUERY_vd = """
     WITH cid AS (
-    SELECT DISTINCT program_title, content_ordinal_id
-    FROM `res-nbcupea-dev-ds-sandbox-001.recsystem.ContentOrdinalId`
+        SELECT DISTINCT program_title, content_ordinal_id
+        FROM `res-nbcupea-dev-ds-sandbox-001.recsystem.ContentOrdinalId`
     )
 
-    SELECT a.program_title, a.program_type, a.program_longsynopsis, a.program_language, a.tags AS keywords, 
-        b.content_ordinal_id
-    FROM `metadata_enhancement.synopsis_cmv_167_clustered_tags` a
+    SELECT a.program_title, a.program_type, a.program_longsynopsis, a.program_language, 
+        STRING_AGG(DISTINCT t, " ") AS keywords, b.content_ordinal_id
+    FROM `metadata_enhancement.synopsis_cmv_167_clustered_tags` a,
+    UNNEST(a.tags) t
     JOIN cid b
     ON LOWER(a.program_title) = LOWER(b.program_title)
+    GROUP BY a.program_title, a.program_type, a.program_language, 
+        a.program_longsynopsis, b.content_ordinal_id
 """
 
 TITLES_QUERY_token_keyword = """

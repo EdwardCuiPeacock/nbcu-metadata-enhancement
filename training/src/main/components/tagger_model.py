@@ -9,7 +9,7 @@ from tensorflow.keras.layers import Dense, Lambda, Dropout, Concatenate, Reshape
 
 class TaggerModel(tf.keras.Model):
     def __init__(
-        self, num_labels, seq_length, mode="concat_after"
+        self, num_labels, seq_length, mode="concat_before"
     ):
         super(TaggerModel, self).__init__()
         self.mode = mode
@@ -18,9 +18,9 @@ class TaggerModel(tf.keras.Model):
         self.encoder2 = hub.KerasLayer("https://tfhub.dev/google/nnlm-en-dim128/2", trainable=False, name="nnlm")
 
         # Hidden layers
-        self.hidden1 = Dense(512, activation="elu")
+        self.hidden1 = Dense(512, activation="elu", name="hidden1")
         self.drop1 = Dropout(0.1)
-        # self.hidden2 = Dense(256, activation="relu")
+        # self.hidden2 = Dense(256, activation="relu", name="hidden2")
         # self.drop2 = Dropout(0.2)
         # Output layer
         self.output_layer = Dense(

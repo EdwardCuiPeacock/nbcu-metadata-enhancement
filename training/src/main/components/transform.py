@@ -39,7 +39,7 @@ def compute_tags(transformed_tags, num_labels):
     # Normalize the tags by their sum
     # tags_normalized = tags_multi_binarized / tf.reduce_sum(tags_multi_binarized, axis=1, keepdims=True)
     # return tags_normalized
-    return tf.cast(tags_multi_binarized, tf.int64)
+    return tf.cast(tags_multi_binarized, tf.float32)
 
 
 def compute_tokens(tokens, max_length):

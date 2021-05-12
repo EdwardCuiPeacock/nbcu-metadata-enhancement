@@ -59,27 +59,18 @@ def get_compiled_model(num_labels, seq_length):
     with strategy.scope():
         model = TaggerModel(num_labels, seq_length)
         metrics = [
-            "accuracy",
             #"kullback_leibler_divergence",
             "cosine_similarity",
+            tfa.metrics.F1Score(num_classes=num_labels, threshold=0.5, average="macro"),
             #tf.keras.metrics.AUC(curve="ROC", name="ROC_AUC"),
-            #tf.keras.metrics.AUC(curve="PR", name="PR_AUC"),
-        ]
-        # clipnorm only seems to work in TF 2.4 with distribution strategy
-        def cos_sim(y_true, y_pred, axis=1):
-            y_true = tf.cast(y_true, tf.float64)
-            y_pred = tf.cast(y_pred, tf.float64)
-            return tf.keras.losses.cosine_similarity(y_true, y_pred, axis=axis)
-        
-        def focal_loss(y_true, y_pred):
-            y_true = tf.cast(y_true, tf.float32)
-            y_pred = tf.cast(y_pred, tf.float32)
-            return tfa.losses.sigmoid_focal_crossentropy(y_true, y_pred, alpha=0.7, gamma=3.0)
-
-        print("alpha=0.75, gamma=3.0")
+            tf.keras.metrics.AUC(curve="PR", multi_label=True, name="pr_auc"),
+        ]        
+        loss_func = tfa.losses.SigmoidFocalCrossEntropy(alpha=0.75, gamma=3.0)
+        print("Loss function")
+        print(loss_func.__dict__)
         model.compile(
             optimizer="adam",
-            loss=focal_loss,
+            loss=loss_func,
             metrics=metrics,
         )
     return model

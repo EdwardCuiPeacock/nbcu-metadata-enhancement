@@ -413,8 +413,8 @@ class Executor(base_executor.BaseExecutor):
         print("Content to content recommendations")
         important_titles = ["The Office", "30 Rock", "Punky Brewster", "Parks and Recreation", "WWE Monday Night RAW", 
             "Yellowstone", "Saturday Night Live", "Law & Order: Special Victims Unit", 
-            "Mr. Mercedes", "Modern Family", "Brave New World", 
-            "The Office: Superfan Episodes", "Chrisley Knows Best", "Mr. Mayor", "This Is Us",	
+            "Mr. Mercedes", "Modern Family", "Brave New World",
+            "The Office: Superfan Episodes", "Chrisley Knows Best", "Mr. Mayor", "This Is Us",
             "Happy Feet Two", "Zombie Tidal Wave"]
         for ti in important_titles:
             pdf_res = query_shows_c2c(unscored_titles, ti)

@@ -65,7 +65,7 @@ def get_compiled_model(num_labels, seq_length):
             #tf.keras.metrics.AUC(curve="ROC", name="ROC_AUC"),
             tf.keras.metrics.AUC(curve="PR", multi_label=True, name="pr_auc"),
         ]        
-        loss_func = tfa.losses.SigmoidFocalCrossEntropy(alpha=0.70, gamma=3.0)
+        loss_func = tfa.losses.SigmoidFocalCrossEntropy(alpha=0.25, gamma=3.0)
         print("Loss function")
         print(loss_func.__dict__)
         model.compile(

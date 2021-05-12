@@ -38,10 +38,10 @@ BQ_TABLE = 'synopsis_genres_167_clustered_tags' #'synopsis_dylan_150tag_with_tok
 DATA_SOURCE_TABLE = f"{GOOGLE_CLOUD_PROJECT}.{BQ_DATASET}.{BQ_TABLE}"
 
 TOKEN_LIMIT = 256
-TEST_LIMIT = 20
+TEST_LIMIT = None
 
 enable_cache = False
-USE_AI_PLATFORM = False
+USE_AI_PLATFORM = True
 
 IMAGE = 'gcr.io/' + GOOGLE_CLOUD_PROJECT + '/edc-dev-pipeline'
 

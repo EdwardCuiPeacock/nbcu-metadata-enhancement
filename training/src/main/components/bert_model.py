@@ -59,6 +59,7 @@ def get_compiled_model(num_labels, seq_length):
     with strategy.scope():
         model = TaggerModel(num_labels, seq_length)
         metrics = [
+            tf.keras.metrics.BinaryAccuracy(threshold=0.5),
             #"kullback_leibler_divergence",
             "cosine_similarity",
             tfa.metrics.F1Score(num_classes=num_labels, threshold=0.5, average="macro"),
